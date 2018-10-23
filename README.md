@@ -1,5 +1,21 @@
-|Id   |Description   |Priorité   |Difficulté   |Sprint   |Dépendances |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-|   |   |   |   |   |   |
-|   |   |   |   |   |   |
-|   |   |   |   |   |   |
+# README.md
+
+| Id    | Description                                                                                                                                                                                                           | Priorité | Difficulté | Sprint |
+| :---: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :--------: | :----: |
+| #1    | En tant que visiteur, je souhaite m'enregistrer en tant que développeur via un formulaire (nom d'utilisateur et mot de passe) afin de gérer mes projets                                                               |          | 3          | 1      |
+| #2    | En tant que visiteur, je souhaite m'authentifier en tant que développeur via un formulaire (nom d'utilisateur et mot de passe) afin de gérer mes projets                                                              |          | 2          | 1      |
+| #3    | En tant que développeur, je souhaite créer un projet via un formulaire (nom de projet et collaborateurs (autres développeurs) optionnellement) afin de pouvoir le gérer                                               |          | 3          | 1      |
+| #4    | En tant que développeur, je souhaite ajouter des collaborateurs afin qu'ils puissent accéder à mon projet                                                                                                             |          | 2          | 2      |
+| #5    | En tant que développeur, je souhaite ajouter une issue (Id, Description, Priorité, Difficulté, Sprint) à mon projet afin de décrire un besoin                                                                         |          | 3          | 1      |
+| #6    | En tant que développeur, je souhaite consulter la liste des issues d'un de mes projets afin de potentiellement les modifier                                                                                           |          | 2          | 1      |
+| #7    | En tant que développeur, je souhaite modifier le contenu d'une issue afin d'atteindre un nouveau besoin                                                                                                               |          | 3          | 2      |
+| #8    | En tant que développeur, je souhaite supprimer une issue afin de la retirer de la liste                                                                                                                               |          | 2          | 1      |
+| #9    | En tant que développeur, je souhaite exporter un backlog (en Markdown) à partir de la liste des issues du projet afin d'y avoir accès en dehors de l'application web                                                  |          | 5          | 3      |
+| #10   | En tant que développeur, je souhaite créer des sprints (avec durée déterminée) contenant des issues du projet afin de pouvoir les planifier                                                                           |          | 3          | 2      |
+| #11   | En tant que développeur, je souhaite visualiser la liste des sprints du projet afin de visualiser l'organisation temporelle du projet                                                                                 |          | 2          | 2      |
+| #12   | En tant que développeur, je souhaite créer une tâche (Id tâche, Id issue, description, statut (réalisée ou non), temps nécessaire, dépendances ,Id développeur (optionnel)) afin de visualiser le travail à effectuer |          | 3          | 2      |
+| #13   | En tant que développeur, je souhaite consulter la liste des tâches de mon projet afin de visualiser l'ensemble du travail à produire                                                                                  |          | 2          | 2      |
+| #14   | En tant que développeur, je souhaite modifier le contenu d'une tâche afin de rectifier le travail à fournir                                                                                                           |          | 3          | 3      |
+| #15   | En tant que développeur, je souhaite supprimer une tâche afin de la retirer de la liste                                                                                                                               |          | 2          | 3      |
+| #16   | En tant que développeur, je souhaite exporter la liste des tâches (en Markdown) afin d'y avoir accès en dehors de l'application web                                                                                   |          | 5          | 3      |
+| #17   | En tant que développeur, je souhaite visualiser la liste des tâches sous forme de diagramme de Pert afin de faciliter l'organisation du projet                                                                        |          | 8          | 3      |
