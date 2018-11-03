@@ -1,6 +1,6 @@
 <?php
     try {
-        $bdd = new PDO('mysql:host=localhost;dbname=CdP;charset=utf8', 'root', '');
+        $bdd = new PDO('mysql:host=mariadb;dbname=database;port=3306;charset=utf8', 'root', 'root');
         $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); // Error Handling
 
         $sql = "CREATE TABLE IF NOT EXISTS Project (

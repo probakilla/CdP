@@ -1,0 +1,27 @@
+version: "3"
+services:
+  mariadb:
+    image: mariadb:10.1
+    container_name: mariadb
+    environment:
+      MYSQL_DATABASE: CdP
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: always
+
+  php-apache:
+    build:
+      context: .
+    container_name: php
+    ports:
+      - 80:80
+      - 3306:3306
+    volumes:
+      - ./php:/var/www/html
+    links:
+      - mariadb
+volumes:
+  mariadb:
