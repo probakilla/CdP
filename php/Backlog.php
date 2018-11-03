@@ -14,15 +14,19 @@
 		<style> textarea { resize: none; } </style>
 	</head>
 	<body>
+		<?php
+			$project = $_GET['ProjectName'];
+		?>
 		    <br>
 	<div class="col-sm-offset-3 col-sm-6">
 		<div class="panel panel-info">
-			<div class="panel-heading">Liste des projets</div>
+			<div class="panel-heading">le projet : <?php echo " ".$project; ?></div>
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table">
 				  	<?php
-						$servername = "localhost";
+				  	
+					  	$servername = "localhost";
 						$username = "root";
 						$password = "";
 						$dbname = "Cdp";
@@ -32,28 +36,38 @@
 						// Check connection
 						if ($conn->connect_error) {
 						    die("Connection failed: " . $conn->connect_error);
-						} 
+						}
 
-						$sql = "SELECT Name FROM Project";
+						$sql = "SELECT * FROM Issue WHERE ProjectName LIKE \"$project\"";
 						$result = $conn->query($sql);
-
-					    echo "<thead><tr>";
-					    echo "<th scope=\"col\">Name</th>";
-					    //echo "<th scope=\"col\">Description</th>";
-					    echo "</tr></thead><tbody>";
+						
+						echo "<thead class=\"thead-dark\">
+					    <tr>
+					      <th scope=\"col\">Id</th>
+					      <th scope=\"col\">Description</th>
+					      <th scope=\"col\">Priorité</th>
+					      <th scope=\"col\">Difficulté</th>
+					    </tr>
+					  </thead>";
+					  echo "<tbody>";
 
 						if ($result->num_rows > 0) {
 						    // output data of each row
 						    while($row = $result->fetch_assoc()) {
-						    	echo "<form method=\"get\" action=\"Backlog.php\">";
-						    	echo "<tr><th scope=\"row\" ><a href=\"Backlog.php?ProjectName=". $row["Name"]."\" type=\"submit\">". $row["Name"]."</a></th>";
-						    	echo "</form>";
+						    	echo "<tr>";
+						    	echo "<th scope=\"row\">".$row["Id"]."</th>";
+						    	echo "<td>".$row["Description"]."</td>";
+						    	echo "<td>".$row["Priority"]."</td>";
+						    	echo "<td>".$row["Difficulty"]."</td>";
+						    	echo "</tr>";
 						        //echo "<td>" . $row["Name"]. "</td>";
 						    }
 						} else {
 						    echo "0 results";
 						}
+
 						echo "</tbody>";
+
 						$conn->close();
 					?>
 				  </table>
