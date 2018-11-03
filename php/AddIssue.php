@@ -11,24 +11,48 @@
         <h1 class="text-center">Add Issue</h1>
 
         <?php
-            $project = "Test";
-            try {
-                $bdd = new PDO('mysql:host=localhost;dbname=CdP;charset=utf8', 'root', '');
-                $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); // Error Handling
-                $sql = "INSERT INTO Issue SET
-                ProjectName = \"$project\",
-                Id = 1,
-                Description = \"En tant qu\'étudiant, je souhaite pouvoir faire fonctionner ce code\",
-                Priority = 1,
-                Difficulty = 3;";
-                $bdd->exec($sql);
+            $project = "";
+            if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"])) {
+                $project = $_GET["projectname"];
             }
-            catch (Exception $e) {
-                die('Erreur : ' . $e->getMessage());
+            else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                try {
+                    $project = $_POST["project"];
+                    $id = $_POST["id"];
+                    $desc = $_POST["desc"];
+                    $prio = $_POST["prio"];
+                    $diff = $_POST["diff"];
+                    $bdd = new PDO('mysql:host=localhost;dbname=CdP;charset=utf8', 'root', '');
+                    $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); // Error Handling
+                    $sql = "INSERT INTO Issue SET
+                    ProjectName = \"$project\",
+                    Id = $id,
+                    Description = \"$desc\",
+                    Priority = \"$prio\",
+                    Difficulty = $diff;";
+                    $bdd->exec($sql);
+                }
+                catch (Exception $e) {
+                    die('Erreur : ' . $e->getMessage());
+                }
+            }
+            else {
+                die('Erreur !');
             }
         ?>
 
-        <h3 class="text-center">Project : <?php echo $project; ?></h3>
+        <form action="?" method="post">
+            <p>Projet : <input type="text" name="project" value=<?php echo $project; ?> readonly/></p>
+            <p>Id : <input type="number" name="id" /></p>
+            <p>Description : <input type="text" name="desc" /></p>
+            <p>Priorité : <select name="prio">
+                <option value="high" selected>High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select></p>
+            <p>Difficulté : <input type="number" name="diff" /></p>
+            <p><input type="submit" value="OK"></p>
+        </form>
 
     </body>
 </html>
