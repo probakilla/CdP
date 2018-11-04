@@ -11,15 +11,15 @@
 <body>
 
 <?php
-define('NB_PRIORITIES', 3);
-$project = $_GET['projectname'];
-$issue   = $_GET['id'];
+    define('NB_PRIORITIES', 3);
+    $project = $_GET['projectname'];
+    $issue   = $_GET['id'];
 
-abstract class priorityEnum {
-    const Low    = 0;
-    const Medium = 1;
-    const High   = 2;
-}
+    abstract class priorityEnum {
+        const Low    = 0;
+        const Medium = 1;
+        const High   = 2;
+    }
 ?>
 
 <h1 class="text-center mt-5">Modification de l'issue #<?php echo $issue ?></h1>
@@ -29,9 +29,10 @@ abstract class priorityEnum {
 
         function error($message) {
             echo "<span class=\"badge badge-warning\">Erreur</span> $message";
-            echo nl2br("\n\nRedirection vers le backlog d'ici 5 secondes.");
-            header("refresh:5;url=Backlog.php");
-            die();
+            echo nl2br("\n\nRedirection vers le backlog.");
+            /*header("refresh:5;url=Backlog.php");
+            die();*/
+            echo "<script type=\"text/javascript\">window.location = \"Backlog.php\";</script>";
         }
 
         function test_input($data) {
@@ -65,7 +66,7 @@ abstract class priorityEnum {
         }
 
         $bdd     = new PDO('mysql:host=mariadb;
-                            dbname=database;
+                            dbname=CdP;
                             port=3306;
                             charset=utf8',
                             'root', 'root');
@@ -98,7 +99,7 @@ abstract class priorityEnum {
                             Priority = \"$prio\",
                             Difficulty = $diff;";
                 $bdd->exec($sql);
-                echo "<script type=\"text/javascript\">window.location = \"Backlog.php\";                       </script>";
+                echo "<script type=\"text/javascript\">window.location = \"Backlog.php\";</script>";
             } catch (Exception $e) {
                 error($e->getMessage());
             }

@@ -23,8 +23,9 @@
                 function error($message) {
                     echo "<span class=\"badge badge-warning\">Erreur</span> $message";
                     echo nl2br ("\n\nRedirection vers le backlog d'ici 5 secondes.");
-                    header("refresh:5;url=Backlog.php");
-                    die();
+                    /*header("refresh:5;url=Backlog.php");
+                    die();*/
+                    echo "<script type=\"text/javascript\">window.location = \"Backlog.php\";</script>";
                 }
                 function test_input($data) {
                     $data = trim($data);
@@ -45,7 +46,7 @@
                         $prio = test_input($_POST["prio"]);
                         $diff = test_input($_POST["diff"]);
                         $bdd = new PDO('mysql:host=mariadb;
-                                              dbname=database;
+                                              dbname=CdP;
                                               charset=utf8',
                                               'root',
                                               'root');

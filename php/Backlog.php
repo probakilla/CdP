@@ -29,7 +29,7 @@
 					  	$servername = "mariadb";
 						$username = "root";
 						$password = "root";
-						$dbname = "database";
+						$dbname = "CdP";
 
 						// Create connection
 						$conn = new mysqli($servername, $username, $password, $dbname);

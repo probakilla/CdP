@@ -34,7 +34,7 @@
 						    die("Connection failed: " . $conn->connect_error);
 						}
 
-						$bdd = new PDO('mysql:host=mariadb;dbname=database;charset=utf8', 'root', 'root');
+						$bdd = new PDO('mysql:host=mariadb;dbname=CdP;charset=utf8', 'root', 'root');
 					    $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
 					    if(isset($_POST['save'])){
