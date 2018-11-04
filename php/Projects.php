@@ -32,23 +32,28 @@
 						// Check connection
 						if ($conn->connect_error) {
 						    die("Connection failed: " . $conn->connect_error);
-						} 
+						}
+
+						$bdd = new PDO('mysql:host=localhost;dbname=CdP;charset=utf8', 'root', '');
+					    $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+					    
+					    if(isset($_POST['save'])){
+					    	$sql1 = "INSERT INTO `Project` (`Name`) VALUES ('".$_POST["projectName"]."')";
+					        $bdd->exec($sql1);
+					    }
 
 						$sql = "SELECT Name FROM Project";
 						$result = $conn->query($sql);
 
 					    echo "<thead><tr>";
 					    echo "<th scope=\"col\">Name</th>";
-					    //echo "<th scope=\"col\">Description</th>";
 					    echo "</tr></thead><tbody>";
 
 						if ($result->num_rows > 0) {
-						    // output data of each row
 						    while($row = $result->fetch_assoc()) {
 						    	echo "<form method=\"get\" action=\"Backlog.php\">";
 						    	echo "<tr><th scope=\"row\" ><a href=\"Backlog.php?ProjectName=". $row["Name"]."\" type=\"submit\">". $row["Name"]."</a></th>";
 						    	echo "</form>";
-						        //echo "<td>" . $row["Name"]. "</td>";
 						    }
 						} else {
 						    echo "0 results";

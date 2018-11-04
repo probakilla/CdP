@@ -20,9 +20,9 @@
 			<div class="panel-heading">Creer un nouveau projet</div>
 			<div class="panel-body"> 
 
-				<form method="post" action="CreateProject.php">
+				<form method="post" action="Projects.php">
 					<input type="text" name="projectName" class="form-control" placeholder="Le nom du projet" /><br>
-					<input type="submit" class="btn btn-info pull-right" value="Creer" />
+					<input type="submit" name="save" class="btn btn-info pull-right" value="Creer" />
 				</form>
 
 			</div>
