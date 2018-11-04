@@ -25,11 +25,11 @@
 				<div class="table-responsive">
 				  <table class="table">
 				  	<?php
-				  	
-					  	$servername = "localhost";
+
+					  	$servername = "mariadb";
 						$username = "root";
-						$password = "";
-						$dbname = "Cdp";
+						$password = "root";
+						$dbname = "database";
 
 						// Create connection
 						$conn = new mysqli($servername, $username, $password, $dbname);
@@ -40,7 +40,7 @@
 
 						$sql = "SELECT * FROM Issue WHERE ProjectName LIKE \"$project\"";
 						$result = $conn->query($sql);
-						
+
 						echo "<thead class=\"thead-dark\">
 					    <tr>
 					      <th scope=\"col\">Id</th>

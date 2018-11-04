@@ -17,7 +17,7 @@ services:
       context: .
     container_name: php
     ports:
-      - 80:80
+      - 8080:80
       - 3306:3306
     volumes:
       - ./php:/var/www/html

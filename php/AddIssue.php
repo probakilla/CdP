@@ -44,14 +44,18 @@
                         $desc = test_input($_POST["desc"]);
                         $prio = test_input($_POST["prio"]);
                         $diff = test_input($_POST["diff"]);
-                        $bdd = new PDO('mysql:host=localhost;dbname=CdP;charset=utf8', 'root', '');
+                        $bdd = new PDO('mysql:host=mariadb;
+                                              dbname=database;
+                                              charset=utf8',
+                                              'root',
+                                              'root');
                         $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); // Error Handling
-                        $sql = "INSERT INTO Issue SET
-                        ProjectName = \"$project\",
-                        Id = $id,
-                        Description = \"$desc\",
-                        Priority = \"$prio\",
-                        Difficulty = $diff;";
+                        $sql = "INSERT INTO Issue
+                                SET ProjectName = \"$project\",
+                                    Id = $id,
+                                    Description = \"$desc\",
+                                    Priority = \"$prio\",
+                                    Difficulty = $diff;";
                         $bdd->exec($sql);
 
                         echo "<script type=\"text/javascript\">window.location = \"Backlog.php\";                       </script>";

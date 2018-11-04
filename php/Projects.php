@@ -22,10 +22,10 @@
 				<div class="table-responsive">
 				  <table class="table">
 				  	<?php
-						$servername = "localhost";
+						$servername = "mariadb";
 						$username = "root";
-						$password = "";
-						$dbname = "Cdp";
+						$password = "root";
+						$dbname = "database";
 
 						// Create connection
 						$conn = new mysqli($servername, $username, $password, $dbname);
@@ -36,7 +36,7 @@
 
 						$bdd = new PDO('mysql:host=localhost;dbname=CdP;charset=utf8', 'root', '');
 					    $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-					    
+
 					    if(isset($_POST['save'])){
 					    	$sql1 = "INSERT INTO `Project` (`Name`) VALUES ('".$_POST["projectName"]."')";
 					        $bdd->exec($sql1);
