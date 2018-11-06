@@ -37,6 +37,14 @@
 						$bdd = new PDO('mysql:host=mariadb;dbname=CdP;charset=utf8', 'root', 'root');
 					    $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
+					    if(isset($_GET["Delete"])){
+					    	$project = $_GET['Delete'];
+							$sqldi = "DELETE FROM Issue WHERE ProjectName LIKE \"$project\"";
+							$sqldp = "DELETE FROM Project WHERE Name LIKE \"$project\"";
+					    	$bdd->exec($sqldi);
+					    	$bdd->exec($sqldp);
+					    }
+					    
 					    if(isset($_POST['save'])){
 					    	$sql1 = "INSERT INTO `Project` (`Name`) VALUES ('".$_POST["projectName"]."')";
 					        $bdd->exec($sql1);
@@ -53,6 +61,7 @@
 						    while($row = $result->fetch_assoc()) {
 						    	echo "<form method=\"get\" action=\"Backlog.php\">";
 						    	echo "<tr><th scope=\"row\" ><a href=\"Backlog.php?ProjectName=". $row["Name"]."\" type=\"submit\">". $row["Name"]."</a></th>";
+						    	echo "<td><th scope=\"row\" ><form method=\"get\" action=\"Projects.php?Delete=". $row["Name"]."\">   <a href=\"Projects.php?Delete=". $row["Name"]."\" type=\"submit\">Supprimer</a></form>      </td></tr>";
 						    	echo "</form>";
 						    }
 						} else {

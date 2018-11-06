@@ -20,7 +20,9 @@
 		    <br>
 	<div class="col-sm-offset-3 col-sm-6">
 		<div class="panel panel-info">
-			<div class="panel-heading">le projet : <?php echo " ".$project; ?></div>
+			<div class="panel-heading"><?php echo "<h4 class=\"panel-title pull-left\">le projet :</h4>".$project;
+			echo "<h4 class=\"panel-title pull-right\"><a href=\"AddIssue.php?projectname=".$project."\" value=\"Ajouter une Issue\">Ajouter une Issue</a></h4>";
+			?></div></div>
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table">
