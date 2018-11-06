@@ -1,7 +1,9 @@
 <?php
     try {
-        $bdd = new PDO('mysql:host=mariadb;dbname=CdP;port=3306;charset=utf8', 'root', 'root');
+        $bdd = new PDO('mysql:host=mariadb;port=3306;charset=utf8', 'root', 'root');
         $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); // Error Handling
+        $bdd->query("CREATE DATABASE IF NOT EXISTS CdP");
+        $bdd->query("use CdP");
 
         $sql = "CREATE TABLE IF NOT EXISTS Project (
         Name VARCHAR(32) NOT NULL,
