@@ -20,7 +20,7 @@ services:
       - 8080:80
       - 3306:3306
     volumes:
-      - ./php:/var/www/html
+      - ./src:/var/www/html
     links:
       - mariadb
 volumes:
