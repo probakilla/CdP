@@ -21,6 +21,9 @@
 	<div class="col-sm-offset-3 col-sm-6">
 		<div class="panel panel-info">
 			<div class="panel-heading">Liste des projets</div>
+			<div class="text-center">
+	            <a class="btn btn-primary" href="HomePage.php">Annuler</a>
+	        </div>
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table">
