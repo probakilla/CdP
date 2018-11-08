@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>New Project</title>
+		<title>Projets</title>
 
 		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -18,6 +18,9 @@
 	<div class="col-sm-offset-3 col-sm-6">
 		<div class="panel panel-info">
 			<div class="panel-heading">Liste des projets</div>
+			<div class="text-center">
+	            <a class="btn btn-primary" href="HomePage.php">Annuler</a>
+	        </div>
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table">
