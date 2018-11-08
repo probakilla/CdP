@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Modification d'issue</title>
+    <title>Modification d'une issue</title>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -23,6 +23,10 @@
 ?>
 
 <h1 class="text-center mt-5">Modification de l'issue #<?php echo $issue ?></h1>
+
+<div class="text-center">
+    <a class="btn btn-primary" href="Backlog.php?ProjectName=<?php echo $project ?>">Annuler</a>
+</div>
 
 <div class="text-center jumbotron mt-5">
     <?php
