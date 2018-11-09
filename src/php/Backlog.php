@@ -15,6 +15,8 @@
 	</head>
 	<body>
 		<?php
+			if ($_SERVER['REQUEST_METHOD'] !== 'GET' && !isset($_GET["projectname"]))
+				error("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?");
 			$project = $_GET['ProjectName'];
 		?>
 		<div class="text-center">
@@ -23,15 +25,19 @@
 		    <br>
 	<div class="col-sm-offset-3 col-sm-6">
 		<div class="panel panel-info">
-			<div class="panel-heading"><?php echo "<h4 class=\"panel-title pull-left\">le projet :</h4>".$project;
+			<div class="panel-heading"><?php echo "<h4 class=\"panel-title pull-left\">le projet : </h4>".$project;
 			echo "<h4 class=\"panel-title pull-right\"><a href=\"AddIssue.php?projectname=".$project."\" value=\"Ajouter une Issue\">Ajouter une Issue</a></h4>";
 			?></div></div>
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table">
 				  	<?php
-
-					  	$servername = "mariadb";
+						function error($message) {
+							echo "<span class=\"badge badge-warning\">Erreur</span> $message";
+							echo nl2br("\n\nRedirection vers le backlog.");
+							echo "<script type=\"text/javascript\">window.location = \"Projects.php\";</script>";
+						}
+						$servername = "mariadb";
 						$username = "root";
 						$password = "root";
 						$dbname = "CdP";
@@ -40,35 +46,35 @@
 						$conn = new mysqli($servername, $username, $password, $dbname);
 						// Check connection
 						if ($conn->connect_error) {
-						    die("Connection failed: " . $conn->connect_error);
+							die("Connection failed: " . $conn->connect_error);
 						}
 
 						$sql = "SELECT * FROM Issue WHERE ProjectName LIKE \"$project\"";
 						$result = $conn->query($sql);
 
 						echo "<thead class=\"thead-dark\">
-					    <tr>
-					      <th scope=\"col\">Id</th>
-					      <th scope=\"col\">Description</th>
-					      <th scope=\"col\">Priorité</th>
-					      <th scope=\"col\">Difficulté</th>
-					    </tr>
-					  </thead>";
-					  echo "<tbody>";
+						<tr>
+						<th scope=\"col\">Id</th>
+						<th scope=\"col\">Description</th>
+						<th scope=\"col\">Priorité</th>
+						<th scope=\"col\">Difficulté</th>
+						</tr>
+					</thead>";
+					echo "<tbody>";
 
 						if ($result->num_rows > 0) {
-						    // output data of each row
-						    while($row = $result->fetch_assoc()) {
-						    	echo "<tr>";
-						    	echo "<th scope=\"row\">".$row["Id"]."</th>";
-						    	echo "<td>".$row["Description"]."</td>";
-						    	echo "<td>".$row["Priority"]."</td>";
-						    	echo "<td>".$row["Difficulty"]."</td>";
-						    	echo "</tr>";
-						        //echo "<td>" . $row["Name"]. "</td>";
-						    }
+							// output data of each row
+							while($row = $result->fetch_assoc()) {
+								echo "<tr>";
+								echo "<th scope=\"row\">".$row["Id"]."</th>";
+								echo "<td>".$row["Description"]."</td>";
+								echo "<td>".$row["Priority"]."</td>";
+								echo "<td>".$row["Difficulty"]."</td>";
+								echo "</tr>";
+								//echo "<td>" . $row["Name"]. "</td>";
+							}
 						} else {
-						    echo "0 results";
+							echo "0 results";
 						}
 
 						echo "</tbody>";

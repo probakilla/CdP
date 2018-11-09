@@ -23,9 +23,7 @@
                 function error($message) {
                     echo "<span class=\"badge badge-warning\">Erreur</span> $message";
                     echo nl2br ("\n\nRedirection vers le backlog d'ici 5 secondes.");
-                    /*header("refresh:5;url=Backlog.php");
-                    die();*/
-                    echo "<script type=\"text/javascript\">window.location = \"Backlog.php\";</script>";
+                    echo "<script type=\"text/javascript\">window.location = \"Projects.php\";</script>";
                 }
                 function test_input($data) {
                     $data = trim($data);
@@ -59,7 +57,7 @@
                                     Difficulty = $diff;";
                         $bdd->exec($sql);
 
-                        echo "<script type=\"text/javascript\">window.location = \"Backlog.php\";                       </script>";
+                        echo "<script type=\"text/javascript\">window.location = \"Backlog.php?ProjectName=$project\";                       </script>";
                     }
                     catch (Exception $e) {
                         error($e->getMessage());
