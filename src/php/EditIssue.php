@@ -67,43 +67,39 @@
             return $out . "</select>";
         }
 
-        $bdd     = new PDO('mysql:host=mariadb;
-                            dbname=CdP;
-                            port=3306;
-                            charset=utf8',
-                            'root', 'root');
-        $projectName = $_GET["projectname"];
-        $issueId = $_GET["Id"];
-        $request = "SELECT *
-        FROM Issue
-        WHERE ProjectName LIKE \"$projectName\"
-        AND Id = $issue";
-        $result = $bdd->query($request);
-        if (!$result)
-            error("Requête à la base de donnée incorrecte");
-        $currentValues = $result->fetch();
 
-        $project = "";
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"]) && isset($_GET["id"])) {
-            $project = test_input($_GET["projectname"]);
-            $id      = test_input($_GET["id"]);
+
+            $bdd     = new PDO('mysql:host=mariadb;
+            dbname=CdP;
+            port=3306;
+            charset=utf8',
+            'root', 'root');
+            $request = "SELECT *
+            FROM Issue
+            WHERE ProjectName LIKE \"$project\"
+            AND Id = $issue";
+            $result = $bdd->query($request);
+            if (!$result)
+                error("Requête à la base de donnée incorrecte");
+            $currentValues = $result->fetch();
+
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
-                $project = test_input($_POST["project"]);
-                $id      = test_input($_POST["id"]);
                 $desc    = test_input($_POST["desc"]);
                 $prio    = test_input($_POST["prio"]);
                 $diff    = test_input($_POST["diff"]);
-                $bdd     = new PDO('mysql:host=mariadb;dbname=database;port=3306;charset=utf8', 'root', 'root');
-                $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Error Handling
+                $bdd     = new PDO('mysql:host=mariadb;dbname=CdP;port=3306;charset=utf8', 'root', 'root');
+                $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $sql = "UPDATE Issue
                         SET Description = \"$desc\",
                             Priority = \"$prio\",
                             Difficulty = $diff;";
                 $bdd->exec($sql);
-                echo "<script type=\"text/javascript\">window.location = \"Projects.php\";</script>";
+                echo "<script type=\"text/javascript\">window.location = \"Backlog.php?ProjectName=".$project.";</script>";
             } catch (Exception $e) {
-                error($e->getMessage());
+                echo $e->getMessage();
+                //error($e->getMessage());
             }
         } else {
             error("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?");
