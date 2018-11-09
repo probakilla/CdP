@@ -5,7 +5,7 @@
 - docker
 - docker-compose
 
-## Installation
+## Installation via git
 
 Premièrement, cloner le dépôt :
 
@@ -25,4 +25,12 @@ Le site internet est maintenant accessible via navigateur à l'adresse :
 
 ```bash
 <http://localhost:8080/>
+```
+
+## Installation via docker
+
+Lancer l'image avec la commande :
+
+```bash
+docker pull probakilla/cdp:v0.1.0
 ```

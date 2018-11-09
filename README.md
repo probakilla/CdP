@@ -17,3 +17,8 @@
 | #13 | En tant que développeur, je souhaite modifier le contenu d'une tâche via un formulaire (Id tâche, Id issue, description, statut, temps nécessaire, dépendances, Id développeur) où les champs de celui-ci seront préremplis avec les informations actuelles de la tâche |     Basse     |     3      |   3    |
 | #14 | En tant que développeur, je souhaite supprimer une tâche afin de la retirer du sprint associé                                                                                                                                                                       |     Basse     |     2      |   3    |
 | #15 | En tant que développeur, je souhaite générer un graphique d'avancement (burn down chart) afin de visualiser l'avancée du projet et la quantité de travail réalisé/restant                                                                                           |     Basse     |     8      |   3    |
+
+## Lien image Docker
+
+Lien internet : <https://hub.docker.com/r/probakilla/cdp/>
+Nom image docker : probakilla/cdp:v0.1.0
