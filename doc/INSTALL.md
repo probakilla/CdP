@@ -26,3 +26,11 @@ Le site internet est maintenant accessible via navigateur à l'adresse :
 ```bash
 <http://localhost:8080/>
 ```
+
+## Installation via docker
+
+Lancer l'image avec la commande :
+
+```bash
+docker run probakilla/cdp:v0.1.0
+```
