@@ -1,5 +1,19 @@
 # Sprint1.md
 
+
+### Issues
+
+| Id  | Description                                                                                                                                                                                                                                                         | Priorité | Difficulté | Sprint |
+| :-: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :--------: | :----: |
+| #3  | En tant que développeur, je souhaite créer un projet via un formulaire (nom de projet et collaborateurs (autres développeurs) optionnellement)                                                                                                                      |     Haute     |     3      |   1    |
+| #5  | En tant que développeur, je souhaite ajouter une issue (Id, Description, Priorité (optionnelle, peut être renseignée plus tard), Difficulté) à mon backlog afin de décrire un besoin                                                                                |     Haute     |     3      |   1    |
+| #6  | En tant que développeur, je souhaite consulter le backlog du projet afin de potentiellement en modifier les issues                                                                                                                                                            |     Haute     |     2      |   1    |
+| #7  | En tant que développeur, je souhaite modifier le contenu d'une issue via un formulaire (Id, Description, Priorité (optionnelle), Difficulté) où les champs auront la valeur de l'issue actuelle                                                                                    |     Haute     |     3      |   1    |
+| #8  | En tant que développeur, je souhaite supprimer une issue du backlog                                                                                                                                                                                                            |     Haute     |     2      |   1    |
+
+
+### Tâches
+
 | Id    | Description                                                                                                                                                                                                                                                                                                                                                                                      | Issue(s) | Développeur | Statut |
 | :---: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: | :---------: | :----: |
 | #1    | Création du fichier *GenerateDB.php* qui génère les bases de données nécessaires                                                                                                                                                                                                                                                                                                                 |          | Saint-Jean  |        |
@@ -28,3 +42,8 @@
 | #24   | Test : Implémentation du test de la modification d'une *issue*                                                                                                                                                                                                                                                                                                                                   | 7        |             |        |
 | #25   | Test : Rédaction du scénario de la suppression d'une *issue* du *backlog*. L'*issue* doit être correctement enlevée de la base de données                                                                                                                                                                                                                                                        | 6        |             |        |
 | #26   | Test : Implémentation du test de la suppression d'une *issue* du *backlog*                                                                                                                                                                                                                                                                                                                       | 6        |             |        |
+
+## Lien image Docker
+
+Lien internet : <https://hub.docker.com/r/probakilla/cdp/>
+Nom image docker : probakilla/cdp:v0.1.0

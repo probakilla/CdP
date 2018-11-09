@@ -25,4 +25,15 @@ Le site internet est maintenant accessible via navigateur à l'adresse :
 
 ```bash
 <http://localhost:8080/>
+<<<<<<< HEAD
+=======
+```
+
+## Installation via docker
+
+Lancer l'image avec la commande :
+
+```bash
+docker run probakilla/cdp:v0.1.0
+>>>>>>> 673b35a... Modif Sprint1 (lien docker)
 ```
