@@ -70,7 +70,7 @@
 								echo "<td>".$row["Description"]."</td>";
 								echo "<td>".$row["Priority"]."</td>";
 								echo "<td>".$row["Difficulty"]."</td>";
-								echo "<td><a href=\"EditIssue.php?projectname=".$project."&id=".$row["Id"]."\" type=\"submit\">Editer</a></td>";
+
 								echo "</tr>";
 							}
 						} else {
