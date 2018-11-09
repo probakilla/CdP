@@ -32,5 +32,5 @@ Le site internet est maintenant accessible via navigateur à l'adresse :
 Lancer l'image avec la commande :
 
 ```bash
-docker pull probakilla/cdp:v0.1.0
+docker run probakilla/cdp:v0.1.0
 ```
