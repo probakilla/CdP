@@ -42,12 +42,12 @@
 
 					    if(isset($_GET["Delete"])){
 					    	$project = $_GET['Delete'];
-							$sqldi = "DELETE FROM Issue WHERE ProjectName LIKE \"$project\"";
+							$sqldi = "DELETE FROM UserStory WHERE ProjectName LIKE \"$project\"";
 							$sqldp = "DELETE FROM Project WHERE Name LIKE \"$project\"";
 					    	$bdd->exec($sqldi);
 					    	$bdd->exec($sqldp);
 					    }
-					    
+
 					    if(isset($_POST['save'])){
 					    	$sql1 = "INSERT INTO `Project` (`Name`) VALUES ('".$_POST["projectName"]."')";
 					        $bdd->exec($sql1);
