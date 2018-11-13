@@ -53,7 +53,7 @@
 							die("Connection failed: " . $conn->connect_error);
 						}
 
-						$sql = "SELECT * FROM UserStory WHERE ProjectName LIKE \"$project\"";
+						$sql = "SELECT * FROM Issue WHERE ProjectName LIKE \"$project\"";
 						$result = $conn->query($sql);
 
 						echo "<thead class=\"thead-dark\">
