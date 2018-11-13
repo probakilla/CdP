@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Modification d'une issue</title>
+    <title>Modification d'une user story</title>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -13,7 +13,7 @@
 <?php
     define('NB_PRIORITIES', 3);
     $project = $_GET['projectname'];
-    $issue   = $_GET['id'];
+    $userStory   = $_GET['id'];
 
     abstract class priorityEnum {
         const Low    = 0;
@@ -22,7 +22,7 @@
     }
 ?>
 
-<h1 class="text-center mt-5">Modification de l'issue #<?php echo $issue ?></h1>
+<h1 class="text-center mt-5">Modification de l'user story #<?php echo $userStory ?></h1>
 
 <div class="text-center">
     <a class="btn btn-primary" href="Backlog.php?ProjectName=<?php echo $project ?>">Annuler</a>
@@ -76,9 +76,9 @@
             charset=utf8',
             'root', 'root');
             $request = "SELECT *
-            FROM Issue
+            FROM UserStory
             WHERE ProjectName LIKE \"$project\"
-            AND Id = $issue";
+            AND Id = $userStory";
             $result = $bdd->query($request);
             if (!$result)
                 error("Requête à la base de donnée incorrecte");
@@ -91,7 +91,7 @@
                 $diff    = test_input($_POST["diff"]);
                 $bdd     = new PDO('mysql:host=mariadb;dbname=CdP;port=3306;charset=utf8', 'root', 'root');
                 $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql = "UPDATE Issue
+                $sql = "UPDATE UserStory
                         SET Description = \"$desc\",
                             Priority = \"$prio\",
                             Difficulty = $diff;";

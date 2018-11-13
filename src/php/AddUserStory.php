@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ajout d'une issue</title>
+        <title>Ajout d'une User Story</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
@@ -16,7 +16,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous" defer></script>
     </head>
     <body>
-        <h1 class="text-center mt-5">Ajout d'une issue</h1>
+        <h1 class="text-center mt-5">Ajout d'une user story</h1>
 
         <div class="text-center jumbotron mt-5">
             <?php
@@ -49,7 +49,7 @@
                                               'root',
                                               'root');
                         $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION ); // Error Handling
-                        $sql = "INSERT INTO Issue
+                        $sql = "INSERT INTO UserStory
                                 SET ProjectName = \"$project\",
                                     Id = $id,
                                     Description = \"$desc\",
@@ -76,7 +76,7 @@
         <div class="container center-block">
 			<div class="row main align-items-center justify-content-center">
 				<div class="main-login main-center">
-				<h5>Ajouter une issue au projet courant :</h5>
+				<h5>Ajouter une user story au projet courant :</h5>
 					<form class="mt-5" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
 						<div class="form-group">
@@ -101,7 +101,7 @@
 							<label for="username" class="cols-sm-2 control-label">Description</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<input type="text" class="form-control" name="desc" placeholder="Entrer le détail de votre issue"/>
+									<input type="text" class="form-control" name="desc" placeholder="Entrer le détail de votre user story"/>
 								</div>
 							</div>
 						</div>
