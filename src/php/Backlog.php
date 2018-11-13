@@ -17,7 +17,7 @@
 		<?php
 			if ($_SERVER['REQUEST_METHOD'] !== 'GET' && !isset($_GET["projectname"]))
 				error("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?");
-			$project = $_GET['ProjectName'];
+			$project = $_GET['projectname'];
 		?>
 		<div class="text-center">
 		    <a class="btn btn-primary" href="HomePage.php">Accueil</a>
@@ -25,9 +25,13 @@
 		    <br>
 	<div class="col-sm-offset-3 col-sm-6">
 		<div class="panel panel-info">
-			<div class="panel-heading"><?php echo "<h4 class=\"panel-title pull-left\">le projet : </h4>".$project;
-			echo "<h4 class=\"panel-title pull-right\"><a href=\"AddIssue.php?projectname=".$project."\" value=\"Ajouter une Issue\">Ajouter une Issue</a></h4>";
-			?></div></div>
+			<div class="panel-heading">
+				<div class="panel-title pull-left">Projet : <?php echo $project?></div>
+				<div class="panel-title text-right">
+					<a href="AddUserStory.php?projectname=<?php echo $project?>" value="Ajouter une User Story">Ajouter une User Story
+					</a>
+				</div>
+			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table">
@@ -82,6 +86,7 @@
 						$conn->close();
 					?>
 				  </table>
+				</div>
 				</div>
 			</div>
 		</div>
