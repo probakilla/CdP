@@ -25,7 +25,7 @@
 <h1 class="text-center mt-5">Modification de l'user story #<?php echo $userStory ?></h1>
 
 <div class="text-center">
-    <a class="btn btn-primary" href="Backlog.php?ProjectName=<?php echo $project ?>">Annuler</a>
+    <a class="btn btn-primary" href="Backlog.php?projectname=<?php echo $project ?>">Annuler</a>
 </div>
 
 <div class="text-center jumbotron mt-5">
@@ -96,7 +96,7 @@
                             Priority = \"$prio\",
                             Difficulty = $diff;";
                 $bdd->exec($sql);
-                echo "<script type=\"text/javascript\">window.location = \"Backlog.php?ProjectName=".$project.";</script>";
+                echo "<script type=\"text/javascript\">window.location = \"Backlog.php?projectname=".$project.";</script>";
             } catch (Exception $e) {
                 echo $e->getMessage();
                 //error($e->getMessage());

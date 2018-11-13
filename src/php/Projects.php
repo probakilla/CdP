@@ -63,7 +63,7 @@
 						if ($result->num_rows > 0) {
 						    while($row = $result->fetch_assoc()) {
 						    	echo "<form method=\"get\" action=\"Backlog.php\">";
-						    	echo "<tr><th scope=\"row\" ><a href=\"Backlog.php?ProjectName=". $row["Name"]."\" type=\"submit\">". $row["Name"]."</a></th>";
+						    	echo "<tr><th scope=\"row\" ><a href=\"Backlog.php?projectname=". $row["Name"]."\" type=\"submit\">". $row["Name"]."</a></th>";
 						    	echo "<td><th scope=\"row\" ><form method=\"get\" action=\"Projects.php?Delete=". $row["Name"]."\">   <a href=\"Projects.php?Delete=". $row["Name"]."\" type=\"submit\">Supprimer</a></form>      </td></tr>";
 						    	echo "</form>";
 						    }
