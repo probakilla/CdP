@@ -5,20 +5,18 @@ addons:
       - docker-ce
 
 services:
-  docker
+ - docker
 
-language: php
-php:
-  - '7.0'
-  - nightly
+language: python
+python:
+  - "3.5"
 
 before-install:
   - pwd
   - ls -la
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar require squizlabs/php_codesniffer
   - docker-compose up -d
+  - pip install selenium
 
 script:
-  - echo "Linting project ..."
-  - vendor/bin/phpcs src/php/*
+  - echo "Stating tests ..."
+  - echo "NO TESTS YET"
