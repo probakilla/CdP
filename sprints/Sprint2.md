@@ -21,13 +21,16 @@
 
 | Id    | Description | User Stories | Temps (en jh) | Développeur | Statut |
 | :---: | :---------: | :----------: | :-----------: | :---------: | :----: |
-| #18   | Test : Rédaction du scénario pour vérifier que l'affichage de la liste des projets est correct, tout les projets présents dans la base de données, dans la table *Project* doivent être correctement affichés sur la page *Projects.php* | 5 | | | TODO |
-| #19   | Test : Implémentation de la vérification de l'affichage de la liste des projets | 5 | | | TODO |
-| #20   | Test : Rédaction du scénario de vérification de l'affichage du backlog d'un projet, les données présentent dans la table *UserStory* associées au projet voulu doivent apparaître correctement sur la page *Backlog.php* | 6 | | | TODO |
-| #21   | Test : Implémentation de la vérification de l'affichage du backlog d'un projet | 6 | | | TODO |
-| #22   | Test : Rédaction du scénario d'ajout d'une *User Story* à la base de données, les éléments entrés dans les champs de la page *AddUserStory.php* doivent être ajoutés dans la table *UserStory* avec les bonnes valeurs | 7 | | | TODO |
-| #23   | Test : Implémentation du test d'ajout d'une User Story à la base de données | 7 | | | TODO |
-| #24   | Test : Rédaction du scénario de la modification d'une User Story via la page *EditUserStory.php*. Les éléments entrés dans le formulaire doivent être correctement modifiés dans la base de données | 9 | | | TODO |
-| #25   | Test : Implémentation du test de la modification d'une User Story | 9 | | | TODO |
-| #26   | Test : Rédaction du scénario de la suppression d'une User Story du backlog. L'User Story doit être correctement enlevée de la base de données | 10 | | | TODO |
-| #27   | Test : Implémentation du test de la suppression d'une User Story du backlog | 10 | | | TODO |
+| #1   | Test : Rédaction du scénario pour vérifier que l'affichage de la liste des projets est correct, tout les projets présents dans la base de données, dans la table *Project* doivent être correctement affichés sur la page *Projects.php* | 5 | | | TODO |
+| #2   | Test : Implémentation de la vérification de l'affichage de la liste des projets | 5 | | | TODO |
+| #3   | Test : Rédaction du scénario de vérification de l'affichage du backlog d'un projet, les données présentent dans la table *UserStory* associées au projet voulu doivent apparaître correctement sur la page *Backlog.php* | 6 | | | TODO |
+| #4   | Test : Implémentation de la vérification de l'affichage du backlog d'un projet | 6 | | | TODO |
+| #5   | Test : Rédaction du scénario d'ajout d'une *User Story* à la base de données, les éléments entrés dans les champs de la page *AddUserStory.php* doivent être ajoutés dans la table *UserStory* avec les bonnes valeurs | 7 | | | TODO |
+| #6   | Test : Implémentation du test d'ajout d'une User Story à la base de données | 7 | | | TODO |
+| #7   | Test : Rédaction du scénario de la modification d'une User Story via la page *EditUserStory.php*. Les éléments entrés dans le formulaire doivent être correctement modifiés dans la base de données | 9 | | | TODO |
+| #8   | Test : Implémentation du test de la modification d'une User Story | 9 | | | TODO |
+| #9   | Test : Rédaction du scénario de la suppression d'une User Story du backlog. L'User Story doit être correctement enlevée de la base de données | 10 | | | TODO |
+| #10  | Test : Implémentation du test de la suppression d'une User Story du backlog | 10 | | | TODO |
+| #11  | Ajout d'un fichier *Database.php* pour la gestion de les transactions avec la base de données. Le fichier doit contenir une classe php *Database* implémentant les méthodes d'accès à la base (CRUD) *insert*, *select*, *update*, *delete* | tous | 1 | Pilleux | DOING |
+| #12  | Refactoring du code existant pour utiliser la classe *Database* lors des interactions avec la base de données | tous | 0.1 | Pilleux | DOING |
+| #13  | Refactoring du code existant pour retirer la duplication de code. Créaction d'un fichier *Utils.php* contenant une classe php *IO* contenant des méthodes statiques pour factoriser du code. Les méthodes implémentées seront *redirect(\$location)*, qui redirige *error(\$message, \$location)* qui affiche un message d'ereur puis redirige, *testInput(\$input)* qui test l'input de l'utilisateur dans un champ de formulaire, *checkURIParams(\$listParams)* qui verrifie si l'URL de la page courante contient la liste des paramètres | tous | 0.5 | Pilleux | DOING |
