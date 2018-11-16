@@ -17,11 +17,13 @@
 		<?php
 			require_once "Error.php";
 			require_once "Database.php";
+			require_once "View.php";
 
 			$database = new Database();
 			if ($_SERVER['REQUEST_METHOD'] !== 'GET' && !isset($_GET["projectname"]))
 				$database->exists(
-					"ProjectName", "UserStory", ''
+					"ProjectName", "UserStory",
+					'ProjectName LIKE "' . $_GET["projectname"] . '"'
 				);
 			$project = $_GET['projectname'];
 		?>
@@ -41,25 +43,38 @@
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table">
-				  	<?php
-						$row = $database->select("*", "UserStory", "ProjectName LIKE \"$project\"");
-
-						echo "<thead class=\"thead-dark\">
+					  <?php
+					  $row = null;
+					  	try {
+							$row = $database->select("*", "UserStory",
+							 "ProjectName LIKE \"$project\"");
+						} catch (Exception $exception) {
+							CdPError::redirectTo(
+								$exception->get_message(),
+								'Projects.php'
+							);
+						} finally {
+							$database = null;
+						}
+						echo '<thead class="thead-dark">
 						<tr>
-						<th scope=\"col\">Id</th>
-						<th scope=\"col\">Description</th>
-						<th scope=\"col\">Priorité</th>
-						<th scope=\"col\">Difficulté</th>
+						<th scope="col">Id</th>
+						<th scope="col">Description</th>
+						<th scope="col">Priorité</th>
+						<th scope="col">Difficulté</th>
 						</tr>
-							</thead>";
+							</thead>';
 					echo "<tbody>";
 						foreach ($row as $value)
 						{
+							$id = $value["Id"];
 							echo "<tr>";
-							echo "<th scope=\"row\">".$value["Id"]."</th>";
+							echo '<th scope="row">'.$value["Id"]."</th>";
 							echo "<td>".$value["Description"]."</td>";
 							echo "<td>".$value["Priority"]."</td>";
 							echo "<td>".$value["Difficulty"]."</td>";
+							echo "<td>".View::addRedirectButton(
+								"EditUserStory.php?projectname=$project&id=$id")."<td>";
 							echo "</tr>";
 						}
 					echo "</tbody>";

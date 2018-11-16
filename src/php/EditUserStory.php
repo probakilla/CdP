@@ -3,27 +3,80 @@
 <head>
     <meta charset="utf-8" />
     <title>Modification d'une user story</title>
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <meta name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous">
+    <!-- Website Font style -->
+    <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One'
+            rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen'
+            rel='stylesheet' type='text/css'>
+    <!-- Bootstrap Javascript -->
+    <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous" defer>
+        </script>
 </head>
 <body>
 
 <?php
     require_once "Database.php";
     require_once "Error.php";
+    require_once "View.php";
 
-    define('NB_PRIORITIES', 3);
     $project = $_GET['projectname'];
     $userStory   = $_GET['id'];
     $database = new Database();
+?>
 
-    abstract class priorityEnum {
-        const Low    = 0;
-        const Medium = 1;
-        const High   = 2;
-    }
+    <?php
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"]) && isset($_GET["id"])) {
+            $database->exists(
+                "ProjectName", "UserStory",
+                'ProjectName LIKE "' . $_GET["projectname"] . '"'
+            );
+            $database->exists(
+                "Id", "UserStory", "Id = " . $_GET["id"] .
+                ' AND ProjectName LIKE "' . $_GET["projectname"] . '"'
+            );
+
+            $currentValues = $database->select(
+                "*", "UserStory",
+                'ProjectName LIKE "' . $project . '" AND Id = '. $userStory
+            )[0];
+
+        } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            try {
+                $project = CdPError::testInput($_POST["project"]);
+                $id = CdPError::testInput($_POST["id"]);
+                $desc = CdPError::testInput($_POST["desc"]);
+                $prio = CdPError::testInput($_POST["prio"]);
+                $diff = CdPError::testInput($_POST["diff"]);
+                $database->update(
+                    "UserStory",
+                    ["Description" => $desc,
+                     "Priority" => $prio,
+                     "Difficulty" => $diff],
+                    'ProjectName LIKE "' . $project . '" AND Id = ' . $id
+                );
+                CdPError::redirectTo("Backlog.php?projectname=$project");
+            } catch (Exception $exception) {
+                echo $exception->getMessage();
+            }
+        } else {
+            CdPError::fail("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?",
+            'Backlog.php?projectname="'.$project.'"');
+        }
 ?>
 
 <h1 class="text-center mt-5">Modification de l'user story #<?php echo $userStory ?></h1>
@@ -33,69 +86,6 @@
 </div>
 
 <div class="text-center jumbotron mt-5">
-    <?php
-        function priorityValue($difficulty) {
-          switch ($difficulty) {
-         case priorityEnum::Low:
-             return "Low";
-          case priorityEnum::Medium:
-               return "Medium";
-           case priorityEnum::High:
-                return "High";
-            }
-        }
-        function currentPriority($currentPriority) {
-            $out = "<select class=\"form-control\" name=\"prio\">";
-            for ($i = 0; $i < NB_PRIORITIES; $i++) {
-                if ($currentPriority === priorityValue($i)) {
-                    $out .= "<option selected>";
-                } else {
-                    $out .= "<option>";
-                }
-                $out .= priorityValue($i) . "</option>";
-            }
-            return $out . "</select>";
-        }
-
-
-        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"]) && isset($_GET["id"])) {
-
-
-            $bdd     = new PDO('mysql:host=mariadb;
-            dbname=CdP;
-            port=3306;
-            charset=utf8',
-            'root', 'root');
-            $request = "SELECT *
-            FROM UserStory
-            WHERE ProjectName LIKE \"$project\"
-            AND Id = $userStory";
-            $result = $bdd->query($request);
-            if (!$result)
-                error("Requête à la base de donnée incorrecte");
-            $currentValues = $result->fetch();
-
-        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            try {
-                $desc    = test_input($_POST["desc"]);
-                $prio    = test_input($_POST["prio"]);
-                $diff    = test_input($_POST["diff"]);
-                $bdd     = new PDO('mysql:host=mariadb;dbname=CdP;port=3306;charset=utf8', 'root', 'root');
-                $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql = "UPDATE UserStory
-                        SET Description = \"$desc\",
-                            Priority = \"$prio\",
-                            Difficulty = $diff;";
-                $bdd->exec($sql);
-                echo "<script type=\"text/javascript\">window.location = \"Backlog.php?projectname=".$project.";</script>";
-            } catch (Exception $e) {
-                echo $e->getMessage();
-                //error($e->getMessage());
-            }
-        } else {
-            error("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?");
-        }
-?>
 </div>
 
 <div class="container center-block">
@@ -143,7 +133,7 @@
                     <label for="password" class="cols-sm-2 control-label">Priorité</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <?php echo currentPriority($currentValues["Priority"]); ?>
+                            <?php echo View::currentPriority($currentValues["Priority"]); ?>
                         </div>
                     </div>
                 </div>

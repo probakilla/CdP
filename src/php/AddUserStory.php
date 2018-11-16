@@ -54,6 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"])) {
         CdPError::redirectTo("Backlog.php?projectname=".$data["ProjectName"]);
     } catch (Exception $e) {
         CdPError::fail($e->getMessage(), "Projects.php");
+    } finally {
+        $database = null;
     }
 } else {
     CdPError::fail(
