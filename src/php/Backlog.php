@@ -15,9 +15,13 @@
 	</head>
 	<body>
 		<?php
+			require_once "Utils.php";
+			require_once "Database.php";
+
 			if ($_SERVER['REQUEST_METHOD'] !== 'GET' && !isset($_GET["projectname"]))
-				error("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?");
+				IO::error("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?");
 			$project = $_GET['projectname'];
+			$database = new Database();
 		?>
 		<div class="text-center">
 		    <a class="btn btn-primary" href="HomePage.php">Accueil</a>
@@ -36,25 +40,7 @@
 				<div class="table-responsive">
 				  <table class="table">
 				  	<?php
-						function error($message) {
-							echo "<span class=\"badge badge-warning\">Erreur</span> $message";
-							echo nl2br("\n\nRedirection vers le backlog.");
-							echo "<script type=\"text/javascript\">window.location = \"Projects.php\";</script>";
-						}
-						$servername = "mariadb";
-						$username = "root";
-						$password = "root";
-						$dbname = "CdP";
-
-						// Create connection
-						$conn = new mysqli($servername, $username, $password, $dbname);
-						// Check connection
-						if ($conn->connect_error) {
-							die("Connection failed: " . $conn->connect_error);
-						}
-
-						$sql = "SELECT * FROM UserStory WHERE ProjectName LIKE \"$project\"";
-						$result = $conn->query($sql);
+						$row = $database->select("*", "UserStory", "ProjectName LIKE \"$project\"");
 
 						echo "<thead class=\"thead-dark\">
 						<tr>
@@ -63,27 +49,18 @@
 						<th scope=\"col\">Priorité</th>
 						<th scope=\"col\">Difficulté</th>
 						</tr>
-					</thead>";
+							</thead>";
 					echo "<tbody>";
-
-						if ($result->num_rows > 0) {
-							// output data of each row
-							while($row = $result->fetch_assoc()) {
-								echo "<tr>";
-								echo "<th scope=\"row\">".$row["Id"]."</th>";
-								echo "<td>".$row["Description"]."</td>";
-								echo "<td>".$row["Priority"]."</td>";
-								echo "<td>".$row["Difficulty"]."</td>";
-
-								echo "</tr>";
-							}
-						} else {
-							echo "0 results";
+						foreach ($row as $value)
+						{
+							echo "<tr>";
+							echo "<th scope=\"row\">".$value["Id"]."</th>";
+							echo "<td>".$value["Description"]."</td>";
+							echo "<td>".$value["Priority"]."</td>";
+							echo "<td>".$value["Difficulty"]."</td>";
+							echo "</tr>";
 						}
-
-						echo "</tbody>";
-
-						$conn->close();
+					echo "</tbody>";
 					?>
 				  </table>
 				</div>

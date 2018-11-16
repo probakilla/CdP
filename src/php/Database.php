@@ -15,19 +15,21 @@ class Database extends PDO
 
     /**
      * Select elements from table
-     * @param elements The elements to fetch in the database (SELECT params)
-     * @param table The table where to fetch the elements (FROM params).
+     * @param elements The elements to fetch in the database (SELECT statement)
+     * @param table The table where to fetch the elements (FROM statement).
+     * @param condition The condiction of the query (WHERE statement)
      * @return Array The array of all elemenst found
      */
     public function select ($elements, $table, $condition = "") {
         if (!is_string($table) && !is_string($elements))
             throw new WrongTypeException();
-        $request = $this->prepare("SELECT $strElements FROM $table");
+        $request = "SELECT $elements FROM $table";
         if ($condition !== "")
-            $request .= "WHERE " . $condition;
-        if (!$this->exec($request))
+            $request .= " WHERE " . $condition;
+        $sql = $this->prepare($request);
+        if (!$sql->execute())
             $this->execError();
-        return $this->fetch(PDO::FETCH_ASSOC);
+        return $sql->fetchAll();
     }
 
     /**
