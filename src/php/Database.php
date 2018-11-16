@@ -1,5 +1,7 @@
 <?php
 
+require_once "Error.php";
+
 class Database extends PDO
 {
     private $_cfgArray;
@@ -13,6 +15,13 @@ class Database extends PDO
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    public function exists($element, $table, $condition)
+    {
+        $res = $this->select($element, $table, $condition)[0];
+        if (!$res)
+            CdPError::redirectTo("HomePage.php");
+    }
+
     /**
      * Select elements from table
      * @param elements The elements to fetch in the database (SELECT statement)
@@ -21,7 +30,7 @@ class Database extends PDO
      * @return Array The array of all elemenst found
      */
     public function select ($elements, $table, $condition = "") {
-        if (!is_string($table) && !is_string($elements))
+        if (!is_string($table) || !is_string($elements))
             throw new WrongTypeException();
         $request = "SELECT $elements FROM $table";
         if ($condition !== "")
@@ -29,7 +38,10 @@ class Database extends PDO
         $sql = $this->prepare($request);
         if (!$sql->execute())
             $this->execError();
-        return $sql->fetchAll();
+        $fetch = $sql->fetchAll();
+        if (! $fetch)
+            $this->execError();
+        return $fetch;
     }
 
     /**
@@ -63,6 +75,11 @@ class Database extends PDO
             $this->execError();
     }
 
+    public function delete ($table, $where)
+    {
+        return $this->exec("DELETE FROM $table WHERE $where");
+    }
+
     private function execError()
     {
         if ($this->errorCode() !== '00000')
@@ -70,7 +87,7 @@ class Database extends PDO
             if ($this->_errorLog === true)
             {
                 echo $this->errorInfo();
-                throw new Exception(
+                throw new FailedRequestException(
                     "ERROR: ". implode(",", $this->errorInfo())
                 );
             }
@@ -87,16 +104,5 @@ class Database extends PDO
         substr($actualMsg, 0, -2);
         $errorMsg = $expectedMsg." ".$actualMsg.")";
         throw new WrongTypeException($errorMsg);
-    }
-}
-
-class WrongTypeException extends Exception
-{
-    public function __construct(
-        $message, $code = 0, Exception $previous = null
-        )
-    {
-        $constMsg = "WRONG TYPE EXCEPTION ! ";
-        parent::__construct($constMsg.$message, $code, $previous);
     }
 }

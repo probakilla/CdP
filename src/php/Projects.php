@@ -12,6 +12,9 @@
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
 		<style> textarea { resize: none; } </style>
+		<?php
+			require_once "Database.php";
+		?>
 	</head>
 	<body>
 		    <br>
@@ -25,53 +28,36 @@
 				<div class="table-responsive">
 				  <table class="table">
 				  	<?php
-						$servername = "mariadb";
-						$username = "root";
-						$password = "root";
-						$dbname = "CdP";
-
-						// Create connection
-						$conn = new mysqli($servername, $username, $password, $dbname);
-						// Check connection
-						if ($conn->connect_error) {
-						    die("Connection failed: " . $conn->connect_error);
-						}
-
-						$bdd = new PDO('mysql:host=mariadb;dbname=CdP;charset=utf8', 'root', 'root');
-					    $bdd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+						$database = new Database();
 
 					    if(isset($_GET["Delete"])){
 					    	$project = $_GET['Delete'];
-							$sqldi = "DELETE FROM UserStory WHERE ProjectName LIKE \"$project\"";
-							$sqldp = "DELETE FROM Project WHERE Name LIKE \"$project\"";
-					    	$bdd->exec($sqldi);
-					    	$bdd->exec($sqldp);
+							$database->delete("UserStory",
+											  "ProjectName LIKE \"$project\"");
+							$database->delete("Project",
+											  "Name LIKE \"$project\"");
 					    }
 
 					    if(isset($_POST['save'])){
-					    	$sql1 = "INSERT INTO `Project` (`Name`) VALUES ('".$_POST["projectName"]."')";
-					        $bdd->exec($sql1);
+							$projectName = $_POST["projectName"];
+							$database->insert(
+								"Project",
+								["Name" => "$projectName"]
+							);
 					    }
-
-						$sql = "SELECT Name FROM Project";
-						$result = $conn->query($sql);
+						$result = $database->select("Name", "Project");
 
 					    echo "<thead><tr>";
 					    echo "<th scope=\"col\">Name</th>";
 					    echo "</tr></thead><tbody>";
 
-						if ($result->num_rows > 0) {
-						    while($row = $result->fetch_assoc()) {
-						    	echo "<form method=\"get\" action=\"Backlog.php\">";
-						    	echo "<tr><th scope=\"row\" ><a href=\"Backlog.php?projectname=". $row["Name"]."\" type=\"submit\">". $row["Name"]."</a></th>";
-						    	echo "<td><th scope=\"row\" ><form method=\"get\" action=\"Projects.php?Delete=". $row["Name"]."\">   <a href=\"Projects.php?Delete=". $row["Name"]."\" type=\"submit\">Supprimer</a></form>      </td></tr>";
-						    	echo "</form>";
-						    }
-						} else {
-						    echo "0 results";
+						foreach ($result as $value) {
+							echo "<form method=\"get\" action=\"Backlog.php\">";
+							echo "<tr><th scope=\"row\" ><a href=\"Backlog.php?projectname=". $value["Name"]."\" type=\"submit\">". $value["Name"]."</a></th>";
+							echo "<td><th scope=\"row\" ><form method=\"get\" action=\"Projects.php?Delete=". $value["Name"]."\">   <a href=\"Projects.php?Delete=". $value["Name"]."\" type=\"submit\">Supprimer</a></form>      </td></tr>";
+							echo "</form>";
 						}
 						echo "</tbody>";
-						$conn->close();
 					?>
 				  </table>
 				</div>

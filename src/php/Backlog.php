@@ -15,13 +15,15 @@
 	</head>
 	<body>
 		<?php
-			require_once "Utils.php";
+			require_once "Error.php";
 			require_once "Database.php";
 
-			if ($_SERVER['REQUEST_METHOD'] !== 'GET' && !isset($_GET["projectname"]))
-				IO::error("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?");
-			$project = $_GET['projectname'];
 			$database = new Database();
+			if ($_SERVER['REQUEST_METHOD'] !== 'GET' && !isset($_GET["projectname"]))
+				$database->exists(
+					"ProjectName", "UserStory", ''
+				);
+			$project = $_GET['projectname'];
 		?>
 		<div class="text-center">
 		    <a class="btn btn-primary" href="HomePage.php">Accueil</a>

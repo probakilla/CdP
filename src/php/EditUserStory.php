@@ -11,9 +11,13 @@
 <body>
 
 <?php
+    require_once "Database.php";
+    require_once "Error.php";
+
     define('NB_PRIORITIES', 3);
     $project = $_GET['projectname'];
     $userStory   = $_GET['id'];
+    $database = new Database();
 
     abstract class priorityEnum {
         const Low    = 0;
@@ -30,20 +34,6 @@
 
 <div class="text-center jumbotron mt-5">
     <?php
-
-        function error($message) {
-            echo "<span class=\"badge badge-warning\">Erreur</span> $message";
-            echo nl2br("\n\nRedirection vers le backlog.");
-            echo "<script type=\"text/javascript\">window.location = \"Projects.php\";</script>";
-        }
-
-        function test_input($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
-
         function priorityValue($difficulty) {
           switch ($difficulty) {
          case priorityEnum::Low:
@@ -69,6 +59,7 @@
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"]) && isset($_GET["id"])) {
+
 
             $bdd     = new PDO('mysql:host=mariadb;
             dbname=CdP;

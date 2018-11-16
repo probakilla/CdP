@@ -26,7 +26,7 @@
          crossorigin="anonymous" defer>
          </script>
          <?php
-            require_once "Utils.php";
+            require_once "Error.php";
             require_once "Database.php";
             $database = new Database();
          ?>
@@ -36,23 +36,27 @@
 
 $project = "";
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"])) {
-    $project = IO::testInput($_GET["projectname"]);
+    $database->exists(
+        "ProjectName", "UserStory", 'ProjectName LIKE "'.$_GET["projectname"]
+        . '"'
+    );
+    $project = CdPError::testInput($_GET["projectname"]);
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
-        "ProjectName" => IO::testInput($_POST["project"]),
-        "Id" => IO::testInput($_POST["id"]),
-        "Description" => IO::testInput($_POST["desc"]),
-        "Priority" => IO::testInput($_POST["prio"]),
-        "Difficulty" => IO::testInput($_POST["diff"])
+        "ProjectName" => CdPError::testInput($_POST["project"]),
+        "Id" => CdPError::testInput($_POST["id"]),
+        "Description" => CdPError::testInput($_POST["desc"]),
+        "Priority" => CdPError::testInput($_POST["prio"]),
+        "Difficulty" => CdPError::testInput($_POST["diff"])
     ];
     try {
         $database->insert("UserStory", $data);
-        IO::redirectTo("Backlog.php?projectname=".$data["ProjectName"]);
+        CdPError::redirectTo("Backlog.php?projectname=".$data["ProjectName"]);
     } catch (Exception $e) {
-        IO::error($e->getMessage(), "Projects.php");
+        CdPError::fail($e->getMessage(), "Projects.php");
     }
 } else {
-    IO::error(
+    CdPError::fail(
         "Un problème est survenu lors de la requête de cette page..." .
         "Peut-être n'êtes vous pas censé vous trouvez ici ?",
         "Projects.php"
