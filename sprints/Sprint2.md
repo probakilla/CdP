@@ -3,7 +3,7 @@
 ## User Stories
 
 | Id    | Description | Priorité | Difficulté |
-| :---: | :---------: | :------: | :--------: |
+| :---: | :---------- | :------: | :--------: |
 | #1  | En tant que visiteur, je souhaite m'enregistrer en tant que développeur via un formulaire (nom d'utilisateur et mot de passe) afin de gérer mes projets | Moyenne | 3 |
 | #2  | En tant que visiteur, je souhaite m'authentifier en tant que développeur via un formulaire (nom d'utilisateur et mot de passe) | Moyenne | 2 |
 | #4  | En tant que développeur, je souhaite ajouter des collaborateurs (autres développeurs possédant des droits similaires aux miens) afin qu'ils puissent accéder à mon projet | Moyenne | 2 |
@@ -17,7 +17,7 @@
 ## Tâches
 
 | Id    | Description | User Stories | Temps (en jh) | Développeur | Statut |
-| :---: | :---------: | :----------: | :-----------: | :---------: | :----: |
+| :---: | :---------- | :----------: | :-----------: | :---------: | :----: |
 | #1   | Test : Rédaction du scénario pour vérifier que l'affichage de la liste des projets est correct, tout les projets présents dans la base de données, dans la table *Project* doivent être correctement affichés sur la page *Projects.php* | 5 | 0.1 | Chemoune | TODO |
 | #2   | Test : Implémentation de la vérification de l'affichage de la liste des projets | 5 | 0.2 | Chemoune | TODO |
 | #3   | Test : Rédaction du scénario de vérification de l'affichage du backlog d'un projet, les données présentent dans la table *UserStory* associées au projet voulu doivent apparaître correctement sur la page *Backlog.php* | 6 | 0.1 | Chemoune | TODO |
@@ -28,9 +28,9 @@
 | #8   | Test : Implémentation du test de la modification d'une User Story | 9 | 0.3 | Chemoune | TODO |
 | #9   | Test : Rédaction du scénario de la suppression d'une User Story du backlog. L'User Story doit être correctement enlevée de la base de données | 10 | 0.1 | Chemoune | TODO |
 | #10  | Test : Implémentation du test de la suppression d'une User Story du backlog | 10 | 0.2 | Chemoune | TODO |
-| #11  | Ajout d'un fichier *Database.php* pour la gestion des transactions avec la base de données. Le fichier doit contenir une classe php *Database* implémentant les méthodes d'accès à la base (CRUD) *insert*, *select*, *update*, *delete* | tous | 1 | Pilleux | DOING |
-| #12  | Refactoring du code existant pour utiliser la classe *Database* lors des interactions avec la base de données | tous | 0.1 | Pilleux | DOING |
-| #13  | Refactoring du code existant pour retirer la duplication de code. Créaction d'un fichier *Utils.php* contenant une classe php *IO* contenant des méthodes statiques pour factoriser du code. Les méthodes implémentées seront *redirect(\$location)*, qui redirige *error(\$message, \$location)* qui affiche un message d'ereur puis redirige, *testInput(\$input)* qui test l'input de l'utilisateur dans un champ de formulaire, *checkURIParams(\$listParams)* qui verrifie si l'URL de la page courante contient la liste des paramètres | tous | 0.5 | Pilleux | DOING |
+| #11  | Ajout d'un fichier *Database.php* pour la gestion des transactions avec la base de données. Le fichier doit contenir une classe php *Database* implémentant les méthodes d'accès à la base (CRUD) *insert*, *select*, *update*, *delete* | tous | 1.5 | Pilleux | DONE |
+| #12  | Refactoring du code existant pour utiliser la classe *Database* lors des interactions avec la base de données | tous | 0.1 | Pilleux | DONE |
+| #13  | Refactoring du code existant pour retirer la duplication de code. Créaction d'un fichier *Utils.php* contenant une classe php *CdPError* contenant des méthodes statiques pour factoriser du code. Les méthodes implémentées seront *redirectTo(\$location)*, qui redirige *fail(\$message, \$location)* qui affiche un message d'ereur puis redirige, *testInput(\$input)* qui test l'input de l'utilisateur dans un champ de formulaire, *checkURIParams(\$listParams)* qui verrifie si l'URL de la page courante contient la liste des paramètres | tous | 0.2 | Pilleux | DONE |
 | #14    | Edition du fichier *init.sql* pour intégrer les tables *User*(**VARCHAR:Name**, VARCHAR:Password) et *ProjectUsers*(**VARCHAR:ProjectName, VARCHAR:UserName**) | 1, 2, 4, 5 | 0.3 | SJC | TODO |
 | #15    | Création du fichier *Register.php* permettant l'enregistrement en tant que développeur | 1 | 0.1 | SJC | TODO |
 | #16    | Implémentation du fichier *Register.php* présentant un formulaire qui requiert un champ *Nom* et un champ *Mot de passe* et qui effectue une requête d'insertion dans la table *User* | 1 | 0.5 | SJC | TODO |
@@ -38,3 +38,5 @@
 | #18    | Implémentation du fichier *LogIn.php* présentant un formulaire qui requiert un champ *Nom* et un champ *Mot de passe* et qui effectue une requête de lecture vers la table *User* | 2 | 0.5 | SJC | TODO |
 | #19    | Création du fichier *AddUser.php* permettant l'ajout d'un ou plusieurs collaborateurs sur un projet | 4 | 0.1 | SJC | TODO |
 | #20    | Implémentation du fichier *AddUser.php* présentant un formulaire qui requiert un champ *Nom* et qui effectue une requête d'insertion vers la table *ProjectUsers* | 4 | 0.5 | SJC | TODO |
+| #21    | Création d'un fichier *View.php* avec une classe *View* contenant des méthodes statiques utilisées pour modifier l'affichage d'une page avec des méthodes *addRedirectButton(\$location)* et *currentPriority(\$currentPriority)* | tous | 0.1 | Pilleux | DONE |
+| #22 | Documenter les méthodes des classes *CdPError*, *View* et *Database* | tous | 0.1 | Pilleux | DOING |
