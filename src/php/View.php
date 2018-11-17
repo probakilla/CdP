@@ -9,10 +9,19 @@ abstract class priorityEnum {
 }
 
 class View {
+    /**
+     * Display a button to redirect the user
+     * @param String The path where redirect the user
+     * @return String An html type string corresponding to a button
+     */
     public static function addRedirectButton ($location) {
         return '<a href="' . $location . '" type="submit"> Editer</a>';
     }
-
+    /**
+     * Display a dropdown input section
+     * @param String The current priority to desplay in the default field
+     * @return String An html type string corresponding to a dropdown element
+     */
     public static function currentPriority($currentPriority) {
         $out = "<select class=\"form-control\" name=\"prio\">";
         for ($i = 0; $i < NB_PRIORITIES; $i++) {

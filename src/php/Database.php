@@ -8,11 +8,20 @@ class Database extends PDO {
     const USER_NAME = "root";
     const PASSWORD = "root";
 
+    /**
+     * Init the database with the correct database.
+     */
     public function __construct() {
         parent::__construct(self::CONFIG, self::USER_NAME, self::PASSWORD);
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    /**
+     * Check if the wanted element is present in the database
+     * @param String $element the wanted column of the database (SELECT)
+     * @param String $table The wanted table of the database (FROM)
+     * @param String $condition The condition of the wanted element (WHERE)
+     */
     public function exists($element, $table, $condition) {
         $res = $this->select($element, $table, $condition)[0];
         if (!$res)
@@ -21,9 +30,11 @@ class Database extends PDO {
 
     /**
      * Select elements from table
-     * @param elements The elements to fetch in the database (SELECT statement)
-     * @param table The table where to fetch the elements (FROM statement).
-     * @param condition The condiction of the query (WHERE statement)
+     * @param String $elements The elements to fetch in the database (SELECT
+     *  statement)
+     * @param String $table The table where to fetch the elements
+     * (FROM statement).
+     * @param String $condition The condiction of the query (WHERE statement)
      * @return Array The array of all elemenst found
      */
     public function select ($elements, $table, $condition = "") {
@@ -41,6 +52,13 @@ class Database extends PDO {
         return $fetch;
     }
 
+    /**
+     * Change elements fields of a database entry
+     * @param String $table The table of the element to update (SELECT)
+     * @param String $data The field values to change in the database (SET)
+     * @param String $where The condition that defines the element in the
+     * database (WHERE)
+     */
     public function update ($table, $data, $where) {
         $request = "UPDATE $table SET ";
         foreach ($data as $key => $value) {
@@ -56,8 +74,8 @@ class Database extends PDO {
 
     /**
      * Insert an element in a table of the database
-     * @param table The table where insert the element
-     * @param data The element data, it must be an associative array
+     * @param String $table The table where insert the element
+     * @param String $data The element data, it must be an associative array
      */
     public function insert ($table, $data) {
         // The second statement tests if $data is an associative array
@@ -84,6 +102,12 @@ class Database extends PDO {
             $this->execError();
     }
 
+    /**
+     * Delete an element from the database
+     * @param String $table The name of the table (DELETE FROM)
+     * @param String $where The condition that defines the element to delete
+     * (WHERE)
+     */
     public function delete ($table, $where) {
         return $this->exec("DELETE FROM $table WHERE $where");
     }

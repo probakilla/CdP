@@ -28,20 +28,22 @@
          <?php
             require_once "Error.php";
             require_once "Database.php";
+            require_once "View.php";
             $database = new Database();
+            $project = "";
+            define("URI_ARGS", array("projectname"));
          ?>
     </head>
     <body>
 <?php
 
-$project = "";
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"])) {
+if (CdPError::correctGetRequest(URI_ARGS)) {
     $database->exists(
-        "ProjectName", "UserStory", 'ProjectName LIKE "'.$_GET["projectname"]
-        . '"'
+        "Name", "Project", 'Name LIKE "'.$_GET["projectname"] . '"'
     );
     $project = CdPError::testInput($_GET["projectname"]);
-} else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+} else if (CdPError::checkRequestMethod("GET")) {
     $data = [
         "ProjectName" => CdPError::testInput($_POST["project"]),
         "Id" => CdPError::testInput($_POST["id"]),
