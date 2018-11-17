@@ -74,7 +74,8 @@
 							echo "<td>".$value["Priority"]."</td>";
 							echo "<td>".$value["Difficulty"]."</td>";
 							echo "<td>".View::addRedirectButton(
-								"EditUserStory.php?projectname=$project&id=$id")."<td>";
+								"EditUserStory.php?projectname=$project&id=$id",
+								"edit".$project.$id)."<td>";
 							echo "</tr>";
 						}
 					echo "</tbody>";

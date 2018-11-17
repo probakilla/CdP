@@ -18,8 +18,12 @@
                     Gestionnaire de projets
                 </div>
                 <div class="links">
-                    <a href="CreateProject.php">creer un nouveau projet</a><br><br>
-                    <a href="Projects.php">La liste des projets</a>
+                    <a id="create-project" href="CreateProject.php">
+                        creer un nouveau projet
+                    </a><br><br>
+                    <a id="list-project" href="Projects.php">
+                        La liste des projets
+                    </a>
                 </div>
             </div>
         </div>

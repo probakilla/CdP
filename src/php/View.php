@@ -12,10 +12,13 @@ class View {
     /**
      * Display a button to redirect the user
      * @param String The path where redirect the user
+     * @param String $id The id of the button
      * @return String An html type string corresponding to a button
      */
-    public static function addRedirectButton ($location) {
-        return '<a href="' . $location . '" type="submit"> Editer</a>';
+    public static function addRedirectButton ($location, $id = "") {
+        if ($id === "")
+            $id = $location;
+        return '<a id="' . $id . '" href="' . $location . '" type="submit"> Editer</a>';
     }
     /**
      * Display a dropdown input section
