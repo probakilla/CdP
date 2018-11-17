@@ -16,7 +16,7 @@ before-install:
   - ls -la
   - docker-compose up -d
   - docker --version
-  - pip install -r doc/pip-requirements.txt
+  - pip install selenium
 
 script:
   - echo "Init containers..."
