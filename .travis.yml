@@ -21,7 +21,5 @@ before-install:
 script:
   - echo "Init containers..."
   - sleep 15
-  - curl localhost:8080
-  - curl localhost:4444
   - echo "Stating tests..."
-  - python tests/*.py
+  - python test/*.py
