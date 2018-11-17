@@ -27,7 +27,7 @@
 | #7   | Test : Rédaction du scénario de la modification d'une User Story via la page *EditUserStory.php*. Les éléments entrés dans le formulaire doivent être correctement modifiés dans la base de données | 9 | 0.1 | Chemoune | TODO |
 | #8   | Test : Implémentation du test de la modification d'une User Story | 9 | 0.3 | Chemoune | TODO |
 | #9   | Test : Rédaction du scénario de la suppression d'une User Story du backlog. L'User Story doit être correctement enlevée de la base de données | 10 | 0.1 | Pilleux | DONE |
-| #10  | Test : Implémentation du test de la suppression d'une User Story du backlog | 10 | 0.2 | Pilleux | DOING |
+| #10  | Test : Implémentation du test de la suppression d'une User Story du backlog | 10 | 0.2 | Pilleux | DONE |
 | #11  | Ajout d'un fichier *Database.php* pour la gestion des transactions avec la base de données. Le fichier doit contenir une classe php *Database* implémentant les méthodes d'accès à la base (CRUD) *insert*, *select*, *update*, *delete* | tous | 1.5 | Pilleux | DONE |
 | #12  | Refactoring du code existant pour utiliser la classe *Database* lors des interactions avec la base de données | tous | 0.1 | Pilleux | DONE |
 | #13  | Refactoring du code existant pour retirer la duplication de code. Créaction d'un fichier *Utils.php* contenant une classe php *CdPError* contenant des méthodes statiques pour factoriser du code. Les méthodes implémentées seront *redirectTo(\$location)*, qui redirige *fail(\$message, \$location)* qui affiche un message d'ereur puis redirige, *testInput(\$input)* qui test l'input de l'utilisateur dans un champ de formulaire, *checkURIParams(\$listParams)* qui verrifie si l'URL de la page courante contient la liste des paramètres | tous | 0.5 | Pilleux | DONE |
@@ -39,5 +39,5 @@
 | #19    | Création du fichier *AddUser.php* permettant l'ajout d'un ou plusieurs collaborateurs sur un projet | 4 | 0.1 | SJC | TODO |
 | #20    | Implémentation du fichier *AddUser.php* présentant un formulaire qui requiert un champ *Nom* et qui effectue une requête d'insertion vers la table *ProjectUsers* | 4 | 0.5 | SJC | TODO |
 | #21    | Création d'un fichier *View.php* avec une classe *View* contenant des méthodes statiques utilisées pour modifier l'affichage d'une page avec des méthodes *addRedirectButton(\$location)* et *currentPriority(\$currentPriority)* | tous | 0.1 | Pilleux | DONE |
-| #22 | Documenter les méthodes des classes *CdPError*, *View* et *Database* | tous | 0.1 | Pilleux | DOING |
-| #23 | Ajouter le lancement des tests à l'intégration continue | tous | 0.1 | Pilleux | TODO |
+| #22 | Documenter les méthodes des classes *CdPError*, *View* et *Database* | tous | 0.1 | Pilleux | DONE |
+| #23 | Ajouter le lancement des tests à l'intégration continue | tous | 0.1 | Pilleux | DONE |
