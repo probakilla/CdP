@@ -26,7 +26,7 @@
 | #6   | Test : Implémentation du test d'ajout d'une User Story à la base de données | 7 | 0.3 | Chemoune | TODO |
 | #7   | Test : Rédaction du scénario de la modification d'une User Story via la page *EditUserStory.php*. Les éléments entrés dans le formulaire doivent être correctement modifiés dans la base de données | 9 | 0.1 | Chemoune | TODO |
 | #8   | Test : Implémentation du test de la modification d'une User Story | 9 | 0.3 | Chemoune | TODO |
-| #9   | Test : Rédaction du scénario de la suppression d'une User Story du backlog. L'User Story doit être correctement enlevée de la base de données | 10 | 0.1 | Pilleux | DOING |
+| #9   | Test : Rédaction du scénario de la suppression d'une User Story du backlog. L'User Story doit être correctement enlevée de la base de données | 10 | 0.1 | Pilleux | DONE |
 | #10  | Test : Implémentation du test de la suppression d'une User Story du backlog | 10 | 0.2 | Pilleux | DOING |
 | #11  | Ajout d'un fichier *Database.php* pour la gestion des transactions avec la base de données. Le fichier doit contenir une classe php *Database* implémentant les méthodes d'accès à la base (CRUD) *insert*, *select*, *update*, *delete* | tous | 1.5 | Pilleux | DONE |
 | #12  | Refactoring du code existant pour utiliser la classe *Database* lors des interactions avec la base de données | tous | 0.1 | Pilleux | DONE |
