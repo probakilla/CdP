@@ -15,8 +15,13 @@ before-install:
   - pwd
   - ls -la
   - docker-compose up -d
-  - pip install selenium
+  - docker --version
+  - pip install -r doc/pip-requirements.txt
 
 script:
-  - echo "Stating tests ..."
-  - echo "NO TESTS YET"
+  - echo "Init containers..."
+  - sleep 15
+  - curl localhost:8080
+  - curl localhost:4444
+  - echo "Stating tests..."
+  - python tests/*.py
