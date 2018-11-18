@@ -42,7 +42,8 @@
     );
     //$username = CdPError::testInput($username);
 
-} else*/ if (CdPError::checkRequestMethod("GET")) {
+} else*/
+if (CdPError::checkRequestMethod("POST")) {
     $data = [
         "Name" => CdPError::testInput($_POST["username"]),
         "Password" => CdPError::testInput($_POST["password"])
@@ -55,13 +56,13 @@
     } finally {
         $database = null;
     }
-} else {
+} /*else {
     CdPError::fail(
         "Un problème est survenu lors de la requête de cette page..." .
         "Peut-être n'êtes vous pas censé vous trouvez ici ?",
         "HomePage.php"
     );
-}
+}*/
 ?>
 
         <h1 class="text-center mt-5">Enregistrement</h1>
@@ -86,7 +87,7 @@
     					<div class="panel-body">
     						<div class="row">
     							<div class="col-lg-12">
-    								<form action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+    								<form action="?" method="post" role="form" style="display: block;">
     									<div class="form-group">
     										<input type="text" name="username" tabindex="1" class="form-control" placeholder="Pseudonyme" value="">
     									</div>
