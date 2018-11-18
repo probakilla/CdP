@@ -58,7 +58,7 @@
 								<a href="Backlog.php?projectname=".'.$value["Name"].'" type="submit">'. $value["Name"] . '</a></th>';
 							echo '<td>
 								<th scope="row" ><form method="get" action="Projects.php?Delete='. $value["Name"].'">
-								<a id="delete-'.$value["Name"].'" href="Projects.php?Delete='. $value["Name"].'"type=\"submit\">Supprimer</a>
+								<a id="delete-'.$value["Name"].'" href="Projects.php?Delete='. $value["Name"].'"type="submit">Supprimer</a>
 								</form></td></tr>';
 							echo "</form>";
 						}

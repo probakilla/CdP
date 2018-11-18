@@ -9,14 +9,14 @@ services:
 
 language: python
 python:
-  - "3.5"
+  - "3.3"
 
 before-install:
   - pwd
   - ls -la
   - docker-compose up -d
   - docker --version
-  - pip install selenium
+  - pip install -r requirements.txt
 
 script:
   - echo "Init containers..."
