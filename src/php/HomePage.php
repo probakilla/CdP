@@ -7,6 +7,11 @@
 
         <title>Gestion de projets</title>
 
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+              crossorigin="anonymous">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="../css/HomePageStyle.css">
@@ -18,6 +23,13 @@
                     Gestionnaire de projets
                 </div>
                 <div class="links">
+                    <a id="login" href="LogIn.php" class="btn btn-outline-secondary">
+                        Connexion
+                    </a>
+                    <a id="register" href="Register.php" class="btn btn-outline-secondary">
+                        Inscription
+                    </a>
+                    <br><br><br>
                     <a id="create-project" href="CreateProject.php">
                         creer un nouveau projet
                     </a><br><br>

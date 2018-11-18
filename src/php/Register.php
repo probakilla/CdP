@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Enregistrement</title>
+        <title>Inscription</title>
         <meta charset="utf-8" />
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,38 +35,32 @@
     </head>
     <body>
 
-<?php
-/*if (CdPError::correctGetRequest(URI_ARGS)) {
-    $database->exists(
-        "Name", "User", 'Name LIKE "'.$username . '"'
-    );
-    //$username = CdPError::testInput($username);
-
-} else*/
-if (CdPError::checkRequestMethod("POST")) {
-    $data = [
-        "Name" => CdPError::testInput($_POST["username"]),
-        "Password" => CdPError::testInput($_POST["password"])
-    ];
-    try {
-        $database->insert("User", $data);
-        CdPError::redirectTo("HomePage.php");
-    } catch (Exception $e) {
-        CdPError::fail($e->getMessage(), "HomePage.php");
-    } finally {
-        $database = null;
-    }
-} /*else {
-    CdPError::fail(
-        "Un problème est survenu lors de la requête de cette page..." .
-        "Peut-être n'êtes vous pas censé vous trouvez ici ?",
-        "HomePage.php"
-    );
-}*/
-?>
-
-        <h1 class="text-center mt-5">Enregistrement</h1>
+        <h1 class="text-center mt-5">Inscription</h1>
         <div class="text-center jumbotron mt-5">
+            <?php
+            /*if (CdPError::correctGetRequest(URI_ARGS)) {
+                $database->exists(
+                    "Name", "User", 'Name LIKE "'.$username . '"'
+                );
+                //$username = CdPError::testInput($username);
+
+            } else*/
+            if (CdPError::checkRequestMethod("POST")) {
+                $data = [
+                    "Name" => CdPError::testInput($_POST["username"]),
+                    "Password" => CdPError::testInput($_POST["password"])
+                ];
+                try {
+                    $database->insert("User", $data);
+                    CdPError::redirectTo("HomePage.php");
+                } catch (Exception $e) {
+                    //CdPError::fail($e->getMessage(), "HomePage.php");
+                    echo '<span class="badge badge-danger">Erreur</span>'.' User already exists !';
+                } finally {
+                    $database = null;
+                }
+            } 
+            ?>
         </div>
 
         <div class="container">
@@ -79,7 +73,7 @@ if (CdPError::checkRequestMethod("POST")) {
     								<a href="LogIn.php" class="btn btn-outline-primary">Connexion</a>
     							</div>
     							<div class="col text-right">
-    								<a href="Register.php" class="btn btn-outline-secondary active">Enregistrement</a>
+    								<a href="Register.php" class="btn btn-outline-secondary active">Inscription</a>
     							</div>
     						</div>
     						<hr>
