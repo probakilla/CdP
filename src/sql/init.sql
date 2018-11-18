@@ -16,3 +16,17 @@ CREATE TABLE IF NOT EXISTS UserStory (
     PRIMARY KEY (ProjectName, Id),
     FOREIGN KEY (ProjectName) REFERENCES Project(Name)
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS User (
+    Name VARCHAR(32) NOT NULL,
+    Password VARCHAR(32) NOT NULL,
+    PRIMARY KEY (Name),
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS ProjectUsers (
+    ProjectName VARCHAR(32) NOT NULL,
+    UserName VARCHAR(32) NOT NULL,
+    PRIMARY KEY (ProjectName, UserName),
+    FOREIGN KEY (ProjectName) REFERENCES Project(Name),
+    FOREIGN KEY (UserName) REFERENCES User(Name)
+) ENGINE=InnoDB;
