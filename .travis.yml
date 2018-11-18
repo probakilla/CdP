@@ -5,39 +5,22 @@ addons:
     packages:
       - docker-ce
 
-env:
-  DOCKER_COMPOSE_VERSION: 1.23.0
-
 services:
  - docker
 
 language: python
 python:
-  - "3.3"
-
-install:
-  - >
-    curl -sSL "https://get.docker.com/gpg" |
-    sudo -E apt-key add -
-  - >
-    echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" |
-     sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update
-  - >
-    sudo apt-get -o Dpkg::Options::="--force-confdef" \
-     -o Dpkg::Options::="--force-confold" --assume-yes install docker-engine
-  - docker version
-  - sudo pip install docker-compose
-  - docker-compose version
+  - "3.5"
 
 before_script:
-  - sudo docker-compose up -d
-  - docker --version
+  - pwd
+  - docker-compose up --build -d
+  - docker ps -a
+  - sleep 30
   - pip install -r requirements.txt
 
 script:
-  - echo "Init containers..."
-  - sleep 15
+  - echo "Pinging containers..."
   - curl localhost:4444
   - curl localhost:8080
   - echo "Stating tests..."
