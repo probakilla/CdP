@@ -14,12 +14,14 @@ python:
 before-install:
   - pwd
   - ls -la
-  - docker-compose up -d
+  - sudo docker-compose up -d
   - docker --version
   - pip install -r requirements.txt
 
 script:
   - echo "Init containers..."
   - sleep 15
+  - curl localhost:4444
+  - curl localhost:8080
   - echo "Stating tests..."
-  - python test/*.py
+  - python -m pytest test/*.py
