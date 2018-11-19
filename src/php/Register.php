@@ -48,7 +48,7 @@
             if (CdPError::checkRequestMethod("POST")) {
                 $data = [
                     "Name" => CdPError::testInput($_POST["username"]),
-                    "Password" => CdPError::testInput($_POST["password"])
+                    "Password" => hash('sha512', CdPError::testInput($_POST["password"]))
                 ];
                 try {
                     $database->insert("User", $data);
@@ -59,7 +59,7 @@
                 } finally {
                     $database = null;
                 }
-            } 
+            }
             ?>
         </div>
 
