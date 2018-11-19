@@ -77,30 +77,30 @@ class Database extends PDO {
      * @param String $table The table where insert the element
      * @param String $data The element data, it must be an associative array
      */
-    public function insert ($table, $data) {
-        // The second statement tests if $data is an associative array
-        if (!is_string($table) &&
-            array_keys($arr) !== range(0, count($arr) - 1))
-                $this->typeError([$table, $data]);
+     public function insert ($table, $data) {
+         $request = "INSERT INTO $table (";
+         $holder = "VALUES (";
+         $counter = 1;
+         foreach ($data as $key => $value) {
+            if ($counter == 1) {
+                $request .= $key;
+                $holder .= "?" ;
+            }
+            else {
+                $request .= ", $key";
+                $holder .= ", ?" ;
+            }
+            $counter += 1;
+         }
+         $request .= ")";
+         $holder .= ")";
+         $request .= $holder;
 
-        /* This part of code is taken from :
-         *https://stackoverflow.com/questions/11746206/
-         *php-pdo-insert-function-with-unknown-number-of-variables
-         */
-        $sql = 'INSERT INTO ' . $table . ' ';
-        $columns = '(';
-        $values = '(';
-        foreach ($data as $k => $v) {
-            $columns .= '`' . $k . '`, ';
-            $values .= "'" . $v . "', ";
-        }
-        $columns = rtrim($columns, ', ') . ')';
-        $values = rtrim($values, ', ') . ')';
-        $sql .= $columns . ' VALUES ' . $values;
-        $query = $this->prepare($sql);
-        if(!$query->execute())
+         $sql = $this->prepare($request);
+        if (!$sql->execute(array_values($data))) {
             $this->execError();
-    }
+        }
+     }
 
     /**
      * Delete an element from the database
