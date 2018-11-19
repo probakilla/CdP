@@ -43,7 +43,7 @@ if (CdPError::correctGetRequest(URI_ARGS)) {
     );
     $project = CdPError::testInput($_GET["projectname"]);
 
-} else if (CdPError::checkRequestMethod("GET")) {
+} else if (CdPError::checkRequestMethod("POST")) {
     $data = [
         "ProjectName" => CdPError::testInput($_POST["project"]),
         "Id" => CdPError::testInput($_POST["id"]),
