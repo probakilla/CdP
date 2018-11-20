@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
 
-class listProjects(unittest.TestCase):
+class BacklogProject(unittest.TestCase):
     WAIT = 10
 
     def test_chrome(self):
@@ -14,18 +14,28 @@ class listProjects(unittest.TestCase):
             command_executor='http://127.0.0.1:4444/wd/hub',
             desired_capabilities=DesiredCapabilities.CHROME
         )
-        self.list(chrome)
+        self.backlog(chrome)
         chrome.quit()
 
-    def list(self, browser):
+    def backlog(self, browser):
         browser.get('http://php-apache:80')
         self.waitURL(browser, "HomePage")
         self.assertIn("HomePage", browser.current_url)
 
-        link = browser.find_element_by_xpath("//a[@id='list-project']")
+        link = browser.find_element_by_xpath("//a[@id='create-project']")
         link.click()
+        self.waitURL(browser, "CreateProject")
+        self.assertIn("CreateProject", browser.current_url)
+
+        field = browser.find_element_by_xpath("//input[@name='projectName']")
+        field.send_keys("projet_backlog_test")
+        submit = browser.find_element_by_xpath("//input[@name='save']")
+        submit.click()
         self.waitURL(browser, "Projects")
         self.assertIn("Projects", browser.current_url)
+
+        listHref = browser.find_element_by_xpath("//a[@id='backlog-projet_backlog_test']")
+        listHref.click()
 
     def waitURL(self, browser, content):
         wait = WebDriverWait(browser, self.WAIT)

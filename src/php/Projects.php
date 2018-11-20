@@ -54,7 +54,7 @@
 						foreach ($result as $value) {
 							echo '<tr>
 								<th scope="row" >
-								<a href="Backlog.php?projectname='.$value["Name"].'">'. $value["Name"] . '</a></th>';
+								<a id="backlog-'.$value["Name"].'" href="Backlog.php?projectname='.$value["Name"].'">'. $value["Name"] . '</a></th>';
 							echo '<td>
 								<th scope="row" >
 								<a id="delete-'.$value["Name"].'" href="Projects.php?Delete='. $value["Name"].'"type="submit">Supprimer</a>
