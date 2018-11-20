@@ -18,14 +18,14 @@
 
 | Id    | Description | User Stories | Temps (en jh) | Développeur | Statut |
 | :---: | :---------- | :----------: | :-----------: | :---------: | :----: |
-| #1   | Test : Rédaction du scénario pour vérifier que l'affichage de la liste des projets est correct, tout les projets présents dans la base de données, dans la table *Project* doivent être correctement affichés sur la page *Projects.php* | 5 | 0.1 | Chemoune | TODO |
-| #2   | Test : Implémentation de la vérification de l'affichage de la liste des projets | 5 | 0.2 | Chemoune | TODO |
-| #3   | Test : Rédaction du scénario de vérification de l'affichage du backlog d'un projet, les données présentent dans la table *UserStory* associées au projet voulu doivent apparaître correctement sur la page *Backlog.php* | 6 | 0.1 | Chemoune | TODO |
-| #4   | Test : Implémentation de la vérification de l'affichage du backlog d'un projet | 6 | 0.2 | Chemoune | TODO |
-| #5   | Test : Rédaction du scénario d'ajout d'une *User Story* à la base de données, les éléments entrés dans les champs de la page *AddUserStory.php* doivent être ajoutés dans la table *UserStory* avec les bonnes valeurs | 7 | 0.1 | Chemoune | TODO |
-| #6   | Test : Implémentation du test d'ajout d'une User Story à la base de données | 7 | 0.3 | Chemoune | TODO |
-| #7   | Test : Rédaction du scénario de la modification d'une User Story via la page *EditUserStory.php*. Les éléments entrés dans le formulaire doivent être correctement modifiés dans la base de données | 9 | 0.1 | Chemoune | TODO |
-| #8   | Test : Implémentation du test de la modification d'une User Story | 9 | 0.3 | Chemoune | TODO |
+| #1   | Test : Rédaction du scénario pour vérifier que l'affichage de la liste des projets est correct, tout les projets présents dans la base de données, dans la table *Project* doivent être correctement affichés sur la page *Projects.php* | 5 | 0.1 | Chemoune | DONE |
+| #2   | Test : Implémentation de la vérification de l'affichage de la liste des projets | 5 | 0.2 | Chemoune | DONE |
+| #3   | Test : Rédaction du scénario de vérification de l'affichage du backlog d'un projet, les données présentent dans la table *UserStory* associées au projet voulu doivent apparaître correctement sur la page *Backlog.php* | 6 | 0.1 | Chemoune | DOING |
+| #4   | Test : Implémentation de la vérification de l'affichage du backlog d'un projet | 6 | 0.2 | Chemoune | DOING |
+| #5   | Test : Rédaction du scénario d'ajout d'une *User Story* à la base de données, les éléments entrés dans les champs de la page *AddUserStory.php* doivent être ajoutés dans la table *UserStory* avec les bonnes valeurs | 7 | 0.1 | Chemoune | DOING |
+| #6   | Test : Implémentation du test d'ajout d'une User Story à la base de données | 7 | 0.3 | Chemoune | DOING |
+| #7   | Test : Rédaction du scénario de la modification d'une User Story via la page *EditUserStory.php*. Les éléments entrés dans le formulaire doivent être correctement modifiés dans la base de données | 9 | 0.1 | Chemoune | DOING |
+| #8   | Test : Implémentation du test de la modification d'une User Story | 9 | 0.3 | Chemoune | DOING |
 | #9   | Test : Rédaction du scénario de la suppression d'une User Story du backlog. L'User Story doit être correctement enlevée de la base de données | 10 | 0.1 | Pilleux | DONE |
 | #10  | Test : Implémentation du test de la suppression d'une User Story du backlog | 10 | 0.2 | Pilleux | DONE |
 | #11  | Ajout d'un fichier *Database.php* pour la gestion des transactions avec la base de données. Le fichier doit contenir une classe php *Database* implémentant les méthodes d'accès à la base (CRUD) *insert*, *select*, *update*, *delete* | tous | 1.5 | Pilleux | DONE |
