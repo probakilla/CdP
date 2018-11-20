@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
 
-class DeleteProject(unittest.TestCase):
+class listProjects(unittest.TestCase):
     WAIT = 10
 
     def test_chrome(self):
@@ -17,7 +17,7 @@ class DeleteProject(unittest.TestCase):
         self.delete(chrome)
         chrome.quit()
 
-    def delete(self, browser):
+    def list(self, browser):
         browser.get('http://php-apache:80')
         self.waitURL(browser, "HomePage")
         self.assertIn("HomePage", browser.current_url)
