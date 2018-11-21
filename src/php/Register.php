@@ -55,7 +55,7 @@
                     CdPError::redirectTo("HomePage.php");
                 } catch (Exception $e) {
                     //CdPError::fail($e->getMessage(), "HomePage.php");
-                    echo '<span class="badge badge-danger">Erreur</span>'.' User already exists !';
+                    echo '<span class="badge badge-danger">Erreur</span>'." Ce nom d'utilisateur est déjà pris !";
                 } finally {
                     $database = null;
                 }
