@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/probakilla/CdP.svg?branch=master)](https://travis-ci.org/probakilla/CdP)
+
 # README.md
 
 | Id  | Description | Priorité | Difficulté | Sprint |
