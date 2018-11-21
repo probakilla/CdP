@@ -1,3 +1,9 @@
+<?php
+    if(session_id() == '' || !isset($_SESSION)) {
+        session_start();
+    }
+?>
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -17,6 +23,13 @@
         <link rel="stylesheet" type="text/css" href="../css/HomePageStyle.css">
     </head>
     <body>
+
+        <?php
+            if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+                include("UserMenu.php");
+            }
+        ?>
+
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">

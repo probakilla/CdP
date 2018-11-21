@@ -1,3 +1,9 @@
+<?php
+    if(session_id() == '' || !isset($_SESSION)) {
+        session_start();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -6,7 +12,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Projets</title>
 
-		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
+        <link rel="stylesheet"
+                href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+                integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+                crossorigin="anonymous">
 
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -17,13 +27,25 @@
 		?>
 	</head>
 	<body>
-		    <br>
+
+        <?php
+            if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+                include("UserMenu.php");
+            }
+        ?>
+
+    <h1 class="text-center mt-5">Vos projets</h1>
+
+    <div class="text-center jumbotron mt-5">
+    </div>
+
 	<div class="text-center">
         <a class="btn btn-primary" href="HomePage.php">Accueil</a>
     </div>
-	<div class="col-sm-offset-3 col-sm-6">
+    <br>
+	<div class="col-sm-offset-3 col-sm-6 mx-auto">
 		<div class="panel panel-info">
-			<div class="panel-heading">Liste des projets</div>
+			<div class="panel-heading mb-5"><h5>Liste des projets</h5></div>
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table">
@@ -47,8 +69,8 @@
 					    }
 						$result = $database->select("Name", "Project");
 
-					    echo "<thead><tr>";
-					    echo "<th scope=\"col\">Name</th>";
+					    echo "<thead class=\"thead-dark\"><tr>";
+					    echo "<th class=\"w-100\" scope=\"col\">Name</th>";
 					    echo "</tr></thead><tbody>";
 
 						foreach ($result as $value) {
@@ -56,9 +78,8 @@
 								<th scope="row" >
 								<a id="backlog-'.$value["Name"].'" href="Backlog.php?projectname='.$value["Name"].'">'. $value["Name"] . '</a></th>';
 							echo '<td>
-								<th scope="row" >
 								<a id="delete-'.$value["Name"].'" href="Projects.php?Delete='. $value["Name"].'"type="submit">Supprimer</a>
-								</th></td></tr>';
+								</td></tr>';
 						}
 						echo "</tbody>";
 					?>

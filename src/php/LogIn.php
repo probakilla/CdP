@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inscription</title>
+        <title>Connexion</title>
         <meta charset="utf-8" />
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,6 +37,7 @@
             require_once "Database.php";
             require_once "View.php";
             $database = new Database();
+            $view = new View();
          ?>
     </head>
     <body>
@@ -47,7 +48,7 @@
             }
         ?>
 
-        <h1 class="text-center mt-5">Inscription</h1>
+        <h1 class="text-center mt-5">Connexion</h1>
         <div class="text-center jumbotron mt-5">
             <?php
             /*if (CdPError::correctGetRequest(URI_ARGS)) {
@@ -63,11 +64,22 @@
                     "Password" => hash('sha512', CdPError::testInput($_POST["password"]))
                 ];
                 try {
-                    $database->insert("User", $data);
-                    CdPError::redirectTo("HomePage.php");
+                    $res_user = $database->select("Name", "User", 'Name LIKE "'. $data["Name"] . '"')[0];
+                    if ($res_user) {
+                        $res_pwd = $database->select("Name", "User", 'Name LIKE "'. $data["Name"] . '" AND Password LIKE "' . $data["Password"] . '"')[0];
+                        if ($res_pwd) {
+                            $_SESSION['username']= $data["Name"];
+                            CdPError::redirectTo("HomePage.php");
+                        }
+                        else {
+                            echo '<span class="badge badge-danger">Erreur</span>'.' Password is incorrect !';
+                        }
+                    }
+                    else {
+                        echo '<span class="badge badge-danger">Erreur</span>'.' User does not exists !';
+                    }
                 } catch (Exception $e) {
-                    //CdPError::fail($e->getMessage(), "HomePage.php");
-                    echo '<span class="badge badge-danger">Erreur</span>'." Ce nom d'utilisateur est déjà pris !";
+                    echo '<span class="badge badge-danger">Erreur</span>'.' Could not find user...';
                 } finally {
                     $database = null;
                 }
@@ -82,10 +94,10 @@
     					<div class="panel-heading">
     						<div class="row">
     							<div class="col text-left">
-    								<a href="LogIn.php" class="btn btn-outline-primary">Connexion</a>
+    								<a href="LogIn.php" class="btn btn-outline-secondary active">Connexion</a>
     							</div>
     							<div class="col text-right">
-    								<a href="Register.php" class="btn btn-outline-secondary active">Inscription</a>
+    								<a href="Register.php" class="btn btn-outline-primary">Inscription</a>
     							</div>
     						</div>
     						<hr>

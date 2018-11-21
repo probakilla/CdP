@@ -1,3 +1,9 @@
+<?php
+    if(session_id() == '' || !isset($_SESSION)) {
+        session_start();
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,6 +41,13 @@
          ?>
     </head>
     <body>
+
+        <?php
+            if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+                include("UserMenu.php");
+            }
+        ?>
+
 <?php
 
 if (CdPError::correctGetRequest(URI_ARGS)) {
@@ -71,6 +84,8 @@ if (CdPError::correctGetRequest(URI_ARGS)) {
         <div class="text-center jumbotron mt-5">
         </div>
 
+        <br>
+
         <div class="text-center">
             <a class="btn btn-primary" href="Backlog.php?projectname=<?php echo $project ?>">Annuler
             </a>
@@ -78,8 +93,8 @@ if (CdPError::correctGetRequest(URI_ARGS)) {
 
         <div class="container center-block">
 			<div class="row main align-items-center justify-content-center">
-				<div class="main-login main-center">
-				<h5>Ajouter une user story au projet courant :</h5>
+				<div class="main-login main-center w-50">
+				<!--<h5>Ajouter une user story au projet courant :</h5>-->
                     <form class="mt-5" method="post" action=
                     "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 						<div class="form-group">

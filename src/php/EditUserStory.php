@@ -1,3 +1,9 @@
+<?php
+    if(session_id() == '' || !isset($_SESSION)) {
+        session_start();
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +33,12 @@
         </script>
 </head>
 <body>
+
+    <?php
+        if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+            include("UserMenu.php");
+        }
+    ?>
 
 <?php
     require_once "Database.php";
@@ -81,16 +93,16 @@
 
 <h1 class="text-center mt-5">Modification de l'user story #<?php echo $userStory ?></h1>
 
+<div class="text-center jumbotron mt-5">
+</div>
+
 <div class="text-center">
     <a class="btn btn-primary" href="Backlog.php?projectname=<?php echo $project ?>">Annuler</a>
 </div>
 
-<div class="text-center jumbotron mt-5">
-</div>
-
 <div class="container center-block">
     <div class="row main align-items-center justify-content-center">
-        <div class="main-login main-center">
+        <div class="main-login main-center w-50">
             <form class="mt-5" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
                 <div class="form-group">
