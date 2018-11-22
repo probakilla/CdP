@@ -19,3 +19,5 @@ class File:
     CREATE_PROJECT = "CreateProject.php"
     PROJECT_LIST = "Projects.php"
     BACKLOG = "Backlog.php"
+    REGISTER = "Register.php"
+    LOGIN = "LogIn.php"

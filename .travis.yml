@@ -10,9 +10,6 @@ addons:
 
 notifications:
   email: false
-  slack:
-    rooms:
-      - ub-cdp-2018:2xNYuxzxL6oJc8Dr69eoi2I5#1_6
 
 services:
  - docker

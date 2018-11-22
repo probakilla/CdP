@@ -19,13 +19,16 @@ def chromeWebdriver():
 
 def browserRegister(browser):
     browser.find_element_by_xpath(Xpath.REGISTER_BTN).click()
+    waitURL(browser, File.REGISTER)
     _fillUserFields(browser)
     if File.HOME_PAGE not in browser.current_url:
         browser.find_element_by_xpath(Xpath.HOME_BTN).click()
+        waitURL(browser, File.HOME_PAGE)
 
 
 def browserLogin(browser):
     browser.find_element_by_xpath(Xpath.LOGIN_BTN).click()
+    waitURL(browser, File.LOGIN)
     _fillUserFields(browser)
 
 
@@ -43,7 +46,7 @@ def _fillUserFields(browser):
 def browserCreateProject(browser, projectName):
     link = browser.find_element_by_xpath(Xpath.CREATE_PROJECT_BTN)
     link.click()
-    waitURL(browser, browser.current_url)
+    waitURL(browser, File.CREATE_PROJECT)
     field = browser.find_element_by_xpath(Xpath.PROJECT_NAME_FIELD)
     field.send_keys(projectName)
     submit = browser.find_element_by_xpath(Xpath.SAVE_PROJECT_BTN)
