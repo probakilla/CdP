@@ -3,11 +3,13 @@
 ## Badges d'intégration continue
 
 Contrôle qualité SonarCloud
-[![bugs](https://sonarcloud.io/api/project_badges/measure?project=CdP%3Av0.2.0&metric=bugs)](https://sonarcloud.io/dashboard?id=CdP%3Av0.2.0)
+
 [![quality gate](https://sonarcloud.io/api/project_badges/measure?project=CdP%3Av0.2.0&metric=alert_status)](https://sonarcloud.io/dashboard?id=CdP%3Av0.2.0)
+[![bugs](https://sonarcloud.io/api/project_badges/measure?project=CdP%3Av0.2.0&metric=bugs)](https://sonarcloud.io/dashboard?id=CdP%3Av0.2.0)
 [![code smells](https://sonarcloud.io/api/project_badges/measure?project=CdP%3Av0.2.0&metric=code_smells)](https://sonarcloud.io/dashboard?id=CdP%3Av0.2.0)
 
 Build Travis
+
 [![Build
 Status](https://travis-ci.org/probakilla/CdP.svg?branch=master)](https://travis-ci.org/probakilla/CdP)
 
