@@ -1,18 +1,16 @@
 <?php
 
 require_once "Error.php";
+include(".dbconfig.php");
 
 class Database extends PDO {
     private $_cfgArray;
-    const CONFIG = "mysql:host=mariadb;dbname=CdP;port=3306;charset=utf8";
-    const USER_NAME = "root";
-    const PASSWORD = "root";
 
     /**
      * Init the database with the correct database.
      */
     public function __construct() {
-        parent::__construct(self::CONFIG, self::USER_NAME, self::PASSWORD);
+        parent::__construct($CONFIG, $USER_NAME, $PASSWORD);
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -126,7 +124,7 @@ class Database extends PDO {
         $actualMsg = "actual (";
         foreach ($argsArray as $value)
             $actualMsg .= gettype($value).", ";
-        substr($actualMsg, 0, -2);
+        $actualMsg = substr($actualMsg, 0, -2);
         $errorMsg = $expectedMsg." ".$actualMsg.")";
         throw new WrongTypeException($errorMsg);
     }

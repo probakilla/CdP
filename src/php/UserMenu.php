@@ -5,7 +5,7 @@
     <div class="row-fluid">
         <div class="span6 fixed-top text-right mt-4 mr-5">
             <h5>
-                <i class="fa fa-user-circle-o"></i>
+                <em class="fa fa-user-circle-o"></em>
                 <?php echo $_SESSION["username"] ?>
             </h5>
 
