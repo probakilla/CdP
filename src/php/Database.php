@@ -10,7 +10,7 @@ class Database extends PDO {
      * Init the database with the correct database.
      */
     public function __construct() {
-        parent::__construct($CONFIG, $USER_NAME, $PASSWORD);
+        parent::__construct(CONFIG, USER_NAME, PASSWORD);
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
