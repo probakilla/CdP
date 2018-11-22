@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS UserStory (
     Priority ENUM('High', 'Medium', 'Low'),
     Difficulty INT(150) NOT NULL,
     PRIMARY KEY (ProjectName, Id),
-    FOREIGN KEY (ProjectName) REFERENCES Project(Name)
+    FOREIGN KEY (ProjectName) REFERENCES Project(Name) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS User (
@@ -27,6 +27,6 @@ CREATE TABLE IF NOT EXISTS ProjectUsers (
     ProjectName VARCHAR(32) NOT NULL,
     UserName VARCHAR(32) NOT NULL,
     PRIMARY KEY (ProjectName, UserName),
-    FOREIGN KEY (ProjectName) REFERENCES Project(Name),
-    FOREIGN KEY (UserName) REFERENCES User(Name)
+    FOREIGN KEY (ProjectName) REFERENCES Project(Name) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (UserName) REFERENCES User(Name) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
