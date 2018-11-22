@@ -42,33 +42,30 @@
 
     $project = $_GET['projectname'];
     $username = $_SESSION['username'];
-    $userStory   = $_GET['id'];
+    $userStory = $_GET['id'];
     $database = new Database();
 
-    if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))
-    && ($database->exists(
-            "Project.Name",
-            "Project, ProjectUsers",
-            "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
-        ))) {
-
+    if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
         include("UserMenu.php");
 
-        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"]) && isset($_GET["id"])) {
-            $database->exists(
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"]) && isset($_GET["id"])
+            && $database->exists(
+                "Project.Name",
+                "Project, ProjectUsers",
+                "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
+            )
+            && $database->exists(
                 "ProjectName", "UserStory",
-                'ProjectName LIKE "' . $_GET["projectname"] . '"'
-            );
-            $database->exists(
-                "Id", "UserStory", "Id = " . $_GET["id"] .
-                ' AND ProjectName LIKE "' . $_GET["projectname"] . '"'
-            );
-
+                "ProjectName=\"$project\""
+            )
+            && $database->exists(
+                "Id", "UserStory",
+                "Id=$userStory AND ProjectName=\"$project\""
+            )) {
             $currentValues = $database->select(
                 "*", "UserStory",
-                'ProjectName LIKE "' . $project . '" AND Id = '. $userStory
+                "ProjectName=\"$project\" AND Id=$userStory"
             )[0];
-
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $project = CdPError::testInput($_POST["project"]);

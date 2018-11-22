@@ -50,13 +50,6 @@
         <h1 class="text-center mt-5">Inscription</h1>
         <div class="text-center jumbotron mt-5">
             <?php
-            /*if (CdPError::correctGetRequest(URI_ARGS)) {
-                $database->exists(
-                    "Name", "User", 'Name LIKE "'.$username . '"'
-                );
-                //$username = CdPError::testInput($username);
-
-            } else*/
             if (CdPError::checkRequestMethod("POST")) {
                 $data = [
                     "Name" => CdPError::testInput($_POST["username"]),

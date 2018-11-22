@@ -14,7 +14,7 @@ class CdPError {
      */
     public static function fail($message, $location) {
         echo '<span class="badge badge-warning">Erreur</span>'.$message;
-        echo nl2br("\n\Clickez sur Ok pour être redirigé vers l'accueil.");
+        echo nl2br("\nClickez sur Ok pour être redirigé vers l'accueil.");
         self::redirectTo($location);
     }
 

@@ -23,10 +23,12 @@ class Database extends PDO {
      */
     public function exists($element, $table, $condition) {
         $res = $this->select($element, $table, $condition)[0];
-        if (!$res)
-            CdPError::redirectTo("HomePage.php");
-        else
-            return true;
+        if (!$res) {
+            return false;
+        }
+        else {
+            return (count($res) > 0);
+        }
     }
 
     /**

@@ -37,20 +37,9 @@
                 include("UserMenu.php");
 
     			$database = new Database();
-    			if ($_SERVER['REQUEST_METHOD'] !== 'GET' && !isset($_GET["projectname"])
-                && $database->exists(
-                    "Project.Name",
-                    "Project, ProjectUsers",
-                    "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
-                ))
-    				$database->exists(
-    					"ProjectName",
-                        "UserStory",
-    					'ProjectName LIKE "' . $_GET["projectname"] . '"'
-    				);
+
             }
             else {
-                require_once "Error.php";
                 CdPError::redirectTo("LogIn.php");
             }
 		?>
@@ -58,6 +47,16 @@
         <h1 class="text-center mt-5">Backlog</h1>
 
         <div class="text-center jumbotron mt-5">
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] !== 'GET' || !isset($_GET["projectname"])
+            || !$database->exists(
+                "Project.Name",
+                "Project, ProjectUsers",
+                "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
+            )) {
+                CdPError::fail("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?", "HomePage.php");
+            }
+            ?>
         </div>
 
 		<div class="text-center">

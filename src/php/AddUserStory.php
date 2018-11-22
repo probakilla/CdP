@@ -49,16 +49,11 @@
         $username = $_SESSION['username'];
         $project = CdPError::testInput($_GET["projectname"]);
 
-        if ($database->exists(
+        if (CdPError::correctGetRequest(URI_ARGS) && $database->exists(
             "Project.Name",
             "Project, ProjectUsers",
-            "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"" .  . "\" AND ProjectUsers.UserName=\"$username\""
+            "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
         )) {
-
-            if (CdPError::correctGetRequest(URI_ARGS)) {
-                $database->exists(
-                    "Name", "Project", 'Name LIKE "'.$project . '"'
-                );
 
             } else if (CdPError::checkRequestMethod("POST")) {
                 $data = [
@@ -87,10 +82,7 @@
         else {
             CdPError::redirectTo("LogIn.php");
         }
-    }
-    else {
-        CdPError::redirectTo("LogIn.php");
-    }
+
 ?>
         <h1 class="text-center mt-5">Ajout d'une user story</h1>
         <div class="text-center jumbotron mt-5">
