@@ -61,7 +61,7 @@
         </div>
 
 		<div class="text-center">
-		    <a class="btn btn-primary" href="HomePage.php">Accueil</a>
+		    <a name="home-btn" class="btn btn-primary" href="HomePage.php">Accueil</a>
 		</div>
 		    <br>
 	<div class="col-sm-offset-3 col-sm-6 mx-auto">

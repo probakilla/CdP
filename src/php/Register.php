@@ -110,7 +110,7 @@
     								</form>
                                     <div class="row">
                                         <div class="col col-sm-offset-3 text-center">
-                                            <a tabindex="4" class="btn btn-primary" href="HomePage.php">Accueil</a>
+                                            <a tabindex="4" name="home-btn" class="btn btn-primary" href="HomePage.php">Accueil</a>
                                         </div>
                                     </div>
     							</div>
