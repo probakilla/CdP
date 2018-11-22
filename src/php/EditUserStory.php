@@ -1,7 +1,7 @@
 <?php
-    if(session_id() == '' || !isset($_SESSION)) {
+    //if(session_id() == '' || !isset($_SESSION)) {
         session_start();
-    }
+    //}
 ?>
 
 <!DOCTYPE html>
@@ -34,23 +34,25 @@
 </head>
 <body>
 
-    <?php
-        if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
-            include("UserMenu.php");
-        }
-    ?>
-
 <?php
+
     require_once "Database.php";
     require_once "Error.php";
     require_once "View.php";
 
     $project = $_GET['projectname'];
+    $username = $_SESSION['username'];
     $userStory   = $_GET['id'];
     $database = new Database();
-?>
 
-    <?php
+    if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))
+    && ($database->exists(
+            "Project.Name",
+            "Project, ProjectUsers",
+            "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
+        ))) {
+
+        include("UserMenu.php");
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"]) && isset($_GET["id"])) {
             $database->exists(
@@ -89,6 +91,10 @@
             CdPError::fail("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?",
             'Backlog.php?projectname="'.$project.'"');
         }
+    }
+    else {
+        CdPError::redirectTo("LogIn.php");
+    }
 ?>
 
 <h1 class="text-center mt-5">Modification de l'user story #<?php echo $userStory ?></h1>

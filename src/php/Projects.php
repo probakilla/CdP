@@ -1,7 +1,7 @@
 <?php
-    if(session_id() == '' || !isset($_SESSION)) {
+    //if(session_id() == '' || !isset($_SESSION)) {
         session_start();
-    }
+    //}
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +24,7 @@
 		<style> textarea { resize: none; } </style>
 		<?php
 			require_once "Database.php";
+            require_once "Error.php";
 		?>
 	</head>
 	<body>
@@ -31,6 +32,9 @@
         <?php
             if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
                 include("UserMenu.php");
+            }
+            else {
+                CdPError::redirectTo("LogIn.php");
             }
         ?>
 
@@ -52,36 +56,50 @@
 				  	<?php
 						$database = new Database();
 
-					    if(isset($_GET["Delete"])){
-					    	$project = $_GET['Delete'];
-							$database->delete("UserStory",
-											  "ProjectName LIKE \"$project\"");
-							$database->delete("Project",
-											  "Name LIKE \"$project\"");
-					    }
+                        if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+                            $username = $_SESSION['username'];
+    					    if(isset($_GET["Delete"])){
+    					    	$project = $_GET['Delete'];
+    							$database->delete("UserStory",
+    											  "ProjectName LIKE \"$project\"");
+    							$database->delete("Project",
+    											  "Name LIKE \"$project\"");
+    					    }
 
-					    if(isset($_POST['save'])){
-							$projectName = $_POST["projectName"];
-							$database->insert(
-								"Project",
-								["Name" => "$projectName"]
-							);
-					    }
-						$result = $database->select("Name", "Project");
+    					    if(isset($_POST['save'])){
+    							$projectName = $_POST["projectName"];
+    							$database->insert(
+    								"Project",
+    								["Name" => "$projectName"]
+    							);
+                                $database->insert(
+                                    "ProjectUsers",
+                                    ["ProjectName" => "$projectName", "UserName" => "$username"]
+                                );
+    					    }
 
-					    echo "<thead class=\"thead-dark\"><tr>";
-					    echo "<th class=\"w-100\" scope=\"col\">Name</th>";
-					    echo "</tr></thead><tbody>";
+    						//$result = $database->select("Name", "Project");
+                            $result = $database->select("Project.Name", "Project, ProjectUsers", "Project.Name=ProjectUsers.ProjectName AND ProjectUsers.UserName=\"$username\"");
 
-						foreach ($result as $value) {
-							echo '<tr>
-								<th scope="row" >
-								<a id="backlog-'.$value["Name"].'" href="Backlog.php?projectname='.$value["Name"].'">'. $value["Name"] . '</a></th>';
-							echo '<td>
-								<a id="delete-'.$value["Name"].'" href="Projects.php?Delete='. $value["Name"].'"type="submit">Supprimer</a>
-								</td></tr>';
-						}
-						echo "</tbody>";
+    					    echo "<thead class=\"thead-dark\"><tr>";
+    					    echo "<th class=\"w-100\" scope=\"col\">Name</th>";
+    					    echo "</tr></thead><tbody>";
+
+    						foreach ($result as $value) {
+    							echo '<tr>
+    								<th scope="row" >
+    								<a id="backlog-'.$value["Name"].'" href="Backlog.php?projectname='.$value["Name"].'">'. $value["Name"] . '</a></th>';
+    							echo '<td>
+    								<a id="delete-'.$value["Name"].'" href="Projects.php?Delete='. $value["Name"].'"type="submit">Supprimer</a>
+    								</td></tr>';
+    						}
+    						echo "</tbody>";
+
+                        }
+                        else {
+                            require_once "Error.php";
+                            CdPError::redirectTo("LogIn.php");
+                        }
 					?>
 				  </table>
 				</div>

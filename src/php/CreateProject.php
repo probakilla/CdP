@@ -1,7 +1,7 @@
 <?php
-    if(session_id() == '' || !isset($_SESSION)) {
+    //if(session_id() == '' || !isset($_SESSION)) {
         session_start();
-    }
+    //}
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +29,10 @@
         <?php
             if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
                 include("UserMenu.php");
+            }
+            else {
+                require_once "Error.php";
+                CdPError::redirectTo("LogIn.php");
             }
         ?>
 

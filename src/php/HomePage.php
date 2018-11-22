@@ -1,7 +1,7 @@
 <?php
-    if(session_id() == '' || !isset($_SESSION)) {
+    //if(session_id() == '' || !isset($_SESSION)) {
         session_start();
-    }
+    //}
 ?>
 
 <!doctype html>

@@ -1,7 +1,7 @@
 <?php
-    if(session_id() == '' || !isset($_SESSION)) {
+    //if(session_id() == '' || !isset($_SESSION)) {
         session_start();
-    }
+    //}
 ?>
 
 <!DOCTYPE html>
@@ -26,23 +26,33 @@
 	<body>
 
         <?php
+
+            require_once "Error.php";
+            require_once "Database.php";
+            require_once "View.php";
+
             if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+                $username = $_SESSION['username'];
+                $project = $_GET['projectname'];
                 include("UserMenu.php");
+
+    			$database = new Database();
+    			if ($_SERVER['REQUEST_METHOD'] !== 'GET' && !isset($_GET["projectname"])
+                && $database->exists(
+                    "Project.Name",
+                    "Project, ProjectUsers",
+                    "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
+                ))
+    				$database->exists(
+    					"ProjectName",
+                        "UserStory",
+    					'ProjectName LIKE "' . $_GET["projectname"] . '"'
+    				);
             }
-        ?>
-
-		<?php
-			require_once "Error.php";
-			require_once "Database.php";
-			require_once "View.php";
-
-			$database = new Database();
-			if ($_SERVER['REQUEST_METHOD'] !== 'GET' && !isset($_GET["projectname"]))
-				$database->exists(
-					"ProjectName", "UserStory",
-					'ProjectName LIKE "' . $_GET["projectname"] . '"'
-				);
-			$project = $_GET['projectname'];
+            else {
+                require_once "Error.php";
+                CdPError::redirectTo("LogIn.php");
+            }
 		?>
 
         <h1 class="text-center mt-5">Backlog</h1>
@@ -82,7 +92,7 @@
 						echo '<thead class="thead-dark">
 						<tr>
 						<th scope="col">Id</th>
-						<th scope="col">Description</th>
+						<th class="w-75" scope="col">Description</th>
 						<th scope="col">Priorité</th>
 						<th scope="col">Difficulté</th>
 						</tr>

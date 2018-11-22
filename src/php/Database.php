@@ -1,4 +1,5 @@
 <?php
+    session_start();
 
 require_once "Error.php";
 include(".dbconfig.php");
@@ -24,6 +25,8 @@ class Database extends PDO {
         $res = $this->select($element, $table, $condition)[0];
         if (!$res)
             CdPError::redirectTo("HomePage.php");
+        else
+            return true;
     }
 
     /**
