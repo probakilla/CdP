@@ -58,3 +58,25 @@ NB : La documentation et les tests sont exclus de la DoD
     ├── tests.md
     └── webDriversOptions.py
 ```
+
+## Base de données
+
+Table Project
+>| Name                         |
+>| :--------------------------: |
+>| Nom du projet (clé primaire) |
+
+Table UserStory
+>| ProjectName                               | Id                         | Description | Priority | Difficulty |
+>| :---------------------------------------: | :------------------------: | :---------: | :------: | :--------: |
+>| Nom du projet (clé primaire et étrangère avec Project[Name]) | Identifiant (clé primaire) | Description de la user story              | Priorité                   | Difficulté  |
+
+Table User
+>| Name                                | Password                |
+>| :---------------------------------: | :---------------------: |
+>| Nom de l'utilisateur (clé primaire) | Mot de passe (encrypté) |
+
+Table ProjectUsers
+>| ProjectName | UserName |
+>| :---------: | :------: |
+>| Nom du projet (clé primaire et étrangère avec Project[Name]) | Nom de l'utilisateur associé au projet (clé primaire et étrangère avec User[Name])
