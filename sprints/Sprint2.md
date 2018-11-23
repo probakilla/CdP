@@ -28,9 +28,9 @@
 | #8   | Test : Implémentation du test de la modification d'une User Story | 9 | 0.3 | Chemoune | DOING |
 | #9   | Test : Rédaction du scénario de la suppression d'une User Story du backlog. L'User Story doit être correctement enlevée de la base de données | 10 | 0.1 | Pilleux | DONE |
 | #10  | Test : Implémentation du test de la suppression d'une User Story du backlog | 10 | 0.2 | Pilleux | DONE |
-| #11  | Ajout d'un fichier *Database.php* pour la gestion des transactions avec la base de données. Le fichier doit contenir une classe php *Database* implémentant les méthodes d'accès à la base (CRUD) *insert*, *select*, *update*, *delete* | tous | 1.5 | Pilleux | DONE |
-| #12  | Refactoring du code existant pour utiliser la classe *Database* lors des interactions avec la base de données | tous | 0.1 | Pilleux | DONE |
-| #13  | Refactoring du code existant pour retirer la duplication de code. Créaction d'un fichier *Utils.php* contenant une classe php *CdPError* contenant des méthodes statiques pour factoriser du code. Les méthodes implémentées seront *redirectTo(\$location)*, qui redirige *fail(\$message, \$location)* qui affiche un message d'ereur puis redirige, *testInput(\$input)* qui test l'input de l'utilisateur dans un champ de formulaire, *checkURIParams(\$listParams)* qui verrifie si l'URL de la page courante contient la liste des paramètres | tous | 0.5 | Pilleux | DONE |
+| #11  | Ajout d'un fichier *Database.php* pour la gestion des transactions avec la base de données. Le fichier doit contenir une classe php *Database* implémentant les méthodes d'accès à la base (CRUD) *insert*, *select*, *update*, *delete* | toutes | 1.5 | Pilleux | DONE |
+| #12  | Refactoring du code existant pour utiliser la classe *Database* lors des interactions avec la base de données | toutes | 0.1 | Pilleux | DONE |
+| #13  | Refactoring du code existant pour retirer la duplication de code. Créaction d'un fichier *Utils.php* contenant une classe php *CdPError* contenant des méthodes statiques pour factoriser du code. Les méthodes implémentées seront *redirectTo(\$location)*, qui redirige *fail(\$message, \$location)* qui affiche un message d'ereur puis redirige, *testInput(\$input)* qui test l'input de l'utilisateur dans un champ de formulaire, *checkURIParams(\$listParams)* qui verrifie si l'URL de la page courante contient la liste des paramètres | toutes | 0.5 | Pilleux | DONE |
 | #14    | Edition du fichier *init.sql* pour intégrer les tables *User*(**VARCHAR:Name**, VARCHAR:Password) et *ProjectUsers*(**VARCHAR:ProjectName, VARCHAR:UserName**) | 1, 2, 4, 5 | 0.3 | SJC | DONE |
 | #15    | Création du fichier *Register.php* permettant l'enregistrement en tant que développeur | 1 | 0.1 | SJC | DONE |
 | #16    | Implémentation du fichier *Register.php* présentant un formulaire qui requiert un champ *Nom* et un champ *Mot de passe* et qui effectue une requête d'insertion dans la table *User* | 1 | 0.5 | SJC | DONE |
@@ -38,7 +38,7 @@
 | #18    | Implémentation du fichier *LogIn.php* présentant un formulaire qui requiert un champ *Nom* et un champ *Mot de passe* et qui effectue une requête de lecture vers la table *User* | 2 | 0.5 | SJC | DONE |
 | #19    | Création du fichier *AddUser.php* permettant l'ajout d'un ou plusieurs collaborateurs sur un projet | 4 | 0.1 | SJC | TODO |
 | #20    | Implémentation du fichier *AddUser.php* présentant un formulaire qui requiert un champ *Nom* et qui effectue une requête d'insertion vers la table *ProjectUsers* | 4 | 0.5 | SJC | TODO |
-| #21    | Edition des fichiers *HomePage.php*, *Projects.php*, *CreateProject.php*, *Backlog.php*, *AddUserStory.php* et *EditUserStory.php* pour prendre en compte la session utilisateur | 4 | 0.5 | SJC | DOING |
-| #22    | Création d'un fichier *View.php* avec une classe *View* contenant des méthodes statiques utilisées pour modifier l'affichage d'une page avec des méthodes *addRedirectButton(\$location)* et *currentPriority(\$currentPriority)* | tous | 0.1 | Pilleux | DONE |
-| #23 | Documenter les méthodes des classes *CdPError*, *View* et *Database* | tous | 0.1 | Pilleux | DONE |
-| #24 | Ajouter le lancement des tests à l'intégration continue | tous | 0.1 | Pilleux | DONE |
+| #21    | Edition des fichiers *HomePage.php*, *Projects.php*, *CreateProject.php*, *Backlog.php*, *AddUserStory.php* et *EditUserStory.php* pour prendre en compte la session utilisateur | 4 | 0.5 | SJC | DONE |
+| #22    | Création d'un fichier *View.php* avec une classe *View* contenant des méthodes statiques utilisées pour modifier l'affichage d'une page avec des méthodes *addRedirectButton(\$location)* et *currentPriority(\$currentPriority)* | toutes | 0.1 | Pilleux | DONE |
+| #23 | Documenter les méthodes des classes *CdPError*, *View* et *Database* | toutes | 0.1 | Pilleux | DONE |
+| #24 | Ajouter le lancement des tests à l'intégration continue | toutes | 0.1 | Pilleux | DONE |
