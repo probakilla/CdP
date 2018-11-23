@@ -35,18 +35,19 @@ NB : La documentation et les tests sont exclus de la DoD
 │   │   └── HomePageStyle.css
 │   ├── index.html
 │   ├── php
+|   |   ├── models
+|   │   │   ├── Database.php
+|   │   │   ├── Error.php
+|   │   │   └── View.php
 │   │   ├── AddUserStory.php
 │   │   ├── Backlog.php
 │   │   ├── CreateProject.php
-│   │   ├── Database.php
 │   │   ├── EditUserStory.php
-│   │   ├── Error.php
 │   │   ├── HomePage.php
 │   │   ├── LogIn.php
 │   │   ├── Projects.php
 │   │   ├── Register.php
-│   │   ├── UserMenu.php
-│   │   └── View.php
+│   │   └── UserMenu.php
 │   └── sql
 │       └── init.sql
 └── test
