@@ -1,12 +1,9 @@
 import unittest
 from selenium import webdriver
-from webDriversOptions import chromeWebdriver
 from webDriversOptions import waitURL
 from webDriversOptions import browserRegister
 from webDriversOptions import browserLogin
 from webDriversOptions import browserLogout
-from webDriversOptions import browserCreateProject
-from webDriversOptions import browserDeleteProject
 from consts import File
 from consts import Xpath
 
@@ -15,7 +12,7 @@ class listProjects(unittest.TestCase):
     def setUp(self):
         self.__chrome = chromeWebdriver()
 
-    def test_list(self, ):
+    def testList(self, ):
         self.__chrome.get('http://php-apache:80')
         waitURL(self.__chrome, File.HOME_PAGE)
         self.assertIn(File.HOME_PAGE, self.__chrome.current_url)

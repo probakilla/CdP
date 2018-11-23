@@ -7,7 +7,6 @@ from webDriversOptions import browserLogout
 from webDriversOptions import browserCreateProject
 from webDriversOptions import browserDeleteProject
 from consts import File
-from consts import Xpath
 
 
 class DeleteProject(unittest.TestCase):
@@ -16,8 +15,7 @@ class DeleteProject(unittest.TestCase):
     def setUp(self):
         self.__chrome = chromeWebdriver()
 
-    def test_delete(self):
-        self.__chrome
+    def testDelete(self):
         self.__chrome.get('http://php-apache:80')
         waitURL(self.__chrome, File.HOME_PAGE)
         self.assertIn(File.HOME_PAGE, self.__chrome.current_url)

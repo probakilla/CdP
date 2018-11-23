@@ -17,7 +17,7 @@ class BacklogProject(unittest.TestCase):
     def setUp(self):
         self.__chrome = chromeWebdriver()
 
-    def test_backlog(self):
+    def testBacklog(self):
         self.__chrome.get('http://php-apache:80')
         waitURL(self.__chrome, File.HOME_PAGE)
         self.assertIn(File.HOME_PAGE, self.__chrome.current_url)
