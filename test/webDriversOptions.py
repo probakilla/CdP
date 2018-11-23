@@ -1,8 +1,8 @@
+import sys
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from consts import Adress
 from consts import File
 from consts import Xpath
 
@@ -13,8 +13,9 @@ _DELETE_BTN = "delete-"
 
 
 def chromeWebdriver():
+    addr = sys.argv[1]
     chrome = webdriver.Remote(
-        Adress.LOCAL_DOCKER,
+        "http://127.0.0.1:4444/wd/hub",
         DesiredCapabilities.CHROME)
     return chrome
 
