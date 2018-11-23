@@ -4,6 +4,7 @@ from webDriversOptions import waitURL
 from webDriversOptions import browserRegister
 from webDriversOptions import browserLogin
 from webDriversOptions import browserLogout
+from webDriversOptions import chromeWebdriver
 from consts import File
 from consts import Xpath
 
