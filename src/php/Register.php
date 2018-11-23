@@ -1,7 +1,5 @@
 <?php
-    //if(session_id() == '' || !isset($_SESSION)) {
-        session_start();
-    //}
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -36,13 +34,14 @@
             require_once "Error.php";
             require_once "Database.php";
             require_once "View.php";
+            define("UNAME_URI", "username");
             $database = new Database();
          ?>
     </head>
     <body>
 
         <?php
-            if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+            if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
                 include("UserMenu.php");
             }
         ?>
@@ -52,14 +51,13 @@
             <?php
             if (CdPError::checkRequestMethod("POST")) {
                 $data = [
-                    "Name" => CdPError::testInput($_POST["username"]),
+                    "Name" => CdPError::testInput($_POST[UNAME_URI]),
                     "Password" => hash('sha512', CdPError::testInput($_POST["password"]))
                 ];
                 try {
                     $database->insert("User", $data);
                     CdPError::redirectTo("HomePage.php");
                 } catch (Exception $e) {
-                    //CdPError::fail($e->getMessage(), "HomePage.php");
                     echo '<span class="badge badge-danger">Erreur</span>'." Ce nom d'utilisateur est déjà pris !";
                 } finally {
                     $database = null;
@@ -103,7 +101,7 @@
     								</form>
                                     <div class="row">
                                         <div class="col col-sm-offset-3 text-center">
-                                            <a tabindex="4" name="home-btn" class="btn btn-primary" href="HomePage.php">Accueil</a>
+                                            <a tabindex="4" id="home-btn" class="btn btn-primary" href="HomePage.php">Accueil</a>
                                         </div>
                                     </div>
     							</div>

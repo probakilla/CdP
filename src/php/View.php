@@ -3,10 +3,10 @@
 
 define('NB_PRIORITIES', 3);
 
-abstract class priorityEnum {
-    const Low    = 0;
-    const Medium = 1;
-    const High   = 2;
+abstract class PriorityEnum {
+    const LOW    = 0;
+    const MEDIUM = 1;
+    const HIGH   = 2;
 }
 
 class View {
@@ -17,8 +17,9 @@ class View {
      * @return String An html type string corresponding to a button
      */
     public static function addRedirectButton ($location, $id = "") {
-        if ($id === "")
+        if ($id === "") {
             $id = $location;
+        }
         return '<a id="' . $id . '" href="' . $location . '" type="submit"> Editer</a>';
     }
     /**
@@ -40,17 +41,23 @@ class View {
     }
 
     public static function dispListLine($content) {
-        echo "<td>$content</td>";
+        return "<td>$content</td>";
+    }
+
+    public static function errorFormat($message) {
+        return '<span class="badge badge-danger">Erreur</span> '.$message;
     }
 
     private static function priorityValue($difficulty) {
       switch ($difficulty) {
-     case priorityEnum::Low:
-         return "Low";
-      case priorityEnum::Medium:
-           return "Medium";
-       case priorityEnum::High:
+        case PriorityEnum::LOW:
+            return "Low";
+        case PriorityEnum::MEDIUM:
+            return "Medium";
+        case PriorityEnum::HIGH:
             return "High";
+        default:
+            break;
         }
     }
 }

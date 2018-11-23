@@ -1,7 +1,5 @@
 <?php
-    //if(session_id() == '' || !isset($_SESSION)) {
-        session_start();
-    //}
+	session_start();
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +10,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Projets</title>
 
-		<!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
         <link rel="stylesheet"
                 href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
                 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -24,13 +21,14 @@
 		<style> textarea { resize: none; } </style>
 		<?php
 			require_once "Database.php";
-            require_once "Error.php";
+			require_once "Error.php";
+			define("UNAME_URI", "username");
 		?>
 	</head>
 	<body>
 
         <?php
-            if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+            if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
                 include("UserMenu.php");
             }
             else {
@@ -56,8 +54,8 @@
 				  	<?php
 						$database = new Database();
 
-                        if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
-                            $username = $_SESSION['username'];
+                        if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
+                            $username = $_SESSION[UNAME_URI];
     					    if(isset($_GET["Delete"])){
     					    	$project = $_GET['Delete'];
     							$database->delete("UserStory",
@@ -76,9 +74,8 @@
                                     "ProjectUsers",
                                     ["ProjectName" => "$projectName", "UserName" => "$username"]
                                 );
-    					    }
+							}
 
-    						//$result = $database->select("Name", "Project");
                             $result = $database->select("Project.Name", "Project, ProjectUsers", "Project.Name=ProjectUsers.ProjectName AND ProjectUsers.UserName=\"$username\"");
 
     					    echo "<thead class=\"thead-dark\"><tr>";

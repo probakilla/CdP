@@ -99,10 +99,10 @@
 							$id = $value["Id"];
 							echo "<tr>";
 							echo '<th scope="row">'.$value["Id"]."</th>";
-							View::dispListLine($value["Description"]);
-							View::dispListLine($value["Priority"]);
-							View::dispListLine($value["Difficulty"]);
-							View::dispListLine(
+							echo View::dispListLine($value["Description"]);
+							echo View::dispListLine($value["Priority"]);
+							echo View::dispListLine($value["Difficulty"]);
+							echo View::dispListLine(
 								View::addRedirectButton(
 									"EditUserStory.php?projectname=$project&id=$id",
 									"edit".$project.$id)

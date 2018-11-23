@@ -1,7 +1,5 @@
 <?php
-    //if(session_id() == '' || !isset($_SESSION)) {
-        session_start();
-    //}
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +34,7 @@
             require_once "Error.php";
             require_once "Database.php";
             require_once "View.php";
+            define("UNAME_URI", "username");
             $database = new Database();
             $view = new View();
          ?>
@@ -43,7 +42,7 @@
     <body>
 
         <?php
-            if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+            if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
                 include("UserMenu.php");
             }
         ?>
@@ -54,7 +53,7 @@
 
             if (CdPError::checkRequestMethod("POST")) {
                 $data = [
-                    "Name" => CdPError::testInput($_POST["username"]),
+                    "Name" => CdPError::testInput($_POST[UNAME_URI]),
                     "Password" => hash('sha512', CdPError::testInput($_POST["password"]))
                 ];
                 try {
@@ -62,18 +61,18 @@
                     if ($res_user) {
                         $res_pwd = $database->select("Name", "User", 'Name LIKE "'. $data["Name"] . '" AND Password LIKE "' . $data["Password"] . '"')[0];
                         if ($res_pwd) {
-                            $_SESSION['username']= $data["Name"];
+                            $_SESSION[UNAME_URI]= $data["Name"];
                             CdPError::redirectTo("HomePage.php");
                         }
                         else {
-                            echo '<span class="badge badge-danger">Erreur</span>'.' Password is incorrect !';
+                            echo View::errorFormat("Password is incorect !");
                         }
                     }
                     else {
-                        echo '<span class="badge badge-danger">Erreur</span>'.' User does not exists !';
+                        echo View::errorFormat("User already exists !");
                     }
                 } catch (Exception $e) {
-                    echo '<span class="badge badge-danger">Erreur</span>'.' Could not find user...';
+                    echo View::errorFormat("Could not find user...");
                 } finally {
                     $database = null;
                 }

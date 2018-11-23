@@ -5,7 +5,6 @@ require_once "Error.php";
 include(".dbconfig.php");
 
 class Database extends PDO {
-    private $_cfgArray;
 
     /**
      * Init the database with the correct database.
@@ -41,17 +40,21 @@ class Database extends PDO {
      * @return Array The array of all elemenst found
      */
     public function select ($elements, $table, $condition = "") {
-        if (!is_string($table) || !is_string($elements))
+        if (!is_string($table) || !is_string($elements)) {
             throw new WrongTypeException();
+        }
         $request = "SELECT $elements FROM $table";
-        if ($condition !== "")
+        if ($condition !== "") {
             $request .= " WHERE " . $condition;
+        }
         $sql = $this->prepare($request);
-        if (!$sql->execute())
+        if (!$sql->execute()) {
             $this->execError();
+        }
         $fetch = $sql->fetchAll();
-        if (! $fetch)
+        if (! $fetch) {
             $this->execError();
+        }
         return $fetch;
     }
 
@@ -116,21 +119,11 @@ class Database extends PDO {
     }
 
     private function execError() {
-        if ($this->errorCode() !== '00000')
-            if ($this->_errorLog === true) {
-                echo $this->errorInfo();
-                throw new FailedRequestException(
-                    "ERROR: ". implode(",", $this->errorInfo())
-                );
-            }
-    }
-
-    private function typeError($expectedMsg ,$argsArray) {
-        $actualMsg = "actual (";
-        foreach ($argsArray as $value)
-            $actualMsg .= gettype($value).", ";
-        $actualMsg = substr($actualMsg, 0, -2);
-        $errorMsg = $expectedMsg." ".$actualMsg.")";
-        throw new WrongTypeException($errorMsg);
+        if ($this->errorCode() !== '00000' && $this->_errorLog === true) {
+            echo $this->errorInfo();
+            throw new FailedRequestException(
+                "ERROR: ". implode(",", $this->errorInfo())
+            );
+        }
     }
 }

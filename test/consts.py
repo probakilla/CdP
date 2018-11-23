@@ -21,3 +21,6 @@ class File:
     BACKLOG = "Backlog.php"
     REGISTER = "Register.php"
     LOGIN = "LogIn.php"
+
+class Adress:
+    LOCAL_DOCKER = "http://127.0.0.1:4444/wd/hub"

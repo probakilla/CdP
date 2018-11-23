@@ -25,12 +25,16 @@ class CdPError {
      * @return Boolean true if the arguments are set, false otherwise
      */
     public static function correctGetRequest($argsArray = null) {
-        if ($_SERVER["REQUEST_METHOD"] !== "GET")
+        if ($_SERVER["REQUEST_METHOD"] !== "GET") {
             return false;
-        if ($argsArray !== null)
-            foreach ($argsArray as $value)
-                if (!isset($_GET[$value]))
+        }
+        if ($argsArray !== null) {
+            foreach ($argsArray as $value) {
+                if (!isset($_GET[$value])) {
                     return false;
+                }
+            }
+        }
         return true;
     }
 
@@ -49,10 +53,9 @@ class CdPError {
      * @return String The correct input
      */
     public static function testInput($data) {
-        $data = trim($data);
+        $data = stripslashes(trim($data));
         $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
+        return htmlspecialchars($data);
     }
 
     /**
