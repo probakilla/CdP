@@ -39,6 +39,10 @@ class View {
         return $out . "</select>";
     }
 
+    public static function dispListLine($content) {
+        echo "<td>$content</td>";
+    }
+
     private static function priorityValue($difficulty) {
       switch ($difficulty) {
      case priorityEnum::Low:

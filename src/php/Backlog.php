@@ -1,7 +1,5 @@
 <?php
-    //if(session_id() == '' || !isset($_SESSION)) {
-        session_start();
-    //}
+	session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +9,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Backlog</title>
-
-		<!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
         <link rel="stylesheet"
                 href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
                 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -29,10 +25,11 @@
 
             require_once "Error.php";
             require_once "Database.php";
-            require_once "View.php";
+			require_once "View.php";
+			define("UNAME_URI", "username");
 
-            if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
-                $username = $_SESSION['username'];
+            if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
+                $username = $_SESSION[UNAME_URI];
                 $project = $_GET['projectname'];
                 include("UserMenu.php");
 
@@ -60,7 +57,7 @@
         </div>
 
 		<div class="text-center">
-		    <a name="home-btn" class="btn btn-primary" href="HomePage.php">Accueil</a>
+		    <a id="home-btn" class="btn btn-primary" href="HomePage.php">Accueil</a>
 		</div>
 		    <br>
 	<div class="col-sm-offset-3 col-sm-6 mx-auto">
@@ -102,12 +99,14 @@
 							$id = $value["Id"];
 							echo "<tr>";
 							echo '<th scope="row">'.$value["Id"]."</th>";
-							echo "<td>".$value["Description"]."</td>";
-							echo "<td>".$value["Priority"]."</td>";
-							echo "<td>".$value["Difficulty"]."</td>";
-							echo "<td>".View::addRedirectButton(
-								"EditUserStory.php?projectname=$project&id=$id",
-								"edit".$project.$id)."<td>";
+							View::dispListLine($value["Description"]);
+							View::dispListLine($value["Priority"]);
+							View::dispListLine($value["Difficulty"]);
+							View::dispListLine(
+								View::addRedirectButton(
+									"EditUserStory.php?projectname=$project&id=$id",
+									"edit".$project.$id)
+								);
 							echo "</tr>";
 						}
 					echo "</tbody>";

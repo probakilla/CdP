@@ -1,7 +1,5 @@
 <?php
-    //if(session_id() == '' || !isset($_SESSION)) {
-        session_start();
-    //}
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +9,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Création de projet</title>
-
-		<!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
 
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"

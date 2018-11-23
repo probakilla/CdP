@@ -1,7 +1,7 @@
 class Xpath:
     # Clickabls
     REGISTER_BTN = "//a[@id='register']"
-    HOME_BTN = "//a[@name='home-btn']"
+    HOME_BTN = "//a[@id='home-btn']"
     LOGIN_BTN = "//a[@id='login']"
     LOGOUT_BTN = "//input[@name='logout']"
     SUBMIT_LOGIN_BTN = "//input[@name='login-submit']"

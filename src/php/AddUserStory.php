@@ -1,7 +1,5 @@
 <?php
-    //if(session_id() == '' || !isset($_SESSION)) {
-        session_start();
-    //}
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -35,26 +33,27 @@
             require_once "Error.php";
             require_once "Database.php";
             require_once "View.php";
+            define("UNAME_URI", "username");
+            define("URI_ARGS", array("projectname"));
             $database = new Database();
             $project = "";
-            define("URI_ARGS", array("projectname"));
          ?>
     </head>
     <body>
 
 <?php
 
-    if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+    if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
         include("UserMenu.php");
-        $username = $_SESSION['username'];
+        $username = $_SESSION[UNAME_URI];
         $project = CdPError::testInput($_GET["projectname"]);
 
-        if (CdPError::correctGetRequest(URI_ARGS) && $database->exists(
+        if (CdPError::correctGetRequest(URI_ARGS) && !$database->exists(
             "Project.Name",
             "Project, ProjectUsers",
             "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
         )) {
-
+            CdPError::redirectTo("HomePage.php");
             } else if (CdPError::checkRequestMethod("POST")) {
                 $data = [
                     "ProjectName" => CdPError::testInput($_POST["project"]),
@@ -71,12 +70,6 @@
                 } finally {
                     $database = null;
                 }
-            } else {
-                CdPError::fail(
-                    "Un problème est survenu lors de la requête de cette page..." .
-                    "Peut-être n'êtes vous pas censé vous trouvez ici ?",
-                    "Projects.php"
-                );
             }
         }
         else {
@@ -98,7 +91,6 @@
         <div class="container center-block">
 			<div class="row main align-items-center justify-content-center">
 				<div class="main-login main-center w-50">
-				<!--<h5>Ajouter une user story au projet courant :</h5>-->
                     <form class="mt-5" method="post" action=
                     "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 						<div class="form-group">
