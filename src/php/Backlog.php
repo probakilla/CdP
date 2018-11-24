@@ -1,5 +1,7 @@
 <?php
-	session_start();
+    //if(session_id() == '' || !isset($_SESSION)) {
+        session_start();
+    //}
 ?>
 
 <!DOCTYPE html>
@@ -9,6 +11,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Backlog</title>
+
+		<!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
         <link rel="stylesheet"
                 href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
                 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -25,11 +29,10 @@
 
             require_once "Error.php";
             require_once "Database.php";
-			require_once "View.php";
-			define("UNAME_URI", "username");
+            require_once "View.php";
 
-            if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
-                $username = $_SESSION[UNAME_URI];
+            if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+                $username = $_SESSION['username'];
                 $project = $_GET['projectname'];
                 include("UserMenu.php");
 
@@ -57,7 +60,7 @@
         </div>
 
 		<div class="text-center">
-		    <a id="home-btn" class="btn btn-primary" href="HomePage.php">Accueil</a>
+		    <a name="home-btn" class="btn btn-primary" href="HomePage.php">Accueil</a>
 		</div>
 		    <br>
 	<div class="col-sm-offset-3 col-sm-6 mx-auto">
@@ -65,7 +68,7 @@
 			<div class="panel-heading">
 				<div class="panel-title pull-left"><h5>Projet : <?php echo $project?></h5></div>
 				<div class="panel-title text-right mb-4">
-					<a href="AddUserStory.php?projectname=<?php echo $project?>" class="btn btn-outline-dark" value="Ajouter une User Story">Ajouter une User Story
+					<a href="AddUserStory.php?projectname=<?php echo $project?>" name="addus-btn" class="btn btn-outline-dark" value="Ajouter une User Story">Ajouter une User Story
 					</a>
 				</div>
 			</div>
@@ -99,14 +102,12 @@
 							$id = $value["Id"];
 							echo "<tr>";
 							echo '<th scope="row">'.$value["Id"]."</th>";
-							echo View::dispListLine($value["Description"]);
-							echo View::dispListLine($value["Priority"]);
-							echo View::dispListLine($value["Difficulty"]);
-							echo View::dispListLine(
-								View::addRedirectButton(
-									"EditUserStory.php?projectname=$project&id=$id",
-									"edit".$project.$id)
-								);
+							echo "<td>".$value["Description"]."</td>";
+							echo "<td>".$value["Priority"]."</td>";
+							echo "<td>".$value["Difficulty"]."</td>";
+							echo "<td id=\"edit_btn\" >".View::addRedirectButton(
+								"EditUserStory.php?projectname=$project&id=$id",
+								"edit".$project.$id)."<td>";
 							echo "</tr>";
 						}
 					echo "</tbody>";
