@@ -1,5 +1,5 @@
 <?php
-        session_start();
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -37,31 +37,35 @@
     require_once "Database.php";
     require_once "Error.php";
     require_once "View.php";
+    define("UNAME_URI", "username");
+    define("PROJECT_URI", "projectname");
+    define("US_TABLE", "UserStory");
+    define("CURRENT_PAGE", "PHP_SELF");
 
     $project = $_GET['projectname'];
-    $username = $_SESSION['username'];
+    $username = $_SESSION[UNAME_URI];
     $userStory = $_GET['id'];
     $database = new Database();
 
-    if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+    if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
         include("UserMenu.php");
 
-        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["projectname"]) && isset($_GET["id"])
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET[PROJECT_URI]) && isset($_GET["id"])
             && $database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
                 "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
             )
             && $database->exists(
-                "ProjectName", "UserStory",
+                PROJECT_URI, US_TABLE,
                 "ProjectName=\"$project\""
             )
             && $database->exists(
-                "Id", "UserStory",
+                "Id", US_TABLE,
                 "Id=$userStory AND ProjectName=\"$project\""
             )) {
             $currentValues = $database->select(
-                "*", "UserStory",
+                "*", US_TABLE,
                 "ProjectName=\"$project\" AND Id=$userStory"
             )[0];
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -72,7 +76,7 @@
                 $prio = CdPError::testInput($_POST["prio"]);
                 $diff = CdPError::testInput($_POST["diff"]);
                 $database->update(
-                    "UserStory",
+                    US_TABLE,
                     ["Description" => $desc,
                      "Priority" => $prio,
                      "Difficulty" => $diff],
@@ -104,7 +108,7 @@
 <div class="container center-block">
     <div class="row main align-items-center justify-content-center">
         <div class="main-login main-center w-50">
-            <form class="mt-5" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <form class="mt-5" method="post" action="<?php echo htmlspecialchars($_SERVER[CURRENT_PAGE]); ?>">
 
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Projet</label>
@@ -112,8 +116,8 @@
                         <div class="input-group">
                             <input type="text"
                                     class="form-control"
-                                    name="project" "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
-                                    value="<?php echo $currentValues["ProjectName"]; ?>" readonly/>
+                                    name="project" "<?php echo htmlspecialchars($_SERVER[CURRENT_PAGE]); ?>"
+                                    value="<?php echo $currentValues[PROJECT_URI]; ?>" readonly/>
                         </div>
                     </div>
                 </div>
@@ -137,7 +141,7 @@
                             <input type="text"
                                     class="form-control"
                                     name="desc"
-                                    "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" value="<?php echo $currentValues["Description"]; ?>"/>
+                                    "<?php echo htmlspecialchars($_SERVER[CURRENT_PAGE]); ?>" value="<?php echo $currentValues["Description"]; ?>"/>
                         </div>
                     </div>
                 </div>
@@ -164,7 +168,7 @@
                 </div>
 
                 <div class="form-group ">
-                    <input type="submit" name="valid-edit-us" class="btn btn-primary btn-lg btn-block" value="Valider">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Valider">
                 </div>
 
             </form>

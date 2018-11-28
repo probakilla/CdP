@@ -1,5 +1,5 @@
 <?php
-        session_start();
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -17,11 +17,11 @@
         <!-- Website Font style -->
         <link rel="stylesheet"
               href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Passion+One'
+		<link rel="stylesheet" href="style.css">
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One'
               rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Oxygen'
+		<link href='https://fonts.googleapis.com/css?family=Oxygen'
               rel='stylesheet' type='text/css'>
         <!-- Bootstrap Javascript -->
         <script
@@ -33,26 +33,27 @@
             require_once "Error.php";
             require_once "Database.php";
             require_once "View.php";
+            define("UNAME_URI", "username");
+            define("URI_ARGS", array("projectname"));
             $database = new Database();
             $project = "";
-            define("URI_ARGS", array("projectname"));
          ?>
     </head>
     <body>
 
 <?php
 
-    if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+    if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
         include("UserMenu.php");
-        $username = $_SESSION['username'];
+        $username = $_SESSION[UNAME_URI];
         $project = CdPError::testInput($_GET["projectname"]);
 
-        if (CdPError::correctGetRequest(URI_ARGS) && $database->exists(
+        if (CdPError::correctGetRequest(URI_ARGS) && !$database->exists(
             "Project.Name",
             "Project, ProjectUsers",
             "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
         )) {
-
+            CdPError::redirectTo("HomePage.php");
             } else if (CdPError::checkRequestMethod("POST")) {
                 $data = [
                     "ProjectName" => CdPError::testInput($_POST["project"]),
@@ -69,12 +70,6 @@
                 } finally {
                     $database = null;
                 }
-            } else {
-                CdPError::fail(
-                    "Un problème est survenu lors de la requête de cette page..." .
-                    "Peut-être n'êtes vous pas censé vous trouvez ici ?",
-                    "Projects.php"
-                );
             }
         }
         else {
@@ -94,18 +89,17 @@
         </div>
 
         <div class="container center-block">
-      <div class="row main align-items-center justify-content-center">
-        <div class="main-login main-center w-50">
-        <!--<h5>Ajouter une user story au projet courant :</h5>-->
+			<div class="row main align-items-center justify-content-center">
+				<div class="main-login main-center w-50">
                     <form class="mt-5" method="post" action=
                     "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <div class="form-group">
+						<div class="form-group">
                             <label for="name"
                                    class="cols-sm-2  control-label">
                                    Projet
                             </label>
-              <div class="cols-sm-10">
-                <div class="input-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
                                     <input type="text"
                                            class="form-control"
                                            name="project"
@@ -113,78 +107,77 @@
 htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
                                             value=<?php echo $project; ?>
                                             readonly/>
-                </div>
-              </div>
-            </div>
+								</div>
+							</div>
+						</div>
 
-            <div class="form-group">
+						<div class="form-group">
                             <label for="email" class="cols-sm-2 control-label">
                                 Id
                             </label>
-              <div class="cols-sm-10">
-                <div class="input-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
                                     <input type="number"
                                            class="form-control"
                                            name="id"/>
-                </div>
-              </div>
-            </div>
+								</div>
+							</div>
+						</div>
 
-            <div class="form-group">
+						<div class="form-group">
                             <label for="username"
                                    class="cols-sm-2 control-label">
                                    Description
                             </label>
-              <div class="cols-sm-10">
-                <div class="input-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
                                     <input type="text"
                                            class="form-control"
                                            name="desc"
                                            placeholder="Entrer le détail de votre user story"/>
-                </div>
-              </div>
-            </div>
+								</div>
+							</div>
+						</div>
 
-            <div class="form-group">
+						<div class="form-group">
                             <label for="password"
                                    class="cols-sm-2 control-label">
                                    Priorité
                             </label>
-              <div class="cols-sm-10">
-                <div class="input-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
                                     <select class="form-control" name="prio">
                                         <option value="high"
                                                 selected>High</option>
                                         <option value="medium">Medium</option>
                                         <option value="low">Low</option>
                                     </select>
-                </div>
-              </div>
-            </div>
+								</div>
+							</div>
+						</div>
 
-            <div class="form-group">
+						<div class="form-group">
                             <label for="confirm"
                                    class="cols-sm-2 control-label">
                                    Difficulté
                             </label>
-              <div class="cols-sm-10">
-                <div class="input-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
                                     <input type="number"
                                            class="form-control"
                                            name="diff"/>
-                </div>
-              </div>
-            </div>
+								</div>
+							</div>
+						</div>
 
-            <div class="form-group ">
+						<div class="form-group ">
                             <input type="submit"
-                                   name="valid-add-us"
                                    class="btn btn-primary btn-lg btn-block"
                                    value="Valider">
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
     </body>
 </html>

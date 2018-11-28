@@ -1,20 +1,19 @@
+import sys
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from consts import *
+from consts import File
+from consts import Xpath
 
 _WAIT = 10
 _UNAME = "uname_test"
 _PSWD = "pswd_test"
 _DELETE_BTN = "delete-"
-_US_ID = "uname_test"
-_US_DESC = "us_description"
-_US_PRIO_H = "High"
-_US_DIFF_2 = "2"
 
 
 def chromeWebdriver():
+    addr = sys.argv[1]
     chrome = webdriver.Remote(
         "http://127.0.0.1:4444/wd/hub",
         DesiredCapabilities.CHROME)
@@ -46,17 +45,6 @@ def _fillUserFields(browser):
     passField = browser.find_element_by_xpath(Xpath.PASSWD_FIELD)
     passField.send_keys(_PSWD)
     browser.find_element_by_xpath(Xpath.SUBMIT_LOGIN_BTN).click()
-
-def _fillUserStoryFields(browser):
-    usid = browser.find_element_by_xpath(Xpath.US_ID_FIELD)
-    usid.send_keys(_US_ID)
-    usdesc = browser.find_element_by_xpath(Xpath.US_DESC_FIELD)
-    usdesc.send_keys(_US_DESC)
-    usprio = browser.find_element_by_xpath(Xpath.US_PRIO_FIELD)
-    usprio.send_keys(_US_PRIO_H)
-    usdiff = browser.find_element_by_xpath(Xpath.US_DIFF_FIELD)
-    usdiff.send_keys(_US_DIFF_2)
-    browser.find_element_by_xpath(Xpath.VALID_ADDUS_BTN).click()
 
 def browserCreateProject(browser, projectName):
     link = browser.find_element_by_xpath(Xpath.CREATE_PROJECT_BTN)
