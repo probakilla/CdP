@@ -23,9 +23,9 @@
     <body>
 
         <?php
-            if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
-                include("UserMenu.php");
-            }
+        if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+            include "UserMenu.php";
+        }
         ?>
 
         <div class="flex-center position-ref full-height">

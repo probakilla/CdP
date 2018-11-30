@@ -29,7 +29,7 @@
          integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
          crossorigin="anonymous" defer>
          </script>
-         <?php
+            <?php
             require_once "models/Error.php";
             require_once "models/Database.php";
             require_once "models/View.php";
@@ -37,44 +37,44 @@
             define("URI_ARGS", array("projectname"));
             $database = new Database();
             $project = "";
-         ?>
+            ?>
     </head>
     <body>
 
 <?php
 
-    if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
-        include("UserMenu.php");
-        $username = $_SESSION[UNAME_URI];
-        $project = CdPError::testInput($_GET["projectname"]);
+if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
+    include "UserMenu.php";
+    $username = $_SESSION[UNAME_URI];
+    $project = CdPError::testInput($_GET["projectname"]);
 
-        if (CdPError::correctGetRequest(URI_ARGS) && !$database->exists(
-            "Project.Name",
-            "Project, ProjectUsers",
-            "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
-        )) {
-            CdPError::redirectTo("HomePage.php");
-            } else if (CdPError::checkRequestMethod("POST")) {
-                $data = [
-                    "ProjectName" => CdPError::testInput($_POST["project"]),
-                    "Id" => CdPError::testInput($_POST["id"]),
-                    "Description" => CdPError::testInput($_POST["desc"]),
-                    "Priority" => CdPError::testInput($_POST["prio"]),
-                    "Difficulty" => CdPError::testInput($_POST["diff"])
-                ];
-                try {
-                    $database->insert("UserStory", $data);
-                    CdPError::redirectTo("Backlog.php?projectname=".$data["ProjectName"]);
-                } catch (Exception $e) {
-                    CdPError::fail($e->getMessage(), "Projects.php");
-                } finally {
-                    $database = null;
-                }
-            }
+    if (CdPError::correctGetRequest(URI_ARGS) && !$database->exists(
+        "Project.Name",
+        "Project, ProjectUsers",
+        "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
+    )) {
+        CdPError::redirectTo("HomePage.php");
+    } else if (CdPError::checkRequestMethod("POST")) {
+        $data = [
+            "ProjectName" => CdPError::testInput($_POST["project"]),
+            "Id" => CdPError::testInput($_POST["id"]),
+            "Description" => CdPError::testInput($_POST["desc"]),
+            "Priority" => CdPError::testInput($_POST["prio"]),
+            "Difficulty" => CdPError::testInput($_POST["diff"])
+        ];
+        try {
+            $database->insert("UserStory", $data);
+            CdPError::redirectTo("Backlog.php?projectname=".$data["ProjectName"]);
+        } catch (Exception $e) {
+            CdPError::fail($e->getMessage(), "Projects.php");
+        } finally {
+            $database = null;
         }
-        else {
-            CdPError::redirectTo("LogIn.php");
-        }
+    }
+}
+else {
+    CdPError::redirectTo("LogIn.php");
+}
 
 ?>
         <h1 class="text-center mt-5">Ajout d'une user story</h1>
@@ -104,7 +104,7 @@
                                            class="form-control"
                                            name="project"
                                            "<?php echo
-htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
+                                            htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
                                             value=<?php echo $project; ?>
                                             readonly/>
 								</div>

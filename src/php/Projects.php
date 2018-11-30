@@ -19,21 +19,21 @@
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
 		<style> textarea { resize: none; } </style>
-		<?php
-			require_once "models/Database.php";
-			require_once "models/Error.php";
-			define("UNAME_URI", "username");
-		?>
+    <?php
+    require_once "models/Database.php";
+    require_once "models/Error.php";
+    define("UNAME_URI", "username");
+    ?>
 	</head>
 	<body>
 
         <?php
-            if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
-                include("UserMenu.php");
-            }
-            else {
-                CdPError::redirectTo("LogIn.php");
-            }
+        if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
+            include "UserMenu.php";
+        }
+        else {
+            CdPError::redirectTo("LogIn.php");
+        }
         ?>
 
     <h1 class="text-center mt-5">Vos projets</h1>
@@ -51,53 +51,53 @@
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table">
-				  	<?php
-						$database = new Database();
+        <?php
+        $database = new Database();
 
-                        if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
-                            $username = $_SESSION[UNAME_URI];
-    					    if(isset($_GET["Delete"])){
-    					    	$project = $_GET['Delete'];
-    							$database->delete("UserStory",
+        if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
+            $username = $_SESSION[UNAME_URI];
+            if(isset($_GET["Delete"])){
+                             $project = $_GET['Delete'];
+                          $database->delete("UserStory",
     											  "ProjectName LIKE \"$project\"");
-    							$database->delete("Project",
-    											  "Name LIKE \"$project\"");
-    					    }
+                                      $database->delete("Project",
+                                "Name LIKE \"$project\"");
+            }
 
-    					    if(isset($_POST['save'])){
-    							$projectName = $_POST["projectName"];
-    							$database->insert(
-    								"Project",
-    								["Name" => "$projectName"]
-    							);
-                                $database->insert(
-                                    "ProjectUsers",
-                                    ["ProjectName" => "$projectName", "UserName" => "$username"]
-                                );
-							}
+            if(isset($_POST['save'])){
+                $projectName = $_POST["projectName"];
+                $database->insert(
+                "Project",
+                ["Name" => "$projectName"]
+                );
+                               $database->insert(
+                                   "ProjectUsers",
+                                   ["ProjectName" => "$projectName", "UserName" => "$username"]
+                               );
+            }
 
                             $result = $database->select("Project.Name", "Project, ProjectUsers", "Project.Name=ProjectUsers.ProjectName AND ProjectUsers.UserName=\"$username\"");
 
-    					    echo "<thead class=\"thead-dark\"><tr>";
-    					    echo "<th class=\"w-100\" scope=\"col\">Name</th>";
-    					    echo "</tr></thead><tbody>";
+                            echo "<thead class=\"thead-dark\"><tr>";
+                            echo "<th class=\"w-100\" scope=\"col\">Name</th>";
+                            echo "</tr></thead><tbody>";
 
-    						foreach ($result as $value) {
-    							echo '<tr>
+            foreach ($result as $value) {
+                echo '<tr>
     								<th scope="row" >
     								<a id="backlog-'.$value["Name"].'" href="Backlog.php?projectname='.$value["Name"].'">'. $value["Name"] . '</a></th>';
-    							echo '<td>
+                echo '<td>
     								<a id="delete-'.$value["Name"].'" href="Projects.php?Delete='. $value["Name"].'"type="submit">Supprimer</a>
     								</td></tr>';
-    						}
-    						echo "</tbody>";
+            }
+                            echo "</tbody>";
 
-                        }
-                        else {
-                            require_once "models/Error.php";
-                            CdPError::redirectTo("LogIn.php");
-                        }
-					?>
+        }
+        else {
+            include_once "models/Error.php";
+            CdPError::redirectTo("LogIn.php");
+        }
+        ?>
 				  </table>
 				</div>
 			</div>

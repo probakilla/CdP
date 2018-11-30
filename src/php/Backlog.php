@@ -25,21 +25,21 @@
 
             require_once "models/Error.php";
             require_once "models/Database.php";
-			require_once "models/View.php";
-			define("UNAME_URI", "username");
+        require_once "models/View.php";
+        define("UNAME_URI", "username");
 
-            if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
-                $username = $_SESSION[UNAME_URI];
-                $project = $_GET['projectname'];
-                include("UserMenu.php");
+        if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
+            $username = $_SESSION[UNAME_URI];
+            $project = $_GET['projectname'];
+            include "UserMenu.php";
 
-    			$database = new Database();
+            $database = new Database();
 
-            }
-            else {
-                CdPError::redirectTo("LogIn.php");
-            }
-		?>
+        }
+        else {
+            CdPError::redirectTo("LogIn.php");
+        }
+        ?>
 
         <h1 class="text-center mt-5">Backlog</h1>
 
@@ -72,20 +72,20 @@
 			<div class="panel-body">
 				<div class="table-responsive">
 				  <table class="table">
-					  <?php
-					  $row = null;
+        <?php
+        $row = null;
 					  	try {
-							$row = $database->select("*", "UserStory",
-							 "ProjectName LIKE \"$project\"");
-						} catch (Exception $exception) {
-							CdPError::redirectTo(
-								$exception->get_message(),
-								'Projects.php'
-							);
-						} finally {
-							$database = null;
-						}
-						echo '<thead class="thead-dark">
+            $row = $database->select("*", "UserStory",
+            "ProjectName LIKE \"$project\"");
+        } catch (Exception $exception) {
+            CdPError::redirectTo(
+            $exception->get_message(),
+            'Projects.php'
+            );
+        } finally {
+            $database = null;
+        }
+        echo '<thead class="thead-dark">
 						<tr>
 						<th scope="col">Id</th>
 						<th class="w-75" scope="col">Description</th>
@@ -93,24 +93,24 @@
 						<th scope="col">Difficulté</th>
 						</tr>
 							</thead>';
-					echo "<tbody>";
-						foreach ($row as $value)
-						{
-							$id = $value["Id"];
-							echo "<tr>";
-							echo '<th scope="row">'.$value["Id"]."</th>";
-							echo View::dispListLine($value["Description"]);
-							echo View::dispListLine($value["Priority"]);
-							echo View::dispListLine($value["Difficulty"]);
-							echo View::dispListLine(
-								View::addRedirectButton(
-									"EditUserStory.php?projectname=$project&id=$id",
-									"edit".$project.$id)
-								);
-							echo "</tr>";
-						}
-					echo "</tbody>";
-					?>
+        echo "<tbody>";
+        foreach ($row as $value)
+        {
+            $id = $value["Id"];
+            echo "<tr>";
+            echo '<th scope="row">'.$value["Id"]."</th>";
+            echo View::dispListLine($value["Description"]);
+            echo View::dispListLine($value["Priority"]);
+            echo View::dispListLine($value["Difficulty"]);
+            echo View::dispListLine(
+            View::addRedirectButton(
+            "EditUserStory.php?projectname=$project&id=$id",
+            "edit".$project.$id)
+            );
+            echo "</tr>";
+        }
+        echo "</tbody>";
+        ?>
 				  </table>
 				</div>
 				</div>

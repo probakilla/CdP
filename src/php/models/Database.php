@@ -1,10 +1,11 @@
 <?php
-    session_start();
+	session_start();
 
 require_once "Error.php";
-include(".dbconfig.php");
+require ".dbconfig.php";
 
 class Database extends PDO {
+
 
     /**
      * Init the database with the correct database.
@@ -14,32 +15,35 @@ class Database extends PDO {
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+
     /**
      * Check if the wanted element is present in the database
-     * @param String $element the wanted column of the database (SELECT)
-     * @param String $table The wanted table of the database (FROM)
+     *
+     * @param String $element   the wanted column of the database (SELECT)
+     * @param String $table     The wanted table of the database (FROM)
      * @param String $condition The condition of the wanted element (WHERE)
      */
     public function exists($element, $table, $condition) {
         $res = $this->select($element, $table, $condition)[0];
         if (!$res) {
             return false;
-        }
-        else {
+        } else {
             return (count($res) > 0);
         }
     }
 
+
     /**
      * Select elements from table
-     * @param String $elements The elements to fetch in the database (SELECT
-     *  statement)
-     * @param String $table The table where to fetch the elements
-     * (FROM statement).
-     * @param String $condition The condiction of the query (WHERE statement)
+     *
+     * @param  String $elements  The elements to fetch in the database (SELECT
+     *                           statement)
+     * @param  String $table     The table where to fetch the elements
+     *                           (FROM statement).
+     * @param  String $condition The condiction of the query (WHERE statement)
      * @return Array The array of all elemenst found
      */
-    public function select ($elements, $table, $condition = "") {
+    public function select($elements, $table, $condition = "") {
         if (!is_string($table) || !is_string($elements)) {
             throw new WrongTypeException();
         }
@@ -58,14 +62,16 @@ class Database extends PDO {
         return $fetch;
     }
 
+
     /**
      * Change elements fields of a database entry
+     *
      * @param String $table The table of the element to update (SELECT)
-     * @param String $data The field values to change in the database (SET)
+     * @param String $data  The field values to change in the database (SET)
      * @param String $where The condition that defines the element in the
-     * database (WHERE)
+     *                      database (WHERE)
      */
-    public function update ($table, $data, $where) {
+    public function update($table, $data, $where) {
         $request = "UPDATE $table SET ";
         foreach ($data as $key => $value) {
             $placeholder = $key . "=?, ";
@@ -78,52 +84,58 @@ class Database extends PDO {
         $sql->execute(array_values($data));
     }
 
+
     /**
      * Insert an element in a table of the database
+     *
      * @param String $table The table where insert the element
-     * @param String $data The element data, it must be an associative array
+     * @param String $data  The element data, it must be an associative array
      */
-     public function insert ($table, $data) {
-         $request = "INSERT INTO $table (";
-         $holder = "VALUES (";
-         $counter = 1;
-         foreach ($data as $key => $value) {
+    public function insert($table, $data) {
+        $request = "INSERT INTO $table (";
+        $holder = "VALUES (";
+        $counter = 1;
+        foreach ($data as $key => $value) {
             if ($counter == 1) {
                 $request .= $key;
-                $holder .= "?" ;
-            }
-            else {
+                $holder .= "?";
+            } else {
                 $request .= ", $key";
-                $holder .= ", ?" ;
+                $holder .= ", ?";
             }
             $counter += 1;
-         }
-         $request .= ")";
-         $holder .= ")";
-         $request .= $holder;
+        }
+        $request .= ")";
+        $holder .= ")";
+        $request .= $holder;
 
-         $sql = $this->prepare($request);
+        $sql = $this->prepare($request);
         if (!$sql->execute(array_values($data))) {
             $this->execError();
         }
-     }
+    }
+
 
     /**
      * Delete an element from the database
+     *
      * @param String $table The name of the table (DELETE FROM)
      * @param String $where The condition that defines the element to delete
-     * (WHERE)
+     *                      (WHERE)
      */
-    public function delete ($table, $where) {
+    public function delete($table, $where) {
         return $this->exec("DELETE FROM $table WHERE $where");
     }
+
 
     private function execError() {
         if ($this->errorCode() !== '00000' && $this->_errorLog === true) {
             echo $this->errorInfo();
             throw new FailedRequestException(
-                "ERROR: ". implode(",", $this->errorInfo())
-            );
+            "ERROR: ". implode(",", $this->errorInfo())
+                  );
         }
     }
+
+
 }

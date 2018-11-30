@@ -30,20 +30,20 @@
          integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
          crossorigin="anonymous" defer>
          </script>
-         <?php
+            <?php
             require_once "models/Error.php";
             require_once "models/Database.php";
             require_once "models/View.php";
             define("UNAME_URI", "username");
             $database = new Database();
-         ?>
+            ?>
     </head>
     <body>
 
         <?php
-            if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
-                include("UserMenu.php");
-            }
+        if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
+            include "UserMenu.php";
+        }
         ?>
 
         <h1 class="text-center mt-5">Inscription</h1>

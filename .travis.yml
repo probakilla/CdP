@@ -24,16 +24,14 @@ python:
   - "3.5"
 
 before_script:
-  - pwd
   - docker-compose up --build -d
-  - docker ps -a
   - pip install -r requirements.txt
+  - composer update
 
 script:
   - sonar-scanner
-  - echo "Pinging containers..."
-  - curl localhost:4444
-  - curl localhost:8080
+  - vendor/bin/phpcbf src/php/**
+  - vendor/bin/phpcs src/php/models/*
   - echo "Stating tests..."
   - python -m pytest test/*.py
 

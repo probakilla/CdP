@@ -47,53 +47,53 @@
     $userStory = $_GET['id'];
     $database = new Database();
 
-    if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
-        include("UserMenu.php");
+if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
+    include "UserMenu.php";
 
-        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET[PROJECT_URI]) && isset($_GET["id"])
-            && $database->exists(
-                "Project.Name",
-                "Project, ProjectUsers",
-                "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
-            )
-            && $database->exists(
-                PROJECT_URI, US_TABLE,
-                "ProjectName=\"$project\""
-            )
-            && $database->exists(
-                "Id", US_TABLE,
-                "Id=$userStory AND ProjectName=\"$project\""
-            )) {
-            $currentValues = $database->select(
-                "*", US_TABLE,
-                "ProjectName=\"$project\" AND Id=$userStory"
-            )[0];
-        } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            try {
-                $project = CdPError::testInput($_POST["project"]);
-                $id = CdPError::testInput($_POST["id"]);
-                $desc = CdPError::testInput($_POST["desc"]);
-                $prio = CdPError::testInput($_POST["prio"]);
-                $diff = CdPError::testInput($_POST["diff"]);
-                $database->update(
-                    US_TABLE,
-                    ["Description" => $desc,
-                     "Priority" => $prio,
-                     "Difficulty" => $diff],
-                    "ProjectName=\"$project\" AND Id=$id"
-                );
-                CdPError::redirectTo("Backlog.php?projectname=$project");
-            } catch (Exception $exception) {
-                echo $exception->getMessage();
-            }
-        } else {
-            CdPError::fail("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?",
-            'Backlog.php?projectname="'.$project.'"');
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET[PROJECT_URI]) && isset($_GET["id"])
+        && $database->exists(
+            "Project.Name",
+            "Project, ProjectUsers",
+            "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
+        )
+        && $database->exists(
+            PROJECT_URI, US_TABLE,
+            "ProjectName=\"$project\""
+        )
+        && $database->exists(
+            "Id", US_TABLE,
+            "Id=$userStory AND ProjectName=\"$project\""
+        )) {
+        $currentValues = $database->select(
+            "*", US_TABLE,
+            "ProjectName=\"$project\" AND Id=$userStory"
+        )[0];
+    } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
+            $project = CdPError::testInput($_POST["project"]);
+            $id = CdPError::testInput($_POST["id"]);
+            $desc = CdPError::testInput($_POST["desc"]);
+            $prio = CdPError::testInput($_POST["prio"]);
+            $diff = CdPError::testInput($_POST["diff"]);
+            $database->update(
+                US_TABLE,
+                ["Description" => $desc,
+                 "Priority" => $prio,
+                 "Difficulty" => $diff],
+                "ProjectName=\"$project\" AND Id=$id"
+            );
+            CdPError::redirectTo("Backlog.php?projectname=$project");
+        } catch (Exception $exception) {
+            echo $exception->getMessage();
         }
+    } else {
+        CdPError::fail("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?",
+        'Backlog.php?projectname="'.$project.'"');
     }
-    else {
-        CdPError::redirectTo("LogIn.php");
-    }
+}
+else {
+    CdPError::redirectTo("LogIn.php");
+}
 ?>
 
 <h1 class="text-center mt-5">Modification de l'user story #<?php echo $userStory ?></h1>

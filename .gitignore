@@ -1,3 +1,4 @@
 .vscode
 __resetdocker.sh
 test/__pycache__
+vendor

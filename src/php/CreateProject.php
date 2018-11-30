@@ -23,13 +23,13 @@
 	<body>
 
         <?php
-            if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
-                include("UserMenu.php");
-            }
-            else {
-                require_once "models/Error.php";
-                CdPError::redirectTo("LogIn.php");
-            }
+        if ((isset($_SESSION['username'])) && (!empty($_SESSION['username']))) {
+            include "UserMenu.php";
+        }
+        else {
+            include_once "models/Error.php";
+            CdPError::redirectTo("LogIn.php");
+        }
         ?>
 
     <br>

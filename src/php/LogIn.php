@@ -30,21 +30,21 @@
          integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
          crossorigin="anonymous" defer>
          </script>
-         <?php
+            <?php
             require_once "models/Error.php";
             require_once "models/Database.php";
             require_once "models/View.php";
             define("UNAME_URI", "username");
             $database = new Database();
             $view = new View();
-         ?>
+            ?>
     </head>
     <body>
 
         <?php
-            if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
-                include("UserMenu.php");
-            }
+        if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
+            include "UserMenu.php";
+        }
         ?>
 
         <h1 class="text-center mt-5">Connexion</h1>
@@ -61,7 +61,7 @@
                     if ($res_user) {
                         $res_pwd = $database->select("Name", "User", 'Name LIKE "'. $data["Name"] . '" AND Password LIKE "' . $data["Password"] . '"')[0];
                         if ($res_pwd) {
-                            $_SESSION[UNAME_URI]= $data["Name"];
+                            $_SESSION[UNAME_URI] = $data["Name"];
                             CdPError::redirectTo("HomePage.php");
                         }
                         else {
