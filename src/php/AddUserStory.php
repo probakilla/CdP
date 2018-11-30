@@ -30,9 +30,9 @@
          crossorigin="anonymous" defer>
          </script>
          <?php
-            require_once "Error.php";
-            require_once "Database.php";
-            require_once "View.php";
+            require_once "models/Error.php";
+            require_once "models/Database.php";
+            require_once "models/View.php";
             define("UNAME_URI", "username");
             define("URI_ARGS", array("projectname"));
             $database = new Database();

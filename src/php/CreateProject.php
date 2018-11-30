@@ -27,7 +27,7 @@
                 include("UserMenu.php");
             }
             else {
-                require_once "Error.php";
+                require_once "models/Error.php";
                 CdPError::redirectTo("LogIn.php");
             }
         ?>

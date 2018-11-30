@@ -17,7 +17,7 @@
 
             <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
-                    require_once "Error.php";
+                    require_once "models/Error.php";
                     unset($_SESSION["username"]);
                     session_destroy();
                     CdPError::redirectTo("HomePage.php");
