@@ -80,7 +80,7 @@
                     ["Description" => $desc,
                      "Priority" => $prio,
                      "Difficulty" => $diff],
-                    'ProjectName LIKE "' . $project . '" AND Id = ' . $id
+                    "ProjectName=\"$project\" AND Id=$id"
                 );
                 CdPError::redirectTo("Backlog.php?projectname=$project");
             } catch (Exception $exception) {
