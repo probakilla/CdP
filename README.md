@@ -26,7 +26,7 @@ Status](https://travis-ci.org/probakilla/CdP.svg?branch=master)](https://travis-
 | #6  | En tant que développeur, je souhaite supprimer un projet de la liste de ceux dans lesquels je suis impliqué ; plus précisément, si d'autres développeurs sont présents sur le projet, j'en serai retiré des collaborateurs, et si j'en suis l'unique collaborateur, le projet sera définitivement supprimé | Haute | 3 | 3 |
 | #7  | En tant que développeur, je souhaite ajouter une User Story (Id, Description, Priorité (optionnelle, peut être renseignée plus tard), Difficulté) à mon backlog afin de décrire un besoin | Haute | 3 | 1 |
 | #8  | En tant que développeur, je souhaite consulter le backlog du projet afin de potentiellement en modifier les User Stories | Haute | 2 | 1 |
-| #9  | En tant que développeur, je souhaite modifier le contenu d'une User STory via un formulaire (Id, Description, Priorité (optionnelle), Difficulté) où les champs auront la valeur de l'User Story actuelle | Haute | 3 | 1 |
+| #9  | En tant que développeur, je souhaite modifier le contenu d'une User Story via un formulaire (Id, Description, Priorité (optionnelle), Difficulté) où les champs auront la valeur de l'User Story actuelle | Haute | 3 | 1 |
 | #10  | En tant que développeur, je souhaite supprimer une User Story du backlog | Haute | 2 | 1 |
 | #11 | En tant que développeur, je souhaite créer des sprints (période de temps fixée et numérotée pendant laquelle on tâche de réaliser les User Stories) afin de pouvoir y associer des tâches pour planifier le projet | Basse | 3 | 2 |
 | #12 | En tant que développeur, je souhaite visualiser la liste des sprints afin de visualiser l'organisation temporelle du travail à fournir | Basse | 2 | 2 |
