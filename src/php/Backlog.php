@@ -65,7 +65,7 @@
 			<div class="panel-heading">
 				<div class="panel-title pull-left"><h5>Projet : <?php echo $project?></h5></div>
 				<div class="panel-title text-right mb-4">
-					<a href="AddUserStory.php?projectname=<?php echo $project?>" class="btn btn-outline-dark" value="Ajouter une User Story">Ajouter une User Story
+					<a href="AddUserStory.php?projectname=<?php echo $project?>" class="btn btn-outline-dark" id="add-us">Ajouter une User Story
 					</a>
 				</div>
 			</div>

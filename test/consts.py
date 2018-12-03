@@ -8,6 +8,7 @@ class Xpath:
     CREATE_PROJECT_BTN = "//a[@id='create-project']"
     SAVE_PROJECT_BTN = "//input[@name='save']"
     LIST_PROJECTS_BTN = "//a[@id='list-project']"
+    ADD_US_BTN = "//a[@id='add-us']"
 
     # Fields
     UNAME_FIELD = "//input[@name='username']"
@@ -21,3 +22,4 @@ class File:
     BACKLOG = "Backlog.php"
     REGISTER = "Register.php"
     LOGIN = "LogIn.php"
+    ADD_US = "AddUserStory.php"
