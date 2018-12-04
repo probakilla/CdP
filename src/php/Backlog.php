@@ -68,6 +68,10 @@
 					<a href="AddUserStory.php?projectname=<?php echo $project?>" class="btn btn-outline-dark" id="add-us">Ajouter une User Story
 					</a>
 				</div>
+				<div class="panel-title text-right mb-4">
+					<a href="AddUser.php?projectname=<?php echo $project?>" class="btn btn-outline-dark" id="add-user">Ajouter un utilisateur
+					</a>
+				</div>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
