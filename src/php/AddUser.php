@@ -45,23 +45,23 @@
 
         <div class="text-center jumbotron mt-5">
             <?php
-			if (($_SERVER['REQUEST_METHOD'] === 'POST')
+            if (($_SERVER['REQUEST_METHOD'] === 'POST')
             && $database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
                 "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
             )) {
-				$data = [
-		            "ProjectName" => CdPError::testInput($_POST["project"]),
-		            "UserName" => CdPError::testInput($_POST["username"])
-		        ];
-		        try {
-		            $database->insert("ProjectUsers", $data);
-		        } catch (Exception $e) {
-		            CdPError::fail($e->getMessage(), "Projects.php");
-		        } finally {
-		            $database = null;
-		        }
+                $data = [
+                       "ProjectName" => CdPError::testInput($_POST["project"]),
+                       "UserName" => CdPError::testInput($_POST["username"])
+                ];
+                try {
+                    $database->insert("ProjectUsers", $data);
+                } catch (Exception $e) {
+                    CdPError::fail($e->getMessage(), "Projects.php");
+                } finally {
+                    $database = null;
+                }
             }
             else if ($_SERVER['REQUEST_METHOD'] !== 'GET' || !isset($_GET["projectname"])
             || !$database->exists(
@@ -89,7 +89,7 @@
 										   class="form-control"
 										   name="project"
 										   "<?php echo
-											htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
+                htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
 											value=<?php echo $project; ?>
 											readonly/>
 								</div>
