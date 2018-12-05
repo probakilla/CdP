@@ -22,9 +22,8 @@
 	<body>
 
         <?php
-
-            require_once "models/Error.php";
-            require_once "models/Database.php";
+        require_once "models/Error.php";
+        require_once "models/Database.php";
         require_once "models/View.php";
         define("UNAME_URI", "username");
 
@@ -45,14 +44,14 @@
 
         <div class="text-center jumbotron mt-5">
             <?php
-            if ((CdPError::checkRequestMethod('POST'))
+            if (CdPError::checkRequestMethod('POST') && isset($_POST["projectname"]) && isset($_POST["username"])
             && $database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
                 "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
             )) {
                 $data = [
-                       "ProjectName" => CdPError::testInput($_POST["project"]),
+                       "ProjectName" => CdPError::testInput($_POST["projectname"]),
                        "UserName" => CdPError::testInput($_POST["username"])
                 ];
                 try {
@@ -63,7 +62,7 @@
                     $database = null;
                 }
             }
-            else if (CdPError::checkRequestMethod('GET') || !isset($_GET["projectname"])
+            else if (!CdPError::checkRequestMethod('GET') || !isset($_GET["projectname"])
             || !$database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
@@ -87,7 +86,7 @@
 								<div class="input-group">
 									<input type="text"
 										   class="form-control"
-										   name="project"
+										   name="projectname"
 										   "<?php echo
                 htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
 											value=<?php echo $project; ?>

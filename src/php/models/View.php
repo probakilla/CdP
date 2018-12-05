@@ -19,12 +19,11 @@ class View {
      * @param  String                                  $id The id of the button
      * @return String An html type string corresponding to a button
      */
-    public static function addRedirectButton($location, $id = "") {
+    public static function addRedirectButton($location, $id = "", $text = "") {
         if ($id === "") {
             $id = $location;
         }
-        return '<a id="' . $id . '" href="' . $location .
-         '" type="submit"> Editer</a>';
+        return "<a id=$id href=$location type=\"submit\">$text</a>";
     }
 
 

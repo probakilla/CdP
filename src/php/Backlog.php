@@ -23,14 +23,16 @@
 
         <?php
 
-            require_once "models/Error.php";
-            require_once "models/Database.php";
+        require_once "models/Error.php";
+        require_once "models/Database.php";
         require_once "models/View.php";
         define("UNAME_URI", "username");
+        define("US_TABLE", "UserStory");
 
         if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
             $username = $_SESSION[UNAME_URI];
             $project = $_GET['projectname'];
+            $delete = $_GET["delete"];
             include "UserMenu.php";
 
             $database = new Database();
@@ -45,13 +47,25 @@
 
         <div class="text-center jumbotron mt-5">
             <?php
-            if ($_SERVER['REQUEST_METHOD'] !== 'GET' || !isset($_GET["projectname"])
+            if (!CdPError::checkRequestMethod('GET') || !isset($_GET["projectname"])
             || !$database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
                 "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
             )) {
                 CdPError::fail("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?", "HomePage.php");
+            }
+            else if (CdPError::checkRequestMethod('GET') && isset($_GET["projectname"]) && isset($_GET["delete"])
+            && $database->exists(
+                "Project.Name",
+                "Project, ProjectUsers",
+                "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
+            )
+            && $database->exists(
+	            "Id", US_TABLE,
+	            "Id=$delete AND ProjectName=\"$project\""
+            )) {
+                $database->delete(US_TABLE, "Id=$delete AND ProjectName=\"$project\"");
             }
             ?>
         </div>
@@ -78,9 +92,9 @@
 				  <table class="table">
         <?php
         $row = null;
-					  	try {
+        try {
             $row = $database->select("*", "UserStory",
-            "ProjectName LIKE \"$project\"");
+            "ProjectName=\"$project\"");
         } catch (Exception $exception) {
             CdPError::redirectTo(
             $exception->get_message(),
@@ -109,7 +123,12 @@
             echo View::dispListLine(
             View::addRedirectButton(
             "EditUserStory.php?projectname=$project&id=$id",
-            "edit".$project.$id)
+            "edit".$project.$id, "Editer")
+            );
+            echo View::dispListLine(
+            View::addRedirectButton(
+            "Backlog.php?projectname=$project&delete=$id",
+            "delete".$project.$id, "Supprimer")
             );
             echo "</tr>";
         }
