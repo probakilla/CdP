@@ -33,7 +33,6 @@
 <body>
 
 <?php
-
     require_once "models/Database.php";
     require_once "models/Error.php";
     require_once "models/View.php";
@@ -42,22 +41,28 @@
     define("US_TABLE", "UserStory");
     define("CURRENT_PAGE", "PHP_SELF");
 
-    $project = $_GET['projectname'];
+    $project = $_GET[PROJECT_URI];
     $username = $_SESSION[UNAME_URI];
     $userStory = $_GET['id'];
     $database = new Database();
+?>
+
+    <h1 class="text-center mt-5">Modification de l'user story #<?php echo $userStory ?></h1>
+
+    <div class="text-center jumbotron mt-5">
+<?php
 
 if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
     include "UserMenu.php";
 
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET[PROJECT_URI]) && isset($_GET["id"])
+    if (CdPError::checkRequestMethod('GET') && isset($_GET[PROJECT_URI]) && isset($_GET["id"])
         && $database->exists(
             "Project.Name",
             "Project, ProjectUsers",
             "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
         )
         && $database->exists(
-            PROJECT_URI, US_TABLE,
+            "ProjectName", US_TABLE,
             "ProjectName=\"$project\""
         )
         && $database->exists(
@@ -68,7 +73,7 @@ if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
             "*", US_TABLE,
             "ProjectName=\"$project\" AND Id=$userStory"
         )[0];
-    } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    } else if (CdPError::checkRequestMethod('POST')) {
         try {
             $project = CdPError::testInput($_POST["project"]);
             $id = CdPError::testInput($_POST["id"]);
@@ -88,17 +93,13 @@ if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
         }
     } else {
         CdPError::fail("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?",
-        'Backlog.php?projectname="'.$project.'"');
+        "Backlog.php?projectname=$project");
     }
 }
 else {
     CdPError::redirectTo("LogIn.php");
 }
 ?>
-
-<h1 class="text-center mt-5">Modification de l'user story #<?php echo $userStory ?></h1>
-
-<div class="text-center jumbotron mt-5">
 </div>
 
 <div class="text-center">
@@ -117,7 +118,7 @@ else {
                             <input type="text"
                                     class="form-control"
                                     name="project" "<?php echo htmlspecialchars($_SERVER[CURRENT_PAGE]); ?>"
-                                    value="<?php echo $currentValues[PROJECT_URI]; ?>" readonly/>
+                                    value="<?php echo $project; ?>" readonly/>
                         </div>
                     </div>
                 </div>
