@@ -45,7 +45,7 @@
 
         <div class="text-center jumbotron mt-5">
             <?php
-            if (($_SERVER['REQUEST_METHOD'] === 'POST')
+            if ((CdPError::checkRequestMethod('POST'))
             && $database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
@@ -63,7 +63,7 @@
                     $database = null;
                 }
             }
-            else if ($_SERVER['REQUEST_METHOD'] !== 'GET' || !isset($_GET["projectname"])
+            else if (CdPError::checkRequestMethod('GET') || !isset($_GET["projectname"])
             || !$database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
