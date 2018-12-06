@@ -169,7 +169,7 @@ else {
                 </div>
 
                 <div class="form-group ">
-                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Valider">
+                    <input type="submit" name="validate" class="btn btn-primary btn-lg btn-block" value="Valider">
                 </div>
 
             </form>
