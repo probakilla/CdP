@@ -87,7 +87,7 @@
 								<div class="input-group">
 									<input type="text"
 										   class="form-control"
-										   name=PNAME_URI
+										   name=<?php echo PNAME_URI; ?>
 										   "<?php echo
                 htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
 											value=<?php echo $project; ?>
@@ -95,7 +95,7 @@
 								</div>
 							</div>
 						</div>
-						<input type="text" name=UNAME_URI class="form-control" placeholder="Nom d'utilisateur" /><br>
+						<input type="text" name=<?php echo UNAME_URI; ?> class="form-control" placeholder="Nom d'utilisateur" /><br>
 						<div class="form-group ">
 							<input type="submit"
 								   class="btn btn-primary btn-lg btn-block"
