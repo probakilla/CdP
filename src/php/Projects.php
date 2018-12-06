@@ -57,11 +57,15 @@
         if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
             $username = $_SESSION[UNAME_URI];
             if(isset($_GET["Delete"])){
-                             $project = $_GET['Delete'];
-                          $database->delete("UserStory",
-    											  "ProjectName LIKE \"$project\"");
-                                      $database->delete("Project",
-                                "Name LIKE \"$project\"");
+                $project = $_GET['Delete'];
+                $nbUsers = count($database->select("UserName", "ProjectUsers", "ProjectName=\"$project\""));
+                if ($nbUsers > 1) {
+                    $database->delete("ProjectUsers", "UserName=\"$username\" AND ProjectName=\"$project\"");
+                }
+                else {
+                             $database->delete("UserStory", "ProjectName=\"$project\"");
+                             $database->delete("Project", "Name=\"$project\"");
+                }
             }
 
             if(isset($_POST['save'])){
