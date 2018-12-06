@@ -22,8 +22,8 @@
 | #2   | Test : Implémentation de la vérification de l'affichage de la liste des projets | 5 | 0.2 | Chemoune | DONE |
 | #3   | Test : Rédaction du scénario de vérification de l'affichage du backlog d'un projet, les données présentent dans la table *UserStory* associées au projet voulu doivent apparaître correctement sur la page *Backlog.php* | 6 | 0.1 | Chemoune | DONE |
 | #4   | Test : Implémentation de la vérification de l'affichage du backlog d'un projet | 6 | 0.2 | Chemoune | DONE |
-| #5   | Test : Rédaction du scénario d'ajout d'une *User Story* à la base de données, les éléments entrés dans les champs de la page *AddUserStory.php* doivent être ajoutés dans la table *UserStory* avec les bonnes valeurs | 7 | 0.1 | Chemoune | DONE |
-| #6   | Test : Implémentation du test d'ajout d'une User Story à la base de données | 7 | 0.3 | Chemoune | DONE |
+| #5   | Test : Rédaction du scénario d'ajout d'une *User Story* à la base de données, les éléments entrés dans les champs de la page *AddUserStory.php* doivent être ajoutés dans la table *UserStory* avec les bonnes valeurs | 7 | 0.1 | Chemoune | DOING |
+| #6   | Test : Implémentation du test d'ajout d'une User Story à la base de données | 7 | 0.3 | Chemoune | DOING |
 | #7   | Test : Rédaction du scénario de la modification d'une User Story via la page *EditUserStory.php*. Les éléments entrés dans le formulaire doivent être correctement modifiés dans la base de données | 9 | 0.1 | Chemoune | DOING |
 | #8   | Test : Implémentation du test de la modification d'une User Story | 9 | 0.3 | Chemoune | DOING |
 | #9   | Test : Rédaction du scénario de la suppression d'une User Story du backlog. L'User Story doit être correctement enlevée de la base de données | 10 | 0.1 | Pilleux | DONE |
