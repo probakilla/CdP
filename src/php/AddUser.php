@@ -26,10 +26,11 @@
         require_once "models/Database.php";
         require_once "models/View.php";
         define("UNAME_URI", "username");
+        define("PNAME_URI", "projectname");
 
         if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
             $username = $_SESSION[UNAME_URI];
-            $project = $_GET['projectname'];
+            $project = $_GET[PNAME_URI];
             include "UserMenu.php";
 
             $database = new Database();
@@ -44,15 +45,15 @@
 
         <div class="text-center jumbotron mt-5">
             <?php
-            if (CdPError::checkRequestMethod('POST') && isset($_POST["projectname"]) && isset($_POST["username"])
+            if (CdPError::checkRequestMethod('POST') && isset($_POST[PNAME_URI]) && isset($_POST[UNAME_URI])
             && $database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
                 "Project.Name=ProjectUsers.ProjectName AND Project.Name=\"$project\" AND ProjectUsers.UserName=\"$username\""
             )) {
                 $data = [
-                       "ProjectName" => CdPError::testInput($_POST["projectname"]),
-                       "UserName" => CdPError::testInput($_POST["username"])
+                       "ProjectName" => CdPError::testInput($_POST[PNAME_URI]),
+                       "UserName" => CdPError::testInput($_POST[UNAME_URI])
                 ];
                 try {
                     $database->insert("ProjectUsers", $data);
@@ -62,7 +63,7 @@
                     $database = null;
                 }
             }
-            else if (!CdPError::checkRequestMethod('GET') || !isset($_GET["projectname"])
+            else if (!CdPError::checkRequestMethod('GET') || !isset($_GET[PNAME_URI])
             || !$database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
@@ -86,7 +87,7 @@
 								<div class="input-group">
 									<input type="text"
 										   class="form-control"
-										   name="projectname"
+										   name=PNAME_URI
 										   "<?php echo
                 htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
 											value=<?php echo $project; ?>
@@ -94,7 +95,7 @@
 								</div>
 							</div>
 						</div>
-						<input type="text" name="username" class="form-control" placeholder="Nom d'utilisateur" /><br>
+						<input type="text" name=UNAME_URI class="form-control" placeholder="Nom d'utilisateur" /><br>
 						<div class="form-group ">
 							<input type="submit"
 								   class="btn btn-primary btn-lg btn-block"

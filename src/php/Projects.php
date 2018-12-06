@@ -23,6 +23,7 @@
     require_once "models/Database.php";
     require_once "models/Error.php";
     define("UNAME_URI", "username");
+    define("PU_TABLE", "ProjectUsers");
     ?>
 	</head>
 	<body>
@@ -58,13 +59,13 @@
             $username = $_SESSION[UNAME_URI];
             if(isset($_GET["Delete"])){
                 $project = $_GET['Delete'];
-                $nbUsers = count($database->select("UserName", "ProjectUsers", "ProjectName=\"$project\""));
+                $nbUsers = count($database->select("UserName", PU_TABLE, "ProjectName=\"$project\""));
                 if ($nbUsers > 1) {
-                    $database->delete("ProjectUsers", "UserName=\"$username\" AND ProjectName=\"$project\"");
+                    $database->delete(PU_TABLE, "UserName=\"$username\" AND ProjectName=\"$project\"");
                 }
                 else {
-                             $database->delete("UserStory", "ProjectName=\"$project\"");
-                             $database->delete("Project", "Name=\"$project\"");
+                    $database->delete("UserStory", "ProjectName=\"$project\"");
+                    $database->delete("Project", "Name=\"$project\"");
                 }
             }
 
@@ -74,27 +75,27 @@
                 "Project",
                 ["Name" => "$projectName"]
                 );
-                               $database->insert(
-                                   "ProjectUsers",
-                                   ["ProjectName" => "$projectName", "UserName" => "$username"]
-                               );
+                $database->insert(
+                   PU_TABLE,
+                   ["ProjectName" => "$projectName", "UserName" => "$username"]
+                );
             }
 
-                            $result = $database->select("Project.Name", "Project, ProjectUsers", "Project.Name=ProjectUsers.ProjectName AND ProjectUsers.UserName=\"$username\"");
+            $result = $database->select("Project.Name", "Project, ProjectUsers", "Project.Name=ProjectUsers.ProjectName AND ProjectUsers.UserName=\"$username\"");
 
-                            echo "<thead class=\"thead-dark\"><tr>";
-                            echo "<th class=\"w-100\" scope=\"col\">Name</th>";
-                            echo "</tr></thead><tbody>";
+            echo "<thead class=\"thead-dark\"><tr>";
+            echo "<th class=\"w-100\" scope=\"col\">Name</th>";
+            echo "</tr></thead><tbody>";
 
             foreach ($result as $value) {
                 echo '<tr>
-    								<th scope="row" >
-    								<a id="backlog-'.$value["Name"].'" href="Backlog.php?projectname='.$value["Name"].'">'. $value["Name"] . '</a></th>';
+						<th scope="row" >
+						<a id="backlog-'.$value["Name"].'" href="Backlog.php?projectname='.$value["Name"].'">'. $value["Name"] . '</a></th>';
                 echo '<td>
-    								<a id="delete-'.$value["Name"].'" href="Projects.php?Delete='. $value["Name"].'"type="submit">Supprimer</a>
-    								</td></tr>';
+						<a id="delete-'.$value["Name"].'" href="Projects.php?Delete='. $value["Name"].'"type="submit">Supprimer</a>
+						</td></tr>';
             }
-                            echo "</tbody>";
+            echo "</tbody>";
 
         }
         else {

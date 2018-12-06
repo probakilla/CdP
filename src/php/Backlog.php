@@ -27,12 +27,14 @@
         require_once "models/Database.php";
         require_once "models/View.php";
         define("UNAME_URI", "username");
+        define("PNAME_URI", "projectname");
+        define("DEL_URI", "delete");
         define("US_TABLE", "UserStory");
 
         if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
             $username = $_SESSION[UNAME_URI];
-            $project = $_GET['projectname'];
-            $delete = $_GET["delete"];
+            $project = $_GET[PNAME_URI];
+            $delete = $_GET[DEL_URI];
             include "UserMenu.php";
 
             $database = new Database();
@@ -47,7 +49,7 @@
 
         <div class="text-center jumbotron mt-5">
             <?php
-            if (!CdPError::checkRequestMethod('GET') || !isset($_GET["projectname"])
+            if (!CdPError::checkRequestMethod('GET') || !isset($_GET[PNAME_URI])
             || !$database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
@@ -55,7 +57,7 @@
             )) {
                 CdPError::fail("Un problème est survenu lors de la requête de cette page... Peut-être n'êtes vous pas censé vous trouvez ici ?", "HomePage.php");
             }
-            else if (CdPError::checkRequestMethod('GET') && isset($_GET["projectname"]) && isset($_GET["delete"])
+            else if (CdPError::checkRequestMethod('GET') && isset($_GET[PNAME_URI]) && isset($_GET[DEL_URI])
             && $database->exists(
                 "Project.Name",
                 "Project, ProjectUsers",
@@ -128,7 +130,7 @@
             echo View::dispListLine(
             View::addRedirectButton(
             "Backlog.php?projectname=$project&delete=$id",
-            "delete".$project.$id, "Supprimer")
+            DEL_URI.$project.$id, "Supprimer")
             );
             echo "</tr>";
         }
