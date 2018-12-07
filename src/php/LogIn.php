@@ -65,14 +65,14 @@
                             CdPError::redirectTo("HomePage.php");
                         }
                         else {
-                            echo View::errorFormat("Password is incorect !");
+                            echo View::errorFormat("Nom ou mot de passe incorrect !");
                         }
                     }
                     else {
-                        echo View::errorFormat("User already exists !");
+                        echo View::errorFormat("Nom ou mot de passe incorrect !");
                     }
                 } catch (Exception $e) {
-                    echo View::errorFormat("Could not find user...");
+                    echo View::errorFormat("Impossible de contacter la base de données, veuillez réessayer ultérieurement.");
                 } finally {
                     $database = null;
                 }
