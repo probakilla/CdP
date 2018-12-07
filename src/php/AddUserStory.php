@@ -41,6 +41,8 @@
     </head>
     <body>
 
+        <h1 class="text-center mt-5">Ajout d'une user story</h1>
+        <div class="text-center jumbotron mt-5">
 <?php
 
 if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
@@ -77,8 +79,6 @@ else {
 }
 
 ?>
-        <h1 class="text-center mt-5">Ajout d'une user story</h1>
-        <div class="text-center jumbotron mt-5">
         </div>
 
         <br>
