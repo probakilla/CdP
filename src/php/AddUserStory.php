@@ -78,9 +78,7 @@ else {
 
 ?>
         <h1 class="text-center mt-5">Ajout d'une user story</h1>
-        <div class="text-center jumbotron mt-5">
-        </div>
-
+        
         <br>
 
         <div class="text-center">

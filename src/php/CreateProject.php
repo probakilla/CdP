@@ -35,7 +35,7 @@
     <br>
 
     <h1 class="text-center mt-5">Création de projet</h1>
-    <div class="text-center jumbotron mt-5"></div>
+    <br>
 
     <div class="container">
         <div class="row justify-content-center">

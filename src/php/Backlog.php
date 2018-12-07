@@ -47,7 +47,9 @@
 
         <h1 class="text-center mt-5">Backlog</h1>
 
-        <div class="text-center jumbotron mt-5">
+        <br>
+
+        <div>
             <?php
             if (!CdPError::checkRequestMethod('GET') || !isset($_GET[PNAME_URI])
             || !$database->exists(

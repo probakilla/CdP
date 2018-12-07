@@ -43,7 +43,7 @@
 
         <h1 class="text-center mt-5">Ajout d'utilisateur</h1>
 
-        <div class="text-center jumbotron mt-5">
+        <div>
             <?php
             if (CdPError::checkRequestMethod('POST') && isset($_POST[PNAME_URI]) && isset($_POST[UNAME_URI])
             && $database->exists(
