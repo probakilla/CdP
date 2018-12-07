@@ -1,4 +1,8 @@
-class Xpath:
+""" Constant classes for tests """
+
+
+class Xpath(object):
+    """ Xpaths constants for elements in php files """
     # Clickabls
     REGISTER_BTN = "//a[@id='register']"
     HOME_BTN = "//a[@id='home-btn']"
@@ -15,7 +19,9 @@ class Xpath:
     PASSWD_FIELD = "//input[@name='password']"
     PROJECT_NAME_FIELD = "//input[@name='projectName']"
 
-class File:
+
+class File(object):
+    """ File name constats """
     HOME_PAGE = "HomePage.php"
     CREATE_PROJECT = "CreateProject.php"
     PROJECT_LIST = "Projects.php"

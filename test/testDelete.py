@@ -1,3 +1,5 @@
+""" Test de la suppression d'une User Story """
+
 import unittest
 from webDriversOptions import chromeWebdriver
 from webDriversOptions import waitURL
@@ -10,26 +12,28 @@ from consts import File
 
 
 class DeleteProject(unittest.TestCase):
+    """ Classe de test unittest """
     __PROJECT = "projet"
 
     def setUp(self):
-        self.__chrome = chromeWebdriver()
+        self.chrome = chromeWebdriver()
 
     def testDelete(self):
-        self.__chrome.get('http://php-apache:80')
-        waitURL(self.__chrome, File.HOME_PAGE)
-        self.assertIn(File.HOME_PAGE, self.__chrome.current_url)
+        """ Test la su^ression d'une US """
+        self.chrome.get('http://php-apache:80')
+        waitURL(self.chrome, File.HOME_PAGE)
+        self.assertIn(File.HOME_PAGE, self.chrome.current_url)
 
-        browserRegister(self.__chrome)
-        browserLogin(self.__chrome)
-        browserCreateProject(self.__chrome, self.__PROJECT)
+        browserRegister(self.chrome)
+        browserLogin(self.chrome)
+        browserCreateProject(self.chrome, self.__PROJECT)
 
-        self.assertIn(File.PROJECT_LIST, self.__chrome.current_url)
-        browserDeleteProject(self.__chrome, self.__PROJECT)
-        browserLogout(self.__chrome)
+        self.assertIn(File.PROJECT_LIST, self.chrome.current_url)
+        browserDeleteProject(self.chrome, self.__PROJECT)
+        browserLogout(self.chrome)
 
     def tearDown(self):
-        self.__chrome.quit()
+        self.chrome.quit()
 
 
 if __name__ == "__main__":

@@ -14,8 +14,7 @@ notifications:
 services:
  - docker
 
-language:
-  - python
+language: python
 
 jdk:
   - oraclejdk8
