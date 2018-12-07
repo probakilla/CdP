@@ -19,6 +19,6 @@
 | #6   | Test : Rédaction du scénario de la modification d'une User Story via la page *EditUserStory.php*. Les éléments entrés dans le formulaire doivent être correctement modifiés dans la base de données | 9 | 0.1 | Chemoune | DONE |
 | #7   | Test : Implémentation du test de la modification d'une User Story | 9 | 0.3 | Chemoune | DONE |
 | #8   | Test : Rédaction du scénario de l'ajout d'un collaborateur sur un projet via la page *AddUser.php*. Une nouvelle entrée doit être insérée dans la table *ProjectUsers* | 4 | 0.1 | Pilleux | DONE |
-| #9   | Test : Implémentation du test de l'ajout d'un collaborateur sur un projet | 4 | 0.3 | Pilleux | TODO |
+| #9   | Test : Implémentation du test de l'ajout d'un collaborateur sur un projet | 4 | 0.3 | Pilleux | DOING |
 | #10   | Test : Rédaction du scénario de la suppression d'un projet du répertoire d'un utilisateur via la page *Projects.php*. Si d'autres utilisateurs sont liés au projet, seule l'entrée correspondante sera retirée de la table *ProjectUsers*, sinon le projet et toutes ses références seront supprimés | 6 | 0.1 | Pilleux | TODO |
 | #11   | Test : Implémentation du test de la suppression d'un projet du répertoire d'un utilisateur | 6 | 0.3 | Pilleux | TODO |

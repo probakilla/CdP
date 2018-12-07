@@ -13,65 +13,67 @@ _PSWD = "pswd_test"
 _DELETE_BTN = "delete-"
 
 
-def chromeWebdriver():
+def chrome_webdriver():
     """ Initialisation of the webdriver """
     chrome = webdriver.Remote(
         "http://127.0.0.1:4444/wd/hub",
         DesiredCapabilities.CHROME)
+    chrome.get('http://php-apache:80')
+    wait_url(chrome, File.HOME_PAGE)
     return chrome
 
 
-def browserRegister(browser):
+def fill_user_fields(browser, name=_UNAME):
+    """ Fill the user registration or login """
+    uname_field = browser.find_element_by_xpath(Xpath.UNAME_FIELD)
+    uname_field.send_keys(name)
+    pass_field = browser.find_element_by_xpath(Xpath.PASSWD_FIELD)
+    pass_field.send_keys(_PSWD)
+    browser.find_element_by_xpath(Xpath.SUBMIT_LOGIN_BTN).click()
+
+
+def browser_register(browser, name=_UNAME):
     """ Registration of a user """
     browser.find_element_by_xpath(Xpath.REGISTER_BTN).click()
-    waitURL(browser, File.REGISTER)
-    _fillUserFields(browser)
+    wait_url(browser, File.REGISTER)
+    fill_user_fields(browser, name)
     if File.HOME_PAGE not in browser.current_url:
         browser.find_element_by_xpath(Xpath.HOME_BTN).click()
-        waitURL(browser, File.HOME_PAGE)
+        wait_url(browser, File.HOME_PAGE)
 
 
-def browserLogin(browser):
+def browser_login(browser):
     """ Login of the webdriver """
     browser.find_element_by_xpath(Xpath.LOGIN_BTN).click()
-    waitURL(browser, File.LOGIN)
-    _fillUserFields(browser)
+    wait_url(browser, File.LOGIN)
+    fill_user_fields(browser)
 
 
-def browserLogout(browser):
+def browser_logout(browser):
     """ Logout the webdriver """
     browser.find_element_by_xpath(Xpath.LOGOUT_BTN).click()
 
 
-def _fillUserFields(browser):
-    """ Fill the user registration or login """
-    unameField = browser.find_element_by_xpath(Xpath.UNAME_FIELD)
-    unameField.send_keys(_UNAME)
-    passField = browser.find_element_by_xpath(Xpath.PASSWD_FIELD)
-    passField.send_keys(_PSWD)
-    browser.find_element_by_xpath(Xpath.SUBMIT_LOGIN_BTN).click()
-
-
-def browserCreateProject(browser, projectName):
+def browser_create_project(browser, project_name):
     """ Makes the webdriver create a project """
     link = browser.find_element_by_xpath(Xpath.CREATE_PROJECT_BTN)
     link.click()
-    waitURL(browser, File.CREATE_PROJECT)
+    wait_url(browser, File.CREATE_PROJECT)
     field = browser.find_element_by_xpath(Xpath.PROJECT_NAME_FIELD)
-    field.send_keys(projectName)
+    field.send_keys(project_name)
     submit = browser.find_element_by_xpath(Xpath.SAVE_PROJECT_BTN)
     submit.click()
-    waitURL(browser, File.PROJECT_LIST)
+    wait_url(browser, File.PROJECT_LIST)
 
 
-def browserDeleteProject(browser, projectName):
+def browser_delete_project(browser, project_name):
     """ Makes the webdriver delete a project """
-    deleteBtn = "//a[@id='" + _DELETE_BTN + projectName + "']"
-    deleteBtn = browser.find_element_by_xpath(deleteBtn)
-    deleteBtn.click()
+    delete_btn = "//a[@id='" + _DELETE_BTN + project_name + "']"
+    delete_btn = browser.find_element_by_xpath(delete_btn)
+    delete_btn.click()
 
 
-def waitURL(browser, content):
+def wait_url(browser, content):
     """ Makes the webdriver wait for the usr to change """
     wait = WebDriverWait(browser, _WAIT)
     wait.until(EC.url_contains(content))

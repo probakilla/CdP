@@ -31,7 +31,6 @@ script:
   - sonar-scanner
   - vendor/bin/phpcbf src/php/**
   - vendor/bin/phpcs src/php/models/*
-  - python -m pylint --rcfile .pylintrc test/*.py
   - echo "Stating tests..."
   - python -m pytest test/*.py
 
