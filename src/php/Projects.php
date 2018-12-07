@@ -39,7 +39,8 @@
 
     <h1 class="text-center mt-5">Vos projets</h1>
 
-    <br>
+    <div class="text-center jumbotron mt-5">
+    </div>
 
 	<div class="text-center">
         <a class="btn btn-primary" href="HomePage.php">Accueil</a>

@@ -49,9 +49,7 @@
 
     <h1 class="text-center mt-5">Modification de l'user story #<?php echo $userStory ?></h1>
 
-    <br>
-
-    <div>
+    <div class="text-center jumbotron mt-5">
 <?php
 
 if ((isset($_SESSION[UNAME_URI])) && (!empty($_SESSION[UNAME_URI]))) {
