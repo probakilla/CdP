@@ -1,5 +1,6 @@
 """ Module used for code factorisation of end to end tests """
 
+import socket
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,8 +16,9 @@ _DELETE_BTN = "delete-"
 
 def chrome_webdriver():
     """ Initialisation of the webdriver """
+    addr = socket.gethostbyname(socket.gethostname())
     chrome = webdriver.Remote(
-        "http://127.0.0.1:4444/wd/hub",
+        "http://" + addr + ":4444/wd/hub",
         DesiredCapabilities.CHROME)
     chrome.get('http://php-apache:80')
     wait_url(chrome, File.HOME_PAGE)
